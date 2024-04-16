@@ -28,7 +28,6 @@
       "INTERNAL_MISMATCH"
     ]
   },
-  "packageManager": "yarn@3.2.3",
   "private": true,
   "resolutionsComments": {
     "immer": "this fixes yarn typecheck in mobile app, see https://github.com/reduxjs/redux-toolkit/issues/1806"
@@ -39,7 +38,6 @@
     "immer": "9.0.21",
     "@uniswap/v2-sdk": "4.1.0",
     "@apollo/client": "3.7.11",
-    "@uniswap/sdk-core": "4.0.7",
     "@react-navigation/routers": "6.1.9",
     "@react-navigation/core": "6.2.2",
     "@sideway/formula": "3.0.1",
