@@ -82,8 +82,8 @@ export function useUnsupportedTokens(): { [address: string]: Token } {
     const listUrl = getChainInfo(chainId).defaultListUrl
     console.log('listsByUrl', listUrl)
 
-    const { current: list } = listsByUrl[listUrl]
-    console.log('list', list)
+    const listdata = listsByUrl[listUrl]
+    const list = listdata ? listdata.current : null
     if (!list) {
       return {}
     }
