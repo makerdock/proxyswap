@@ -11,22 +11,22 @@ import MantleLogo from '../../assets/svg/mantle_logo.svg'
 import MaticLogo from '../../assets/svg/matic-token-icon.svg'
 import { isCelo, isDegen, nativeOnChain } from '../../constants/tokens'
 
-type Network = 'ethereum' | 'arbitrum' | 'optimism' | 'mantle'
+// type Network = 'ethereum' | 'arbitrum' | 'optimism' | 'mantle'
 
-function chainIdToNetworkName(networkId: SupportedChainId): Network {
-  switch (networkId) {
-    case SupportedChainId.MAINNET:
-      return 'ethereum'
-    case SupportedChainId.ARBITRUM_ONE:
-      return 'arbitrum'
-    case SupportedChainId.OPTIMISM:
-      return 'optimism'
-    case SupportedChainId.MANTLE:
-      return 'mantle'
-    default:
-      return 'ethereum'
-  }
-}
+// function chainIdToNetworkName(networkId: SupportedChainId): Network {
+//   switch (networkId) {
+//     case SupportedChainId.MAINNET:
+//       return 'ethereum'
+//     case SupportedChainId.ARBITRUM_ONE:
+//       return 'arbitrum'
+//     case SupportedChainId.OPTIMISM:
+//       return 'optimism'
+//     case SupportedChainId.MANTLE:
+//       return 'mantle'
+//     default:
+//       return 'ethereum'
+//   }
+// }
 
 function getNativeLogoURI(chainId: SupportedChainId = SupportedChainId.MAINNET): string {
   switch (chainId) {
@@ -46,7 +46,7 @@ function getNativeLogoURI(chainId: SupportedChainId = SupportedChainId.MAINNET):
 }
 
 function getTokenLogoURI(address: string, chainId: SupportedChainId = SupportedChainId.MAINNET): string | void {
-  const networkName = chainIdToNetworkName(chainId)
+  // const networkName = chainIdToNetworkName(chainId)
   const networksWithUrls = [SupportedChainId.ARBITRUM_ONE, SupportedChainId.MAINNET, SupportedChainId.OPTIMISM]
   if (networksWithUrls.includes(chainId)) {
     return `https://raw.githubusercontent.com/ubeswap/default-token-list/master/assets/asset_CELO.png`
