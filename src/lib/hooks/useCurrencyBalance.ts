@@ -7,7 +7,7 @@ import JSBI from 'jsbi'
 import { useMultipleContractSingleData, useSingleContractMultipleData } from 'lib/hooks/multicall'
 import { useMemo } from 'react'
 
-import { MNT_MANTLE, nativeOnChain } from '../../constants/tokens'
+import { DEGEN, nativeOnChain } from '../../constants/tokens'
 import { useInterfaceMulticall } from '../../hooks/useContract'
 import { isAddress } from '../../utils'
 
@@ -118,7 +118,7 @@ export function useCurrencyBalances(
 
   const tokenBalances = useTokenBalances(account, tokens)
   const containsETH: boolean = useMemo(
-    () => currencies?.some((currency) => currency?.isNative || currency?.equals(MNT_MANTLE)) ?? false,
+    () => currencies?.some((currency) => currency?.isNative || currency?.equals(DEGEN)) ?? false,
     [currencies]
   )
   const ethBalance = useNativeCurrencyBalances(useMemo(() => (containsETH ? [account] : []), [containsETH, account]))

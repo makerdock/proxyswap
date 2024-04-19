@@ -5,11 +5,11 @@ import { useMemo } from 'react'
 import { WrappedTokenInfo } from 'state/lists/wrappedTokenInfo'
 
 import DegenLogo from '../../assets/images/degen-logo.jpg'
-import EthereumLogo from '../../assets/images/ethereum-logo.png'
-import CeloLogo from '../../assets/svg/celo_logo.svg'
-import MantleLogo from '../../assets/svg/mantle_logo.svg'
-import MaticLogo from '../../assets/svg/matic-token-icon.svg'
-import { isCelo, isDegen, nativeOnChain } from '../../constants/tokens'
+// import EthereumLogo from '../../assets/images/ethereum-logo.png'
+// import CeloLogo from '../../assets/svg/celo_logo.svg'
+// import MantleLogo from '../../assets/svg/mantle_logo.svg'
+// import MaticLogo from '../../assets/svg/matic-token-icon.svg'
+import { isDegen, nativeOnChain } from '../../constants/tokens'
 
 // type Network = 'ethereum' | 'arbitrum' | 'optimism' | 'mantle'
 
@@ -28,29 +28,29 @@ import { isCelo, isDegen, nativeOnChain } from '../../constants/tokens'
 //   }
 // }
 
-function getNativeLogoURI(chainId: SupportedChainId = SupportedChainId.MAINNET): string {
+function getNativeLogoURI(chainId: SupportedChainId = SupportedChainId.DEGEN): string {
   switch (chainId) {
-    case SupportedChainId.MANTLE:
-      return MantleLogo
+    // case SupportedChainId.MANTLE:
+    // return MantleLogo
     case SupportedChainId.DEGEN:
       return DegenLogo
-    case SupportedChainId.POLYGON:
-    case SupportedChainId.POLYGON_MUMBAI:
-      return MaticLogo
-    case SupportedChainId.CELO:
-    case SupportedChainId.CELO_ALFAJORES:
-      return CeloLogo
+    // case SupportedChainId.POLYGON:
+    // case SupportedChainId.POLYGON_MUMBAI:
+    //   return MaticLogo
+    // case SupportedChainId.CELO:
+    // case SupportedChainId.CELO_ALFAJORES:
+    //   return CeloLogo
     default:
-      return EthereumLogo
+      return DegenLogo
   }
 }
 
-function getTokenLogoURI(address: string, chainId: SupportedChainId = SupportedChainId.MAINNET): string | void {
+function getTokenLogoURI(address: string, chainId: SupportedChainId = SupportedChainId.DEGEN): string | void {
   // const networkName = chainIdToNetworkName(chainId)
-  const networksWithUrls = [SupportedChainId.ARBITRUM_ONE, SupportedChainId.MAINNET, SupportedChainId.OPTIMISM]
-  if (networksWithUrls.includes(chainId)) {
-    return `https://raw.githubusercontent.com/ubeswap/default-token-list/master/assets/asset_CELO.png`
-  }
+  // const networksWithUrls = [SupportedChainId.ARBITRUM_ONE, SupportedChainId.MAINNET, SupportedChainId.OPTIMISM]
+  // if (networksWithUrls.includes(chainId)) {
+  //   return `https://raw.githubusercontent.com/ubeswap/default-token-list/master/assets/asset_CELO.png`
+  // }
 
   // Celo logo logo is hosted elsewhere.
   if (isDegen(chainId)) {
@@ -58,11 +58,11 @@ function getTokenLogoURI(address: string, chainId: SupportedChainId = SupportedC
       return DegenLogo
     }
   }
-  if (isCelo(chainId)) {
-    if (address === nativeOnChain(chainId).wrapped.address) {
-      return 'https://raw.githubusercontent.com/ubeswap/default-token-list/master/assets/asset_CELO.png'
-    }
-  }
+  // if (isCelo(chainId)) {
+  //   if (address === nativeOnChain(chainId).wrapped.address) {
+  //     return 'https://raw.githubusercontent.com/ubeswap/default-token-list/master/assets/asset_CELO.png'
+  //   }
+  // }
 }
 
 export default function useCurrencyLogoURIs(currency?: Currency | null): string[] {

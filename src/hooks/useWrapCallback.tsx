@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { Trans } from '@lingui/macro'
 import { Currency } from '@uniswap/sdk-core'
 import { useWeb3React } from '@web3-react/core'
@@ -5,7 +6,7 @@ import useNativeCurrency from 'lib/hooks/useNativeCurrency'
 import tryParseCurrencyAmount from 'lib/utils/tryParseCurrencyAmount'
 import { useMemo } from 'react'
 
-import { MNT_MANTLE, WRAPPED_NATIVE_CURRENCY } from '../constants/tokens'
+import { DEGEN, WRAPPED_NATIVE_CURRENCY } from '../constants/tokens'
 import { useCurrencyBalance } from '../state/connection/hooks'
 import { useTransactionAdder } from '../state/transactions/hooks'
 import { TransactionType } from '../state/transactions/types'
@@ -75,55 +76,55 @@ export default function useWrapCallback(
     const hasInputAmount = Boolean(inputAmount?.greaterThan('0'))
     const sufficientBalance = inputAmount && balance && !balance.lessThan(inputAmount)
 
-    if ((inputCurrency.isNative || inputCurrency.equals(MNT_MANTLE)) && weth.equals(outputCurrency)) {
+    if ((inputCurrency.isNative || inputCurrency.equals(DEGEN)) && weth.equals(outputCurrency)) {
       return {
         wrapType: WrapType.WRAP,
         execute:
           sufficientBalance && inputAmount
             ? async () => {
-                try {
-                  const txReceipt = await wethContract.deposit({ value: `0x${inputAmount.quotient.toString(16)}` })
-                  addTransaction(txReceipt, {
-                    type: TransactionType.WRAP,
-                    unwrapped: false,
-                    currencyAmountRaw: inputAmount?.quotient.toString(),
-                    chainId,
-                  })
-                } catch (error) {
-                  console.error('Could not deposit', error)
-                }
+              try {
+                const txReceipt = await wethContract.deposit({ value: `0x${inputAmount.quotient.toString(16)}` })
+                addTransaction(txReceipt, {
+                  type: TransactionType.WRAP,
+                  unwrapped: false,
+                  currencyAmountRaw: inputAmount?.quotient.toString(),
+                  chainId,
+                })
+              } catch (error) {
+                console.error('Could not deposit', error)
               }
+            }
             : undefined,
         inputError: sufficientBalance
           ? undefined
           : hasInputAmount
-          ? WrapInputError.INSUFFICIENT_NATIVE_BALANCE
-          : WrapInputError.ENTER_NATIVE_AMOUNT,
+            ? WrapInputError.INSUFFICIENT_NATIVE_BALANCE
+            : WrapInputError.ENTER_NATIVE_AMOUNT,
       }
-    } else if (weth.equals(inputCurrency) && (outputCurrency.isNative || outputCurrency.equals(MNT_MANTLE))) {
+    } else if (weth.equals(inputCurrency) && (outputCurrency.isNative || outputCurrency.equals(DEGEN))) {
       return {
         wrapType: WrapType.UNWRAP,
         execute:
           sufficientBalance && inputAmount
             ? async () => {
-                try {
-                  const txReceipt = await wethContract.withdraw(`0x${inputAmount.quotient.toString(16)}`)
-                  addTransaction(txReceipt, {
-                    type: TransactionType.WRAP,
-                    unwrapped: true,
-                    currencyAmountRaw: inputAmount?.quotient.toString(),
-                    chainId,
-                  })
-                } catch (error) {
-                  console.error('Could not withdraw', error)
-                }
+              try {
+                const txReceipt = await wethContract.withdraw(`0x${inputAmount.quotient.toString(16)}`)
+                addTransaction(txReceipt, {
+                  type: TransactionType.WRAP,
+                  unwrapped: true,
+                  currencyAmountRaw: inputAmount?.quotient.toString(),
+                  chainId,
+                })
+              } catch (error) {
+                console.error('Could not withdraw', error)
               }
+            }
             : undefined,
         inputError: sufficientBalance
           ? undefined
           : hasInputAmount
-          ? WrapInputError.INSUFFICIENT_WRAPPED_BALANCE
-          : WrapInputError.ENTER_WRAPPED_AMOUNT,
+            ? WrapInputError.INSUFFICIENT_WRAPPED_BALANCE
+            : WrapInputError.ENTER_WRAPPED_AMOUNT,
       }
     } else {
       return NOT_APPLICABLE

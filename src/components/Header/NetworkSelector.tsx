@@ -149,20 +149,20 @@ const StyledChevronDown = styled(ChevronDown)`
 `
 const BridgeLabel = ({ chainId }: { chainId: SupportedChainId }) => {
   switch (chainId) {
-    case SupportedChainId.ARBITRUM_ONE:
-    case SupportedChainId.ARBITRUM_RINKEBY:
-      return <Trans>Arbitrum Bridge</Trans>
-    case SupportedChainId.OPTIMISM:
-    case SupportedChainId.OPTIMISTIC_KOVAN:
-      return <Trans>Optimism Bridge</Trans>
-    case SupportedChainId.POLYGON:
-    case SupportedChainId.POLYGON_MUMBAI:
-      return <Trans>Polygon Bridge</Trans>
-    case SupportedChainId.CELO:
-    case SupportedChainId.CELO_ALFAJORES:
-      return <Trans>Portal Bridge</Trans>
-    case SupportedChainId.MANTLE:
-      return <Trans>Mantle Bridge</Trans>
+    // case SupportedChainId.ARBITRUM_ONE:
+    // case SupportedChainId.ARBITRUM_RINKEBY:
+    //   return <Trans>Arbitrum Bridge</Trans>
+    // case SupportedChainId.OPTIMISM:
+    // case SupportedChainId.OPTIMISTIC_KOVAN:
+    //   return <Trans>Optimism Bridge</Trans>
+    // case SupportedChainId.POLYGON:
+    // case SupportedChainId.POLYGON_MUMBAI:
+    //   return <Trans>Polygon Bridge</Trans>
+    // case SupportedChainId.CELO:
+    // case SupportedChainId.CELO_ALFAJORES:
+    //   return <Trans>Portal Bridge</Trans>
+    // case SupportedChainId.MANTLE:
+    //   return <Trans>Mantle Bridge</Trans>
     case SupportedChainId.DEGEN:
       return <Trans>DEGEN Bridge</Trans>
     default:
@@ -171,20 +171,20 @@ const BridgeLabel = ({ chainId }: { chainId: SupportedChainId }) => {
 }
 const ExplorerLabel = ({ chainId }: { chainId: SupportedChainId }) => {
   switch (chainId) {
-    case SupportedChainId.ARBITRUM_ONE:
-    case SupportedChainId.ARBITRUM_RINKEBY:
-      return <Trans>Arbiscan</Trans>
-    case SupportedChainId.OPTIMISM:
-    case SupportedChainId.OPTIMISTIC_KOVAN:
-      return <Trans>Optimistic Etherscan</Trans>
-    case SupportedChainId.POLYGON:
-    case SupportedChainId.POLYGON_MUMBAI:
-      return <Trans>Polygonscan</Trans>
-    case SupportedChainId.CELO:
-    case SupportedChainId.CELO_ALFAJORES:
-      return <Trans>Blockscout</Trans>
-    case SupportedChainId.MANTLE:
-      return <Trans>Mantle Explorer</Trans>
+    // case SupportedChainId.ARBITRUM_ONE:
+    // case SupportedChainId.ARBITRUM_RINKEBY:
+    //   return <Trans>Arbiscan</Trans>
+    // case SupportedChainId.OPTIMISM:
+    // case SupportedChainId.OPTIMISTIC_KOVAN:
+    //   return <Trans>Optimistic Etherscan</Trans>
+    // case SupportedChainId.POLYGON:
+    // case SupportedChainId.POLYGON_MUMBAI:
+    //   return <Trans>Polygonscan</Trans>
+    // case SupportedChainId.CELO:
+    // case SupportedChainId.CELO_ALFAJORES:
+    //   return <Trans>Blockscout</Trans>
+    // case SupportedChainId.MANTLE:
+    //   return <Trans>Mantle Explorer</Trans>
     case SupportedChainId.DEGEN:
       return <Trans>DEGEN Explorer</Trans>
     default:

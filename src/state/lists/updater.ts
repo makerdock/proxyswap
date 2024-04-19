@@ -1,20 +1,13 @@
 import { getVersionUpgrade, minVersionBump, VersionUpgrade } from '@uniswap/token-lists'
 import { useWeb3React } from '@web3-react/core'
 import { SupportedChainId } from 'constants/chains'
-import {
-  ARBITRUM_LIST,
-  CELO_LIST,
-  DEGEN_LIST,
-  MANTLE_LIST,
-  OPTIMISM_LIST,
-  UNSUPPORTED_LIST_URLS,
-} from 'constants/lists'
+import { DEGEN_LIST, UNSUPPORTED_LIST_URLS } from 'constants/lists'
 import useInterval from 'lib/hooks/useInterval'
 import { useCallback, useEffect } from 'react'
 import { useAppDispatch } from 'state/hooks'
 import { useAllLists } from 'state/lists/hooks'
 
-import { isCelo } from '../../constants/tokens'
+// import { isCelo } from '../../constants/tokens'
 import { useFetchListCallback } from '../../hooks/useFetchListCallback'
 import useIsWindowVisible from '../../hooks/useIsWindowVisible'
 import { acceptListUpdate, enableList } from './actions'
@@ -38,18 +31,18 @@ export default function Updater(): null {
   }, [fetchList, isWindowVisible, lists])
 
   useEffect(() => {
-    if (chainId && [SupportedChainId.OPTIMISM, SupportedChainId.OPTIMISTIC_KOVAN].includes(chainId)) {
-      dispatch(enableList(OPTIMISM_LIST))
-    }
-    if (chainId && [SupportedChainId.ARBITRUM_ONE, SupportedChainId.ARBITRUM_RINKEBY].includes(chainId)) {
-      dispatch(enableList(ARBITRUM_LIST))
-    }
-    if (chainId && isCelo(chainId)) {
-      dispatch(enableList(CELO_LIST))
-    }
-    if (chainId && [SupportedChainId.MANTLE].includes(chainId)) {
-      dispatch(enableList(MANTLE_LIST))
-    }
+    // if (chainId && [SupportedChainId.OPTIMISM, SupportedChainId.OPTIMISTIC_KOVAN].includes(chainId)) {
+    //   dispatch(enableList(OPTIMISM_LIST))
+    // }
+    // if (chainId && [SupportedChainId.ARBITRUM_ONE, SupportedChainId.ARBITRUM_RINKEBY].includes(chainId)) {
+    //   dispatch(enableList(ARBITRUM_LIST))
+    // }
+    // if (chainId && isCelo(chainId)) {
+    //   dispatch(enableList(CELO_LIST))
+    // }
+    // if (chainId && [SupportedChainId.MANTLE].includes(chainId)) {
+    //   dispatch(enableList(MANTLE_LIST))
+    // }
     if (chainId && [SupportedChainId.DEGEN].includes(chainId)) {
       dispatch(enableList(DEGEN_LIST))
     }

@@ -1,6 +1,6 @@
 import { Currency } from '@uniswap/sdk-core'
 import { useWeb3React } from '@web3-react/core'
-import { MNT_MANTLE } from 'constants/tokens'
+import { DEGEN } from 'constants/tokens'
 import { useMemo } from 'react'
 import { useCombinedActiveList } from 'state/lists/hooks'
 
@@ -13,7 +13,7 @@ export function useTokenInfoFromActiveList(currency: Currency) {
 
   return useMemo(() => {
     if (!chainId) return
-    if (currency.isNative || currency.equals(MNT_MANTLE)) return currency
+    if (currency.isNative || currency.equals(DEGEN)) return currency
 
     try {
       return activeList[chainId][currency.wrapped.address].token

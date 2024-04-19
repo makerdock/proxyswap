@@ -2,7 +2,7 @@ import { MaxUint256 } from '@ethersproject/constants'
 import { TransactionResponse } from '@ethersproject/providers'
 import { Currency, CurrencyAmount, Token } from '@uniswap/sdk-core'
 import { useWeb3React } from '@web3-react/core'
-import { MNT_MANTLE } from 'constants/tokens'
+import { DEGEN } from 'constants/tokens'
 import { useTokenContract } from 'hooks/useContract'
 import { useTokenAllowance } from 'hooks/useTokenAllowance'
 import { useCallback, useMemo } from 'react'
@@ -28,7 +28,7 @@ export function useApprovalStateForSpender(
 
   return useMemo(() => {
     if (!amountToApprove || !spender) return ApprovalState.UNKNOWN
-    if (amountToApprove.currency.isNative || amountToApprove.currency.equals(MNT_MANTLE)) return ApprovalState.APPROVED
+    if (amountToApprove.currency.isNative || amountToApprove.currency.equals(DEGEN)) return ApprovalState.APPROVED
     // we might not have enough data to know whether or not we need to approve
     if (!currentAllowance) return ApprovalState.UNKNOWN
 

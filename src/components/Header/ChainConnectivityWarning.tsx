@@ -1,7 +1,6 @@
 import { Trans } from '@lingui/macro'
 import { useWeb3React } from '@web3-react/core'
 import { getChainInfoOrDefault, L2ChainInfo } from 'constants/chainInfo'
-import { SupportedChainId } from 'constants/chains'
 import { AlertOctagon } from 'react-feather'
 import styled from 'styled-components/macro'
 import { ExternalLink, MEDIA_WIDTHS } from 'theme'
@@ -58,11 +57,12 @@ export function ChainConnectivityWarning() {
         </TitleText>
       </TitleRow>
       <BodyRow>
-        {chainId === SupportedChainId.MAINNET ? (
+        {/* {chainId === SupportedChainId.MAINNET ? (
           <Trans>You may have lost your network connection.</Trans>
         ) : (
           <Trans>You may have lost your network connection, or {label} might be down right now.</Trans>
-        )}{' '}
+        )}{' '} */}
+        <Trans>You may have lost your network connection, or {label} might be down right now.</Trans>
         {(info as L2ChainInfo).statusPage !== undefined && (
           <span>
             <Trans>Check network status</Trans>{' '}
