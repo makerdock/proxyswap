@@ -363,8 +363,6 @@ export default function NetworkSelector() {
     return null
   }
 
-  console.log(info, 'info')
-
   return (
     <SelectorWrapper
       ref={node}
@@ -373,7 +371,12 @@ export default function NetworkSelector() {
       onClick={isMobile ? toggleModal : undefined}
     >
       <SelectorControls>
-        <SelectorLogo src={info.logoUrl} />
+        <img src={info.logoUrl} alt='Info' style={{
+          width: "20px",
+          height: "20px",
+          marginRight: "8px",
+          borderRadius: "100%",
+        }} />
         <SelectorLabel>{info.label}</SelectorLabel>
         <StyledChevronDown />
       </SelectorControls>

@@ -14,15 +14,12 @@ import { useUserHasSubmittedClaim } from 'state/transactions/hooks'
 import { useDarkModeManager } from 'state/user/hooks'
 import styled from 'styled-components/macro'
 
-import { ReactComponent as Logo } from '../../assets/svg/logo.svg'
 import { ThemedText } from '../../theme'
 import ClaimModal from '../claim/ClaimModal'
 import { CardNoise } from '../earn/styled'
-import Menu from '../Menu'
 import Row from '../Row'
 import { Dots } from '../swap/styleds'
 import Web3Status from '../Web3Status'
-import HolidayOrnament from './HolidayOrnament'
 import NetworkSelector from './NetworkSelector'
 
 const HeaderFrame = styled.div<{ showBackground: boolean }>`
@@ -271,10 +268,10 @@ export default function Header() {
     <HeaderFrame showBackground={scrollY > 45}>
       <ClaimModal />
       <Title href=".">
-        <UniIcon>
-          <Logo fill={darkMode ? white : black} width="24px" height="100%" title="logo" />
-          <HolidayOrnament />
-        </UniIcon>
+        <img src='/images/proxyswap.png' alt='proxyswap' style={{
+          aspectRatio: '606 / 180',
+          width: '220px'
+        }} />
       </Title>
       <HeaderLinks>
         <StyledNavLink id={`swap-nav-link`} to={'/swap'}>
@@ -337,9 +334,9 @@ export default function Header() {
             <Web3Status />
           </AccountElement>
         </HeaderElement>
-        <HeaderElement>
+        {/* <HeaderElement>
           <Menu />
-        </HeaderElement>
+        </HeaderElement> */}
       </HeaderControls>
     </HeaderFrame>
   )

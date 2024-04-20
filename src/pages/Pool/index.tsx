@@ -1,7 +1,6 @@
 import { Trans } from '@lingui/macro'
 import { useWeb3React } from '@web3-react/core'
-import { PageName } from 'components/AmplitudeAnalytics/constants'
-import { ElementName, Event, EventName } from 'components/AmplitudeAnalytics/constants'
+import { ElementName, Event, EventName, PageName } from 'components/AmplitudeAnalytics/constants'
 import { Trace } from 'components/AmplitudeAnalytics/Trace'
 import { TraceEvent } from 'components/AmplitudeAnalytics/TraceEvent'
 import { ButtonGray, ButtonPrimary, ButtonText } from 'components/Button'
@@ -13,17 +12,16 @@ import { RowBetween, RowFixed } from 'components/Row'
 import { SwitchLocaleLink } from 'components/SwitchLocaleLink'
 import { useV3Positions } from 'hooks/useV3Positions'
 import { useContext } from 'react'
-import { Activity, BookOpen, ChevronDown, ChevronsRight, Inbox, Layers, PlusCircle } from 'react-feather'
+import { Activity, ChevronDown, Inbox, PlusCircle } from 'react-feather'
 import { Link } from 'react-router-dom'
 import { useToggleWalletModal } from 'state/application/hooks'
 import { useUserHideClosedPositions } from 'state/user/hooks'
 import styled, { css, ThemeContext } from 'styled-components/macro'
-import { ExternalLink, HideSmall, ThemedText } from 'theme'
+import { ExternalLink, ThemedText } from 'theme'
 import { PositionDetails } from 'types/position'
 import { isChainAllowed } from 'utils/switchChain'
 
 import { V2_FACTORY_ADDRESSES } from '../../constants/addresses'
-import CTACards from './CTACards'
 import { LoadingRows } from './styleds'
 
 const PageWrapper = styled(AutoColumn)`
@@ -223,36 +221,36 @@ export default function Pool() {
       link: '/add/ETH',
       external: false,
     },
-    {
-      content: (
-        <MenuItem>
-          <Trans>Migrate</Trans>
-          <ChevronsRight size={16} />
-        </MenuItem>
-      ),
-      link: '/migrate/v2',
-      external: false,
-    },
-    {
-      content: (
-        <MenuItem>
-          <Trans>V2 liquidity</Trans>
-          <Layers size={16} />
-        </MenuItem>
-      ),
-      link: '/pool/v2',
-      external: false,
-    },
-    {
-      content: (
-        <MenuItem>
-          <Trans>Learn</Trans>
-          <BookOpen size={16} />
-        </MenuItem>
-      ),
-      link: 'https://docs.uniswap.org/',
-      external: true,
-    },
+    // {
+    //   content: (
+    //     <MenuItem>
+    //       <Trans>Migrate</Trans>
+    //       <ChevronsRight size={16} />
+    //     </MenuItem>
+    //   ),
+    //   link: '/migrate/v2',
+    //   external: false,
+    // },
+    // {
+    //   content: (
+    //     <MenuItem>
+    //       <Trans>V2 liquidity</Trans>
+    //       <Layers size={16} />
+    //     </MenuItem>
+    //   ),
+    //   link: '/pool/v2',
+    //   external: false,
+    // },
+    // {
+    //   content: (
+    //     <MenuItem>
+    //       <Trans>Learn</Trans>
+    //       <BookOpen size={16} />
+    //     </MenuItem>
+    //   ),
+    //   link: 'https://docs.uniswap.org/',
+    //   external: true,
+    // },
   ]
 
   return (
@@ -327,9 +325,6 @@ export default function Pool() {
                   </ErrorContainer>
                 )}
               </MainContentWrapper>
-              <HideSmall>
-                <CTACards />
-              </HideSmall>
             </AutoColumn>
           </AutoColumn>
         </PageWrapper>

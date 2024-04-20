@@ -5,7 +5,6 @@ import { sendAnalyticsEvent } from 'components/AmplitudeAnalytics'
 import { EventName, WALLET_CONNECTION_RESULT } from 'components/AmplitudeAnalytics/constants'
 import { sendEvent } from 'components/analytics'
 import { AutoColumn } from 'components/Column'
-import { AutoRow } from 'components/Row'
 import { ConnectionType } from 'connection'
 import { getConnection, getConnectionName, getIsCoinbaseWallet, getIsInjected, getIsMetaMask } from 'connection/utils'
 import { useCallback, useEffect, useState } from 'react'
@@ -19,9 +18,7 @@ import { isMobile } from 'utils/userAgent'
 import { ReactComponent as Close } from '../../assets/images/x.svg'
 import { useModalIsOpen, useToggleWalletModal } from '../../state/application/hooks'
 import { ApplicationModal } from '../../state/application/reducer'
-import { ExternalLink, ThemedText } from '../../theme'
 import AccountDetails from '../AccountDetails'
-import { LightCard } from '../Card'
 import Modal from '../Modal'
 import { CoinbaseWalletOption, OpenCoinbaseWalletOption } from './CoinbaseWalletOption'
 import { FortmaticOption } from './FortmaticOption'
@@ -299,7 +296,7 @@ export default function WalletModal({
               />
             )}
             {walletView !== WALLET_VIEWS.PENDING && <OptionGrid data-testid="option-grid">{getOptions()}</OptionGrid>}
-            {!pendingError && (
+            {/* {!pendingError && (
               <LightCard>
                 <AutoRow style={{ flexWrap: 'nowrap' }}>
                   <ThemedText.Body fontSize={12}>
@@ -320,7 +317,7 @@ export default function WalletModal({
                   </ThemedText.Body>
                 </AutoRow>
               </LightCard>
-            )}
+            )} */}
           </AutoColumn>
         </ContentWrapper>
       </UpperSection>

@@ -1,4 +1,4 @@
-import DegenLogoUrl from 'assets/images/degen-logo.jpg'
+import DegenLogoUrl from 'assets/images/degen-chain.png'
 import ms from 'ms.macro'
 
 import { SupportedChainId, SupportedL1ChainId, SupportedL2ChainId } from './chains'

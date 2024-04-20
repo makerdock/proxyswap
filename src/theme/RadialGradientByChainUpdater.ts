@@ -77,9 +77,7 @@ export default function RadialGradientByChainUpdater(): null {
       //   break
       case SupportedChainId.DEGEN:
         setBackground(backgroundResetStyles)
-        const degenLightGradient = 'radial-gradient(150% 100% at 50% 0%, #CDE8FB 0%, #FCF3F9 50%, #FFFFFF 100%)'
-        const degenDarkGradient = 'radial-gradient(150% 100% at 50% 0%, #0A294B 0%, #221E30 50%, #1F2128 100%)'
-        backgroundRadialGradientElement.style.background = darkMode ? degenDarkGradient : degenLightGradient
+        backgroundRadialGradientElement.style.background = '#19233C'
         break
       default:
         setBackground(initialStyles)

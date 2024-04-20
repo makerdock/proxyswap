@@ -4,7 +4,7 @@ import useHttpLocations from 'hooks/useHttpLocations'
 import { useMemo } from 'react'
 import { WrappedTokenInfo } from 'state/lists/wrappedTokenInfo'
 
-import DegenLogo from '../../assets/images/degen-logo.jpg'
+import DegenLogo from '../../assets/images/degen-chain.png'
 // import EthereumLogo from '../../assets/images/ethereum-logo.png'
 // import CeloLogo from '../../assets/svg/celo_logo.svg'
 // import MantleLogo from '../../assets/svg/mantle_logo.svg'
