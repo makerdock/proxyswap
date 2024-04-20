@@ -58,7 +58,7 @@ export default function Manage({
   setListUrl: (url: string) => void
 }) {
   // toggle between tokens and lists
-  const [showLists, setShowLists] = useState(true)
+  const [showLists, setShowLists] = useState(false)
 
   return (
     <Wrapper>
@@ -74,10 +74,16 @@ export default function Manage({
       <Separator />
       <PaddedColumn style={{ paddingBottom: 0 }}>
         <ToggleWrapper>
-          <ToggleOption onClick={() => setShowLists(!showLists)} active={showLists}>
+          {/* <ToggleOption onClick={() => setShowLists(!showLists)} active={showLists}>
             <Trans>Lists</Trans>
-          </ToggleOption>
-          <ToggleOption onClick={() => setShowLists(!showLists)} active={!showLists}>
+          </ToggleOption> */}
+          <ToggleOption
+            style={{
+              width: '100%',
+            }}
+            onClick={() => setShowLists(!showLists)}
+            active={!showLists}
+          >
             <Trans>Tokens</Trans>
           </ToggleOption>
         </ToggleWrapper>

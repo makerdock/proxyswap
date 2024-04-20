@@ -199,7 +199,7 @@ export const COMMON_BASES: ChainCurrencyList = {
   // ],
   [SupportedChainId.DEGEN]: [
     nativeOnChain(SupportedChainId.DEGEN),
-    USDT_DEGEN,
+    // USDT_DEGEN,
     WRAPPED_NATIVE_CURRENCY[SupportedChainId.DEGEN] as Token,
   ],
 }

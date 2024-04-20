@@ -145,21 +145,21 @@ export const USDT_DEGEN = new Token(
 //   'Dai stable coin'
 // )
 
-export const USDC_DEGEN = new Token(
-  SupportedChainId.DEGEN,
-  '0x11538E6Bb4244872690233b2698454F036E7C268',
-  18,
-  'FAKE_USDC',
-  'FAKE DEGEN'
-)
+// export const USDC_DEGEN = new Token(
+//   SupportedChainId.DEGEN,
+//   '0x11538E6Bb4244872690233b2698454F036E7C268',
+//   18,
+//   'FAKE_USDC',
+//   'FAKE DEGEN'
+// )
 
-export const WRAPPEDDEGEN = new Token(
-  SupportedChainId.DEGEN,
-  '0x11538E6Bb4244872690233b2698454F036E7C268',
-  18,
-  'WDEGEN',
-  'WRAPPED DEGEN'
-)
+// export const WRAPPEDDEGEN = new Token(
+//   SupportedChainId.DEGEN,
+//   '0x11538E6Bb4244872690233b2698454F036E7C268',
+//   18,
+//   'WDEGEN',
+//   'WRAPPED DEGEN'
+// )
 export const USDC: { [chainId in SupportedChainId]: Token } = {
   // [SupportedChainId.MAINNET]: USDC_MAINNET,
   // [SupportedChainId.ARBITRUM_ONE]: USDC_ARBITRUM,
@@ -175,7 +175,7 @@ export const USDC: { [chainId in SupportedChainId]: Token } = {
   // [SupportedChainId.KOVAN]: USDC_KOVAN,
   // [SupportedChainId.ROPSTEN]: USDC_ROPSTEN,
   // [SupportedChainId.MANTLE]: USDC_MANTLE,
-  [SupportedChainId.DEGEN]: USDC_DEGEN,
+  [SupportedChainId.DEGEN]: USDT_DEGEN,
 }
 // export const DAI_POLYGON = new Token(
 //   SupportedChainId.POLYGON,
@@ -451,9 +451,9 @@ export const WRAPPED_NATIVE_CURRENCY: { [chainId: number]: Token | undefined } =
   // ),
   [SupportedChainId.DEGEN]: new Token(
     SupportedChainId.DEGEN,
-    '0x11538E6Bb4244872690233b2698454F036E7C268',
+    '0xEb54dACB4C2ccb64F8074eceEa33b5eBb38E5387',
     18,
-    'WDEGEN',
+    'wDEGEN',
     'Wrapped DEGEN'
   ),
 }

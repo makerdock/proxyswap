@@ -3,7 +3,6 @@ import { Trans } from '@lingui/macro'
 import useScrollPosition from '@react-hook/window-scroll'
 import { useWeb3React } from '@web3-react/core'
 import { getChainInfoOrDefault } from 'constants/chainInfo'
-import useTheme from 'hooks/useTheme'
 import { darken } from 'polished'
 import { NavLink } from 'react-router-dom'
 import { Text } from 'rebass'
@@ -11,7 +10,6 @@ import { useShowClaimPopup, useToggleSelfClaimModal } from 'state/application/ho
 import { useUserHasAvailableClaim } from 'state/claim/hooks'
 import { useNativeCurrencyBalances } from 'state/connection/hooks'
 import { useUserHasSubmittedClaim } from 'state/transactions/hooks'
-import { useDarkModeManager } from 'state/user/hooks'
 import styled from 'styled-components/macro'
 
 import { ThemedText } from '../../theme'
@@ -173,15 +171,6 @@ const Title = styled.a`
   }
 `
 
-const UniIcon = styled.div`
-  transition: transform 0.3s ease;
-  :hover {
-    transform: rotate(-5deg);
-  }
-
-  position: relative;
-`
-
 const activeClassName = 'ACTIVE'
 
 const StyledNavLink = styled(NavLink).attrs({
@@ -246,9 +235,6 @@ export default function Header() {
   const { account, chainId } = useWeb3React()
 
   const userEthBalance = useNativeCurrencyBalances(account ? [account] : [])?.[account ?? '']
-  const [darkMode] = useDarkModeManager()
-  const { white, black } = useTheme()
-
   const toggleClaimModal = useToggleSelfClaimModal()
 
   const availableClaim: boolean = useUserHasAvailableClaim(account)
@@ -269,7 +255,7 @@ export default function Header() {
       <ClaimModal />
       <Title href=".">
         <img src='/images/proxyswap.png' alt='proxyswap' style={{
-          aspectRatio: '606 / 180',
+          aspectRatio: '606 / 210',
           width: '220px'
         }} />
       </Title>

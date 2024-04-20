@@ -5,6 +5,7 @@ import { useMemo } from 'react'
 import { WrappedTokenInfo } from 'state/lists/wrappedTokenInfo'
 
 import DegenLogo from '../../assets/images/degen-chain.png'
+import ProxySwap from '../../assets/images/Icon.png'
 // import EthereumLogo from '../../assets/images/ethereum-logo.png'
 // import CeloLogo from '../../assets/svg/celo_logo.svg'
 // import MantleLogo from '../../assets/svg/mantle_logo.svg'
@@ -58,6 +59,7 @@ function getTokenLogoURI(address: string, chainId: SupportedChainId = SupportedC
       return DegenLogo
     }
   }
+  return ProxySwap
   // if (isCelo(chainId)) {
   //   if (address === nativeOnChain(chainId).wrapped.address) {
   //     return 'https://raw.githubusercontent.com/ubeswap/default-token-list/master/assets/asset_CELO.png'
