@@ -118,6 +118,7 @@ export function useDerivedSwapInfo(): {
     parsedAmount,
     (isExactIn ? outputCurrency : inputCurrency) ?? undefined
   )
+  // console.log(trade, 'useBestTrade')
 
   const currencyBalances = useMemo(
     () => ({

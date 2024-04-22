@@ -301,7 +301,6 @@ export default function NetworkSelector() {
 
 
   const info = getChainInfo(chainId)
-  console.log(info, "info");
   const replaceURLChainParam = useCallback(() => {
     if (chainId) {
       history.replace({ search: replaceURLParam(history.location.search, 'chain', getChainNameFromId(chainId)) })
