@@ -231,6 +231,26 @@ const StyledNavLink = styled(NavLink).attrs({
 //   }
 // `
 
+const ProxySwapBigLogo = styled.img`
+  aspect-ratio: 606 / 210;
+  width: 220px;  
+
+  @media (max-width: 768px) {
+    display: none;
+  }
+`;
+
+const ProxySwapSquareLogo = styled.img`
+  aspect-ratio: 1 / 1;
+  width: 30px;
+  margin-left: 1rem;
+  
+
+  @media (min-width: 768px) {
+    display: none;
+  }
+`;
+
 export default function Header() {
   const { account, chainId } = useWeb3React()
 
@@ -254,10 +274,18 @@ export default function Header() {
     <HeaderFrame showBackground={scrollY > 45}>
       <ClaimModal />
       <Title href=".">
-        <img src='/images/proxyswap.png' alt='proxyswap' style={{
+        <ProxySwapBigLogo
+          alt={'proxyswap'}
+          src={'/images/proxyswap.png'}
+        />
+        <ProxySwapSquareLogo
+          alt={'proxyswap'}
+          src={'/images/512x512_App_Icon.png'}
+        />
+        {/* <img src='/images/proxyswap.png' alt='proxyswap' style={{
           aspectRatio: '606 / 210',
           width: '220px'
-        }} />
+        }} /> */}
       </Title>
       <HeaderLinks>
         <StyledNavLink id={`swap-nav-link`} to={'/swap'}>
