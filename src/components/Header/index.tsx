@@ -37,7 +37,7 @@ const HeaderFrame = styled.div<{ showBackground: boolean }>`
   background-image: ${({ theme }) => `linear-gradient(to bottom, transparent 50%, ${theme.bg0} 50% )}}`};
   background-position: ${({ showBackground }) => (showBackground ? '0 -100%' : '0 0')};
   background-size: 100% 200%;
-  box-shadow: 0px 0px 0px 1px ${({ theme, showBackground }) => (showBackground ? theme.bg2 : 'transparent;')};
+  box-shadow: 0px 0px 0px 1px ${({ theme, showBackground }) => (showBackground ? 'transparent' : 'transparent;')};
   transition: background-position 0.1s, box-shadow 0.1s;
   background-blend-mode: hard-light;
 
@@ -271,7 +271,7 @@ export default function Header() {
   } = getChainInfoOrDefault(chainId)
 
   return (
-    <HeaderFrame showBackground={scrollY > 45}>
+    <HeaderFrame showBackground={false}>
       <ClaimModal />
       <Title href=".">
         <ProxySwapBigLogo
