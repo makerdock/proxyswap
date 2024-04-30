@@ -18,6 +18,7 @@ import AddLiquidity from './AddLiquidity'
 import { RedirectDuplicateTokenIds } from './AddLiquidity/redirects'
 import { RedirectDuplicateTokenIdsV2 } from './AddLiquidityV2/redirects'
 import Manage from './Earn/Manage'
+import Lock from './Lock'
 import MigrateV2 from './MigrateV2'
 import MigrateV2Pair from './MigrateV2/MigrateV2Pair'
 import Pool from './Pool'
@@ -72,6 +73,8 @@ function getCurrentPageFromLocation(locationPathname: string): PageName | undefi
       return PageName.VOTE_PAGE
     case '/pool':
       return PageName.POOL_PAGE
+    case '/lock':
+      return PageName.LOCK_PAGE
     default:
       return undefined
   }
@@ -162,6 +165,10 @@ export default function App() {
                 </Route>
                 <Route exact strict path="/migrate/v2/:address">
                   <MigrateV2Pair />
+                </Route>
+
+                <Route exact strict path="/lock">
+                  <Lock />
                 </Route>
 
                 <Route>

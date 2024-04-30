@@ -67,8 +67,7 @@ const ActiveText = styled.div`
 const StyledArrowLeft = styled(ArrowLeft)`
   color: ${({ theme }) => theme.text1};
 `
-
-export function SwapPoolTabs({ active }: { active: 'swap' | 'pool' }) {
+export function SwapPoolTabs({ active }: { active: 'swap' | 'pool' | 'lock' }) {
   return (
     <Tabs style={{ marginBottom: '20px', display: 'none', padding: '1rem 1rem 0 1rem' }}>
       <StyledNavLink id={`swap-nav-link`} to={'/swap'} isActive={() => active === 'swap'}>
@@ -76,6 +75,9 @@ export function SwapPoolTabs({ active }: { active: 'swap' | 'pool' }) {
       </StyledNavLink>
       <StyledNavLink id={`pool-nav-link`} to={'/pool'} isActive={() => active === 'pool'}>
         <Trans>Pool</Trans>
+      </StyledNavLink>
+      <StyledNavLink id={`lock-nav-link`} to={'/lock'} isActive={() => active === 'lock'}>
+        <Trans>Lock</Trans>
       </StyledNavLink>
     </Tabs>
   )
