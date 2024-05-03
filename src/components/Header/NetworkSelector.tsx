@@ -121,6 +121,7 @@ const SelectorLabel = styled(NetworkLabel)`
   @media screen and (min-width: ${MEDIA_WIDTHS.upToSmall}px) {
     display: block;
     margin-right: 8px;
+    width: 7rem;
   }
 `
 const SelectorControls = styled.div`
@@ -299,7 +300,6 @@ export default function NetworkSelector() {
   const closeModal = useCloseModal(ApplicationModal.NETWORK_SELECTOR)
   const toggleModal = useToggleModal(ApplicationModal.NETWORK_SELECTOR)
 
-
   const info = getChainInfo(chainId)
   const replaceURLChainParam = useCallback(() => {
     if (chainId) {
@@ -370,12 +370,16 @@ export default function NetworkSelector() {
       onClick={isMobile ? toggleModal : undefined}
     >
       <SelectorControls>
-        <img src={info.logoUrl} alt='Info' style={{
-          width: "20px",
-          height: "20px",
-          marginRight: "8px",
-          borderRadius: "100%",
-        }} />
+        <img
+          src={info.logoUrl}
+          alt="Info"
+          style={{
+            width: '20px',
+            height: '20px',
+            marginRight: '8px',
+            borderRadius: '100%',
+          }}
+        />
         <SelectorLabel>{info.label}</SelectorLabel>
         <StyledChevronDown />
       </SelectorControls>
