@@ -209,7 +209,7 @@ const CHAIN_INFO: ChainInfoMap = {
     docs: 'https://docs.degenscore.com',
     explorer: 'https://explorer.degen.tips',
     infoLink: '',
-    label: 'Degen Chain',
+    label: 'Degen',
     logoUrl: DegenLogoUrl,
     defaultListUrl: DEGEN_LIST,
     helpCenterUrl: '',

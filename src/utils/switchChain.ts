@@ -68,7 +68,7 @@ export const switchChain = async (connector: Connector, chainId: SupportedChainI
     const info = getChainInfo(chainId)
     const addChainParameter = {
       chainId,
-      chainName: info.label,
+      chainName: info.label === 'Degen' ? 'Degen Chain' : info.label,
       rpcUrls: getRpcUrls(chainId),
       nativeCurrency: info.nativeCurrency,
       blockExplorerUrls: [info.explorer],

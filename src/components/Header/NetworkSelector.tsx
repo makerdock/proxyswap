@@ -121,7 +121,6 @@ const SelectorLabel = styled(NetworkLabel)`
   @media screen and (min-width: ${MEDIA_WIDTHS.upToSmall}px) {
     display: block;
     margin-right: 8px;
-    width: 7rem;
   }
 `
 const SelectorControls = styled.div`
