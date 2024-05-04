@@ -203,7 +203,7 @@ const AirdropModal = () => {
 
   useEffect(() => {
     if (account && provider && contract) {
-      ;(async () => {
+      ; (async () => {
         try {
           const { data } = await CollectionRewardsFetcher(account)
           const claim = data.find((claim) => claim?.rewardType === Airdrop.GENIE_UNISWAP_USDC_AIRDROP)
@@ -257,7 +257,7 @@ const AirdropModal = () => {
               <SuccessText>
                 You have successfully claimed {totalAmount} USDC. Thank you for supporting Genie.xyz.
               </SuccessText>
-              <EtherscanLink href={`https://etherscan.io/tx/${hash}`} target="_blank">
+              <EtherscanLink href={`https://explorer.degen.tips/tx/${hash}`} target="_blank">
                 <ThemedText.Link>
                   <EtherscanLinkWrap>
                     <span>Etherscan</span>
