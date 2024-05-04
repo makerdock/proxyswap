@@ -1,9 +1,11 @@
+/* eslint-disable prettier/prettier */
 // eslint-disable-next-line no-restricted-imports
 import { t, Trans } from '@lingui/macro'
 import { useWeb3React } from '@web3-react/core'
 import { ElementName, Event, EventName } from 'components/AmplitudeAnalytics/constants'
 import { TraceEvent } from 'components/AmplitudeAnalytics/TraceEvent'
 import { getConnection } from 'connection/utils'
+import { SupportedChainId } from 'constants/chains'
 import { getIsValidSwapQuote } from 'pages/Swap'
 import { darken } from 'polished'
 import { useMemo } from 'react'
@@ -11,7 +13,7 @@ import { Activity } from 'react-feather'
 import { useAppSelector } from 'state/hooks'
 import { useDerivedSwapInfo } from 'state/swap/hooks'
 import styled, { css } from 'styled-components/macro'
-import { isChainAllowed } from 'utils/switchChain'
+import { isChainAllowed, switchChain } from 'utils/switchChain'
 
 import { useHasSocks } from '../../hooks/useSocksBalance'
 import { useToggleWalletModal } from '../../state/application/hooks'
@@ -50,7 +52,7 @@ const Web3StatusError = styled(Web3StatusGeneric)`
   }
 `
 
-const Web3StatusConnect = styled(Web3StatusGeneric)<{ faded?: boolean }>`
+const Web3StatusConnect = styled(Web3StatusGeneric) <{ faded?: boolean }>`
   background-color: ${({ theme }) => theme.primary4};
   border: none;
 
@@ -78,7 +80,7 @@ const Web3StatusConnect = styled(Web3StatusGeneric)<{ faded?: boolean }>`
     `}
 `
 
-const Web3StatusConnected = styled(Web3StatusGeneric)<{ pending?: boolean }>`
+const Web3StatusConnected = styled(Web3StatusGeneric) <{ pending?: boolean }>`
   background-color: ${({ pending, theme }) => (pending ? theme.primary1 : theme.bg1)};
   border: 1px solid ${({ pending, theme }) => (pending ? theme.primary1 : theme.bg1)};
   color: ${({ pending, theme }) => (pending ? theme.white : theme.text1)};
@@ -154,7 +156,11 @@ function Web3StatusInner() {
     return null
   } else if (!chainAllowed) {
     return (
-      <Web3StatusError onClick={toggleWalletModal}>
+      <Web3StatusError
+        onClick={async () => {
+          await switchChain(connector, SupportedChainId.DEGEN)
+        }}
+      >
         <NetworkIcon />
         <Text>
           <Trans>Wrong Network</Trans>
