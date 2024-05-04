@@ -11,7 +11,7 @@ import { ThemedText } from 'theme/components'
 import { Field } from './constants'
 import { SwapModalHeaderAmount } from './SwapModalHeaderAmount'
 
-const HeaderContainer = styled(AutoColumn)<{ isNewSwapFlowEnabled?: boolean }>`
+const HeaderContainer = styled(AutoColumn) <{ isNewSwapFlowEnabled?: boolean }>`
   margin-top: ${({ isNewSwapFlowEnabled }) => (isNewSwapFlowEnabled ? '0px' : '16px')};
 `
 
@@ -27,6 +27,8 @@ export default function SwapModalHeader({
   const fiatValueInput = useUSDPrice(trade.inputAmount)
   const fiatValueOutput = useUSDPrice(trade.outputAmount)
   const isNewSwapFlowEnabled = useNewSwapFlow()
+
+  console.log(inputCurrency, "inputCurrency");
 
   return (
     <HeaderContainer gap="sm" isNewSwapFlowEnabled={isNewSwapFlowEnabled}>

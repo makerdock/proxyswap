@@ -15,15 +15,13 @@ import { shouldDisableNFTRoutesAtom } from 'state/application/atoms'
 import { useAppSelector } from 'state/hooks'
 import { AppState } from 'state/reducer'
 import { useRouterPreference } from 'state/user/hooks'
-import { StatsigProvider, StatsigUser } from 'statsig-react'
+import { StatsigUser } from 'statsig-react'
 import styled from 'styled-components'
 import DarkModeQueryParamReader from 'theme/components/DarkModeQueryParamReader'
 import { useIsDarkMode } from 'theme/components/ThemeToggle'
 import { flexRowNoWrap } from 'theme/styles'
 import { Z_INDEX } from 'theme/zIndex'
-import { STATSIG_DUMMY_KEY } from 'tracing'
 import { isPathBlocked } from 'utils/blockedPaths'
-import { getEnvName } from 'utils/env'
 import { MICROSITE_LINK } from 'utils/openDownloadApp'
 import { getCurrentPageFromLocation } from 'utils/urlRoutes'
 import { getCLS, getFCP, getFID, getLCP, Metric } from 'web-vitals'
@@ -172,51 +170,40 @@ export default function App() {
         <Helmet>
           <title>{findRouteByPath(pathname)?.getTitle(pathname) ?? 'Uniswap Interface'}</title>
         </Helmet>
-        <StatsigProvider
-          user={statsigUser}
-          // TODO: replace with proxy and cycle key
-          sdkKey={STATSIG_DUMMY_KEY}
-          waitForInitialization={false}
-          options={{
-            environment: { tier: getEnvName() },
-            api: process.env.REACT_APP_STATSIG_PROXY_URL,
-          }}
-        >
-          <UserPropertyUpdater />
-          {renderUkBannner && <UkBanner />}
-          <HeaderWrapper transparent={isHeaderTransparent} bannerIsVisible={renderUkBannner} scrollY={scrollY}>
-            <NavBar blur={isHeaderTransparent} />
-          </HeaderWrapper>
-          <BodyWrapper bannerIsVisible={renderUkBannner}>
-            <Suspense>
-              <AppChrome />
-            </Suspense>
-            <Suspense fallback={<Loader />}>
-              {isLoaded ? (
-                <Routes>
-                  {routes.map((route: RouteDefinition) =>
-                    route.enabled(routerConfig) ? (
-                      <Route key={route.path} path={route.path} element={route.getElement(routerConfig)}>
-                        {route.nestedPaths.map((nestedPath) => (
-                          <Route
-                            path={nestedPath}
-                            element={route.getElement(routerConfig)}
-                            key={`${route.path}/${nestedPath}`}
-                          />
-                        ))}
-                      </Route>
-                    ) : null
-                  )}
-                </Routes>
-              ) : (
-                <Loader />
-              )}
-            </Suspense>
-          </BodyWrapper>
-          <MobileBottomBar>
-            <PageTabs />
-          </MobileBottomBar>
-        </StatsigProvider>
+        <UserPropertyUpdater />
+        {renderUkBannner && <UkBanner />}
+        <HeaderWrapper transparent={isHeaderTransparent} bannerIsVisible={renderUkBannner} scrollY={scrollY}>
+          <NavBar blur={isHeaderTransparent} />
+        </HeaderWrapper>
+        <BodyWrapper bannerIsVisible={renderUkBannner}>
+          <Suspense>
+            <AppChrome />
+          </Suspense>
+          <Suspense fallback={<Loader />}>
+            {isLoaded ? (
+              <Routes>
+                {routes.map((route: RouteDefinition) =>
+                  route.enabled(routerConfig) ? (
+                    <Route key={route.path} path={route.path} element={route.getElement(routerConfig)}>
+                      {route.nestedPaths.map((nestedPath) => (
+                        <Route
+                          path={nestedPath}
+                          element={route.getElement(routerConfig)}
+                          key={`${route.path}/${nestedPath}`}
+                        />
+                      ))}
+                    </Route>
+                  ) : null
+                )}
+              </Routes>
+            ) : (
+              <Loader />
+            )}
+          </Suspense>
+        </BodyWrapper>
+        <MobileBottomBar>
+          <PageTabs />
+        </MobileBottomBar>
       </Trace>
     </ErrorBoundary>
   )
@@ -246,8 +233,8 @@ function UserPropertyUpdater() {
     sendInitializationEvent(SharedEventName.APP_LOADED, pageLoadProperties)
     const sendWebVital =
       (metric: string) =>
-      ({ delta }: Metric) =>
-        sendAnalyticsEvent(SharedEventName.WEB_VITALS, { ...pageLoadProperties, [metric]: delta })
+        ({ delta }: Metric) =>
+          sendAnalyticsEvent(SharedEventName.WEB_VITALS, { ...pageLoadProperties, [metric]: delta })
     getCLS(sendWebVital('cumulative_layout_shift'))
     getFCP(sendWebVital('first_contentful_paint_ms'))
     getFID(sendWebVital('first_input_delay_ms'))

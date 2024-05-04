@@ -132,7 +132,7 @@ export function PoolDetailsTransactionsTable({
             color = 'success'
             text = (
               <span>
-                <Trans>Buy</Trans>&nbsp;{token0?.symbol}
+
               </span>
             )
           } else if (row.type === PoolTransactionType.SELL) {

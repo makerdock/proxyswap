@@ -1,9 +1,13 @@
-import { gql } from '@apollo/client'
-import { ChainId } from '@uniswap/sdk-core'
-import { OrderDirection, Swap_OrderBy, useTokenTransactionsQuery } from 'graphql/thegraph/__generated__/types-and-hooks'
-import { useCallback, useMemo, useRef } from 'react'
+import { gql } from "@apollo/client";
+import { ChainId } from "@uniswap/sdk-core";
+import {
+  OrderDirection,
+  Swap_OrderBy,
+  useTokenTransactionsQuery,
+} from "graphql/thegraph/__generated__/types-and-hooks";
+import { useCallback, useMemo, useRef } from "react";
 
-import { chainToApolloClient } from './apollo'
+import { chainToApolloClient } from "./apollo";
 
 gql`
   query TokenTransactions(
@@ -68,11 +72,11 @@ gql`
       amountUSD
     }
   }
-`
+`;
 
 export enum TokenTransactionType {
-  BUY = 'Buy',
-  SELL = 'Sell',
+  // BUY = 'Buy',
+  SELL = "Sell",
 }
 
 export function useTokenTransactions(
@@ -80,11 +84,14 @@ export function useTokenTransactions(
   chainId?: ChainId,
   orderBy: Swap_OrderBy = Swap_OrderBy.Timestamp,
   orderDirection: OrderDirection = OrderDirection.Desc,
-  filter: TokenTransactionType[] = [TokenTransactionType.BUY, TokenTransactionType.SELL],
+  filter: TokenTransactionType[] = [
+    TokenTransactionType.BUY,
+    TokenTransactionType.SELL,
+  ],
   first = 25,
-  skip?: number
+  skip?: number,
 ) {
-  const apolloClient = chainToApolloClient[chainId || ChainId.MAINNET]
+  const apolloClient = chainToApolloClient[chainId || ChainId.MAINNET];
   const { data, loading, fetchMore, error } = useTokenTransactionsQuery({
     variables: {
       address: address.toLowerCase(),
@@ -94,47 +101,54 @@ export function useTokenTransactions(
       orderDirection,
     },
     client: apolloClient,
-  })
-  const loadingMore = useRef(false)
+  });
+  const loadingMore = useRef(false);
   const loadMore = useCallback(
     ({ onComplete }: { onComplete?: () => void }) => {
       if (loadingMore.current) {
-        return
+        return;
       }
-      loadingMore.current = true
+      loadingMore.current = true;
       fetchMore({
         variables: {
-          skip: Math.max(data?.swapsAs0?.length ?? 0, data?.swapsAs1?.length ?? 0),
+          skip: Math.max(
+            data?.swapsAs0?.length ?? 0,
+            data?.swapsAs1?.length ?? 0,
+          ),
         },
         updateQuery: (prev, { fetchMoreResult }) => {
-          if (!fetchMoreResult) return prev
-          onComplete?.()
+          if (!fetchMoreResult) return prev;
+          onComplete?.();
           const mergedData = {
             swapsAs0: [...prev.swapsAs0, ...fetchMoreResult.swapsAs0],
             swapsAs1: [...prev.swapsAs1, ...fetchMoreResult.swapsAs1],
-          }
-          loadingMore.current = false
-          return mergedData
+          };
+          loadingMore.current = false;
+          return mergedData;
         },
-      })
+      });
     },
-    [data, fetchMore]
-  )
+    [data, fetchMore],
+  );
 
   const transactions = useMemo(
     () =>
       [
         ...(data?.swapsAs0.filter((swap) => {
-          const isSell = swap.amount0 > 0
-          return isSell ? filter.includes(TokenTransactionType.SELL) : filter.includes(TokenTransactionType.BUY)
+          const isSell = swap.amount0 > 0;
+          return isSell
+            ? filter.includes(TokenTransactionType.SELL)
+            : filter.includes(TokenTransactionType.BUY);
         }) ?? []),
         ...(data?.swapsAs1.filter((swap) => {
-          const isSell = swap.amount1 > 0
-          return isSell ? filter.includes(TokenTransactionType.SELL) : filter.includes(TokenTransactionType.BUY)
+          const isSell = swap.amount1 > 0;
+          return isSell
+            ? filter.includes(TokenTransactionType.SELL)
+            : filter.includes(TokenTransactionType.BUY);
         }) ?? []),
       ].sort((a, b) => b.timestamp - a.timestamp),
-    [data?.swapsAs0, data?.swapsAs1, filter]
-  )
+    [data?.swapsAs0, data?.swapsAs1, filter],
+  );
 
   return useMemo(() => {
     return {
@@ -142,6 +156,6 @@ export function useTokenTransactions(
       loading,
       loadMore,
       error,
-    }
-  }, [transactions, loading, loadMore, error])
+    };
+  }, [transactions, loading, loadMore, error]);
 }

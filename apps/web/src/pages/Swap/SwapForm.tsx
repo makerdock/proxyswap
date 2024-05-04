@@ -8,7 +8,6 @@ import {
   SwapEventName,
 } from '@uniswap/analytics-events'
 import { Currency, CurrencyAmount, Token } from '@uniswap/sdk-core'
-import { UNIVERSAL_ROUTER_ADDRESS } from '@uniswap/universal-router-sdk'
 import { useWeb3React } from '@web3-react/core'
 import { sendAnalyticsEvent, Trace, TraceEvent, useTrace } from 'analytics'
 import { useToggleAccountDrawer } from 'components/AccountDrawer/MiniPortfolio/hooks'
@@ -116,18 +115,18 @@ export function SwapForm({ disableTokenInputs = false, onCurrencyChange }: SwapF
     () =>
       urlLoadedTokens && !isEmptyObject(defaultTokens)
         ? urlLoadedTokens
-            .filter((token: Token) => {
-              return !(token.address in defaultTokens)
+          .filter((token: Token) => {
+            return !(token.address in defaultTokens)
+          })
+          .filter((token: Token) => {
+            // Any token addresses that are loaded from the shorthands map do not need to show the import URL
+            const supported = asSupportedChain(chainId)
+            if (!supported) return true
+            return !Object.keys(TOKEN_SHORTHANDS).some((shorthand) => {
+              const shorthandTokenAddress = TOKEN_SHORTHANDS[shorthand][supported]
+              return shorthandTokenAddress && shorthandTokenAddress === token.address
             })
-            .filter((token: Token) => {
-              // Any token addresses that are loaded from the shorthands map do not need to show the import URL
-              const supported = asSupportedChain(chainId)
-              if (!supported) return true
-              return !Object.keys(TOKEN_SHORTHANDS).some((shorthand) => {
-                const shorthandTokenAddress = TOKEN_SHORTHANDS[shorthand][supported]
-                return shorthandTokenAddress && shorthandTokenAddress === token.address
-              })
-            })
+          })
         : [],
     [chainId, defaultTokens, urlLoadedTokens]
   )
@@ -176,13 +175,13 @@ export function SwapForm({ disableTokenInputs = false, onCurrencyChange }: SwapF
     () =>
       showWrap
         ? {
-            [Field.INPUT]: parsedAmount,
-            [Field.OUTPUT]: parsedAmount,
-          }
+          [Field.INPUT]: parsedAmount,
+          [Field.OUTPUT]: parsedAmount,
+        }
         : {
-            [Field.INPUT]: independentField === Field.INPUT ? parsedAmount : trade?.inputAmount,
-            [Field.OUTPUT]: independentField === Field.OUTPUT ? parsedAmount : trade?.outputAmount,
-          },
+          [Field.INPUT]: independentField === Field.INPUT ? parsedAmount : trade?.inputAmount,
+          [Field.OUTPUT]: independentField === Field.OUTPUT ? parsedAmount : trade?.outputAmount,
+        },
     [independentField, parsedAmount, showWrap, trade]
   )
 
@@ -219,9 +218,9 @@ export function SwapForm({ disableTokenInputs = false, onCurrencyChange }: SwapF
       routeIsSyncing || !isClassicTrade(trade) || showWrap
         ? [undefined, undefined]
         : [
-            computeFiatValuePriceImpact(fiatValueTradeInput.data, fiatValueTradeOutput.data),
-            computeFiatValuePriceImpact(fiatValueTradeInput.data, preTaxFiatValueTradeOutput.data),
-          ],
+          computeFiatValuePriceImpact(fiatValueTradeInput.data, fiatValueTradeOutput.data),
+          computeFiatValuePriceImpact(fiatValueTradeInput.data, preTaxFiatValueTradeOutput.data),
+        ],
     [fiatValueTradeInput, fiatValueTradeOutput, preTaxFiatValueTradeOutput, routeIsSyncing, trade, showWrap]
   )
 
@@ -300,10 +299,10 @@ export function SwapForm({ disableTokenInputs = false, onCurrencyChange }: SwapF
       [dependentField]: showWrap
         ? parsedAmounts[independentField]?.toExact() ?? ''
         : formatCurrencyAmount({
-            amount: parsedAmounts[dependentField],
-            type: NumberType.SwapTradeAmount,
-            placeholder: '',
-          }),
+          amount: parsedAmounts[dependentField],
+          type: NumberType.SwapTradeAmount,
+          placeholder: '',
+        }),
     }),
     [dependentField, formatCurrencyAmount, independentField, parsedAmounts, showWrap, typedValue]
   )
@@ -315,10 +314,11 @@ export function SwapForm({ disableTokenInputs = false, onCurrencyChange }: SwapF
   const maximumAmountIn = useMaxAmountIn(trade, allowedSlippage)
   const allowance = usePermit2Allowance(
     maximumAmountIn ??
-      (parsedAmounts[Field.INPUT]?.currency.isToken
-        ? (parsedAmounts[Field.INPUT] as CurrencyAmount<Token>)
-        : undefined),
-    isSupportedChain(chainId) ? UNIVERSAL_ROUTER_ADDRESS(chainId) : undefined,
+    (parsedAmounts[Field.INPUT]?.currency.isToken
+      ? (parsedAmounts[Field.INPUT] as CurrencyAmount<Token>)
+      : undefined),
+    // isSupportedChain(chainId) ? UNIVERSAL_ROUTER_ADDRESS(chainId) : undefined,
+    undefined,
     trade?.fillType
   )
 

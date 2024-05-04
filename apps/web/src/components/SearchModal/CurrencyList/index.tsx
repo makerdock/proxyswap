@@ -251,7 +251,7 @@ export class CurrencyListRow {
     public readonly currency: Currency | undefined,
     public readonly disabled: boolean,
     public readonly tooltip?: string
-  ) {}
+  ) { }
 }
 
 /**

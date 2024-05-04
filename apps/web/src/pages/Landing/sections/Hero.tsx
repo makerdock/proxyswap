@@ -1,16 +1,13 @@
 import { Trans } from '@lingui/macro'
-import { ColumnCenter } from 'components/Column'
 import { useCurrency } from 'hooks/Tokens'
 import { Swap } from 'pages/Swap'
 import { useEffect, useState } from 'react'
-import { ChevronDown } from 'react-feather'
 import styled, { css, keyframes } from 'styled-components'
-import { ThemedText } from 'theme/components'
 
 import { BREAKPOINTS } from 'theme'
-import { Box, H1, Subheading } from '../components/Generics'
+import { Box, H1 } from '../components/Generics'
 import { TokenCloud } from '../components/TokenCloud/index'
-import { Hover, RiseIn, RiseInText } from '../components/animations'
+import { RiseIn, RiseInText } from '../components/animations'
 
 const Container = styled(Box)`
   min-width: 100%;
@@ -54,7 +51,7 @@ const shrinkAndFade = keyframes`
     opacity: 0;
   }
 `
-const Center = styled(Box)<{ transition?: boolean }>`
+const Center = styled(Box) <{ transition?: boolean }>`
   width: unset;
   pointer-events: none;
   padding: 48px 0px;
@@ -132,20 +129,13 @@ export function Hero({ scrollToRef, transition }: HeroProps) {
             </StyledH1>
           </RiseIn>
         </Box>
-
         <RiseIn delay={0.4}>
           <LandingSwapContainer>
             <LandingSwap initialInputCurrency={initialInputCurrency} />
           </LandingSwapContainer>
         </RiseIn>
-
-        <RiseIn delay={0.3}>
-          <Subheading>
-            <Trans>The largest onchain marketplace. Buy and sell crypto on Ethereum and 7+ other chains.</Trans>
-          </Subheading>
-        </RiseIn>
       </Center>
-      <LearnMoreContainer
+      {/* <LearnMoreContainer
         position="absolute"
         width="100%"
         align="center"
@@ -172,7 +162,7 @@ export function Hero({ scrollToRef, transition }: HeroProps) {
             </Hover>
           </Box>
         </RiseIn>
-      </LearnMoreContainer>
+      </LearnMoreContainer> */}
     </Container>
   )
 }

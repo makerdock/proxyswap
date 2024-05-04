@@ -9,7 +9,6 @@ import { isIFramed } from 'utils/isIFramed'
 import { useLocation } from 'react-router-dom'
 import { RowBetween, RowFixed } from '../Row'
 import SettingsTab from '../Settings'
-import SwapBuyFiatButton from './SwapBuyFiatButton'
 import { SwapTab } from './constants'
 import { SwapHeaderTabButton } from './styled'
 
@@ -55,17 +54,6 @@ export default function SwapHeader() {
         >
           <Trans>Swap</Trans>
         </SwapHeaderTabButton>
-        {limitsEnabled && chainId === ChainId.MAINNET && (
-          <SwapHeaderTabButton $isActive={currentTab === SwapTab.Limit} onClick={() => setCurrentTab(SwapTab.Limit)}>
-            <Trans>Limit</Trans>
-          </SwapHeaderTabButton>
-        )}
-        {sendEnabled && (
-          <SwapHeaderTabButton $isActive={currentTab === SwapTab.Send} onClick={() => setCurrentTab(SwapTab.Send)}>
-            <Trans>Send</Trans>
-          </SwapHeaderTabButton>
-        )}
-        <SwapBuyFiatButton />
       </HeaderButtonContainer>
       <RowFixed>
         <SettingsTab autoSlippage={autoSlippage} chainId={chainId} trade={trade.trade} />
