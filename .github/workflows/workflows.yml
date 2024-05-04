@@ -1,0 +1,23 @@
+name: Trigger API on Commit
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types: [closed]
+    branches:
+      - main
+
+jobs:
+  triggerAPI:
+    runs-on: ubuntu-latest
+    if: >
+      github.event_name == 'push' ||
+      (github.event_name == 'pull_request' && github.event.pull_request.merged == true)
+    steps:
+      - name: Call API
+        env:
+          API_URL: https://api.vercel.com/v1/integrations/deploy/prj_pdoQfmQSma4Esa4QuXiCs4paGYBI/tTB4B73QsR
+        run: |
+          curl -X GET $API_URL
