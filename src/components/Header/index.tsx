@@ -233,23 +233,22 @@ const StyledNavLink = styled(NavLink).attrs({
 
 const ProxySwapBigLogo = styled.img`
   aspect-ratio: 606 / 210;
-  width: 220px;  
+  width: 220px;
 
   @media (max-width: 768px) {
     display: none;
   }
-`;
+`
 
 const ProxySwapSquareLogo = styled.img`
   aspect-ratio: 1 / 1;
   width: 30px;
   margin-left: 1rem;
-  
 
   @media (min-width: 768px) {
     display: none;
   }
-`;
+`
 
 export default function Header() {
   const { account, chainId } = useWeb3React()
@@ -274,14 +273,8 @@ export default function Header() {
     <HeaderFrame showBackground={false}>
       <ClaimModal />
       <Title href=".">
-        <ProxySwapBigLogo
-          alt={'proxyswap'}
-          src={'/images/proxyswap.png'}
-        />
-        <ProxySwapSquareLogo
-          alt={'proxyswap'}
-          src={'/images/512x512_App_Icon.png'}
-        />
+        <ProxySwapBigLogo alt={'proxyswap'} src={'/images/proxyswap.png'} />
+        <ProxySwapSquareLogo alt={'proxyswap'} src={'/images/512x512_App_Icon.png'} />
         {/* <img src='/images/proxyswap.png' alt='proxyswap' style={{
           aspectRatio: '606 / 210',
           width: '220px'
@@ -304,6 +297,9 @@ export default function Header() {
           }
         >
           <Trans>Pool</Trans>
+        </StyledNavLink>
+        <StyledNavLink id={`lock-nav-link`} to={'/lock'}>
+          <Trans>Lock</Trans>
         </StyledNavLink>
         {/* {(!chainId || chainId === SupportedChainId.MAINNET) && (
           <StyledNavLink id={`vote-nav-link`} to={'/vote'}>

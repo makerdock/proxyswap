@@ -19,6 +19,12 @@ const Row = styled(Box)<{
   border-radius: ${({ borderRadius }) => borderRadius};
 `
 
+export const RowCenter = styled(Row)`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`
+
 export const RowBetween = styled(Row)`
   justify-content: space-between;
 `
