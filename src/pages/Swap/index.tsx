@@ -26,6 +26,7 @@ import { InterfaceTrade } from 'state/routing/types'
 import { TradeState } from 'state/routing/types'
 import styled, { DefaultTheme, ThemeContext } from 'styled-components/macro'
 
+import AddChain from '../../components/AddChain'
 import AddressInputPanel from '../../components/AddressInputPanel'
 import { ButtonConfirmed, ButtonError, ButtonLight, ButtonPrimary } from '../../components/Button'
 import { GreyCard } from '../../components/Card'
@@ -678,6 +679,7 @@ export default function Swap() {
         <AlertWrapper>
           <NetworkAlert />
         </AlertWrapper>
+        <AddChain />
         <SwitchLocaleLink />
         {!swapIsUnsupported ? null : (
           <UnsupportedCurrencyFooter

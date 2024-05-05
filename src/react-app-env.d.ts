@@ -14,6 +14,7 @@ interface Window {
     isCoinbaseWallet?: true
     isMetaMask?: true
     autoRefreshOnNetworkChange?: boolean
+    request?: (args: any) => Promise<any>
   }
   web3?: Record<string, unknown>
 }
