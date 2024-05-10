@@ -1,37 +1,33 @@
-import { ChainId } from '@uniswap/sdk-core'
-import { BaseVariant, FeatureFlag, useBaseFlag } from '../index'
+import { ChainId } from "@uniswap/sdk-core";
+import { BaseVariant, FeatureFlag, useBaseFlag } from "../index";
 
 export function useOutageBannerOptimism(): BaseVariant {
-  return useBaseFlag(FeatureFlag.outageBannerOptimism)
+  return useBaseFlag(FeatureFlag.outageBannerOptimism);
 }
 
 function useShowOutageBannerOptimism(): boolean {
-  return useOutageBannerOptimism() === BaseVariant.Enabled
+  return useOutageBannerOptimism() === BaseVariant.Enabled;
 }
 
 export function useOutageBannerArbitrum(): BaseVariant {
-  return useBaseFlag(FeatureFlag.outageBannerArbitrum)
+  return useBaseFlag(FeatureFlag.outageBannerArbitrum);
 }
 
 function useShowOutageBannerArbitrum(): boolean {
-  return useOutageBannerArbitrum() === BaseVariant.Enabled
+  return useOutageBannerArbitrum() === BaseVariant.Enabled;
 }
 
 export function useOutageBannerPolygon(): BaseVariant {
-  return useBaseFlag(FeatureFlag.outageBannerPolygon)
+  return useBaseFlag(FeatureFlag.outageBannerPolygon);
 }
 
 function useShowOutageBannerPolygon(): boolean {
-  return useOutageBannerPolygon() === BaseVariant.Enabled
+  return useOutageBannerPolygon() === BaseVariant.Enabled;
 }
 
 export function useOutageBanners(): Record<ChainId, boolean> {
   return {
-    [ChainId.OPTIMISM]: useShowOutageBannerOptimism(),
-    [ChainId.ARBITRUM_ONE]: useShowOutageBannerArbitrum(),
-    [ChainId.POLYGON]: useShowOutageBannerPolygon(),
-
-    [ChainId.MAINNET]: false,
+    [ChainId.DEGEN]: false,
     [ChainId.GOERLI]: false,
     [ChainId.SEPOLIA]: false,
     [ChainId.OPTIMISM_GOERLI]: false,
@@ -45,5 +41,5 @@ export function useOutageBanners(): Record<ChainId, boolean> {
     [ChainId.AVALANCHE]: false,
     [ChainId.BASE_GOERLI]: false,
     [ChainId.BASE]: false,
-  }
+  };
 }

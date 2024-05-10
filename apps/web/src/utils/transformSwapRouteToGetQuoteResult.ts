@@ -1,9 +1,12 @@
-import { Protocol } from '@uniswap/router-sdk'
-import { Currency, CurrencyAmount, TradeType } from '@uniswap/sdk-core'
+import { Protocol } from "@uniswap/router-sdk";
+import { Currency, CurrencyAmount, TradeType } from "@uniswap/sdk-core";
 // This file is lazy-loaded, so the import of smart-order-router is intentional.
 // eslint-disable-next-line @typescript-eslint/no-restricted-imports
-import { routeAmountsToString, SwapRoute } from '@uniswap/smart-order-router'
-import { Pool } from '@uniswap/v3-sdk'
+import {
+  routeAmountsToString,
+  SwapRoute,
+} from "@ketankudikyal/smart-order-router";
+import { Pool } from "@uniswap/v3-sdk";
 import {
   ClassicQuoteData,
   QuoteResult,
@@ -11,7 +14,7 @@ import {
   URAQuoteType,
   V2PoolInRoute,
   V3PoolInRoute,
-} from 'state/routing/types'
+} from "state/routing/types";
 
 // from routing-api (https://github.com/Uniswap/routing-api/blob/main/lib/handlers/quote/quote.ts#L243-L311)
 export function transformSwapRouteToGetQuoteResult(
@@ -27,33 +30,42 @@ export function transformSwapRouteToGetQuoteResult(
     gasPriceWei,
     methodParameters,
     blockNumber,
-  }: SwapRoute
+  }: SwapRoute,
 ): QuoteResult {
-  const routeResponse: Array<(V3PoolInRoute | V2PoolInRoute)[]> = []
+  const routeResponse: Array<(V3PoolInRoute | V2PoolInRoute)[]> = [];
 
   for (const subRoute of route) {
-    const { amount, quote, tokenPath } = subRoute
+    const { amount, quote, tokenPath } = subRoute;
 
-    const pools = subRoute.protocol === Protocol.V2 ? subRoute.route.pairs : subRoute.route.pools
-    const curRoute: (V3PoolInRoute | V2PoolInRoute)[] = []
+    const pools =
+      subRoute.protocol === Protocol.V2
+        ? subRoute.route.pairs
+        : subRoute.route.pools;
+    const curRoute: (V3PoolInRoute | V2PoolInRoute)[] = [];
     for (let i = 0; i < pools.length; i++) {
-      const nextPool = pools[i]
-      const tokenIn = tokenPath[i]
-      const tokenOut = tokenPath[i + 1]
+      const nextPool = pools[i];
+      const tokenIn = tokenPath[i];
+      const tokenOut = tokenPath[i + 1];
 
-      let edgeAmountIn = undefined
+      let edgeAmountIn = undefined;
       if (i === 0) {
-        edgeAmountIn = tradeType === TradeType.EXACT_INPUT ? amount.quotient.toString() : quote.quotient.toString()
+        edgeAmountIn =
+          tradeType === TradeType.EXACT_INPUT
+            ? amount.quotient.toString()
+            : quote.quotient.toString();
       }
 
-      let edgeAmountOut = undefined
+      let edgeAmountOut = undefined;
       if (i === pools.length - 1) {
-        edgeAmountOut = tradeType === TradeType.EXACT_INPUT ? quote.quotient.toString() : amount.quotient.toString()
+        edgeAmountOut =
+          tradeType === TradeType.EXACT_INPUT
+            ? quote.quotient.toString()
+            : amount.quotient.toString();
       }
 
       if (nextPool instanceof Pool) {
         curRoute.push({
-          type: 'v3-pool',
+          type: "v3-pool",
           tokenIn: {
             chainId: tokenIn.chainId,
             decimals: tokenIn.decimals,
@@ -72,13 +84,13 @@ export function transformSwapRouteToGetQuoteResult(
           tickCurrent: nextPool.tickCurrent.toString(),
           amountIn: edgeAmountIn,
           amountOut: edgeAmountOut,
-        })
+        });
       } else {
-        const reserve0 = nextPool.reserve0
-        const reserve1 = nextPool.reserve1
+        const reserve0 = nextPool.reserve0;
+        const reserve1 = nextPool.reserve1;
 
         curRoute.push({
-          type: 'v2-pool',
+          type: "v2-pool",
           tokenIn: {
             chainId: tokenIn.chainId,
             decimals: tokenIn.decimals,
@@ -111,11 +123,11 @@ export function transformSwapRouteToGetQuoteResult(
           },
           amountIn: edgeAmountIn,
           amountOut: edgeAmountOut,
-        })
+        });
       }
     }
 
-    routeResponse.push(curRoute)
+    routeResponse.push(curRoute);
   }
 
   const result: ClassicQuoteData = {
@@ -134,7 +146,10 @@ export function transformSwapRouteToGetQuoteResult(
     gasPriceWei: gasPriceWei.toString(),
     route: routeResponse,
     routeString: routeAmountsToString(route),
-  }
+  };
 
-  return { state: QuoteState.SUCCESS, data: { routing: URAQuoteType.CLASSIC, quote: result, allQuotes: [] } }
+  return {
+    state: QuoteState.SUCCESS,
+    data: { routing: URAQuoteType.CLASSIC, quote: result, allQuotes: [] },
+  };
 }
