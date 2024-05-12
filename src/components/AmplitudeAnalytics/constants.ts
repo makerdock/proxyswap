@@ -29,6 +29,7 @@ export const enum PageName {
   POOL_PAGE = 'pool-page',
   SWAP_PAGE = 'swap-page',
   VOTE_PAGE = 'vote-page',
+  LAUNCH_PAGE = 'launch-page',
   // alphabetize additional page names.
 }
 
