@@ -172,7 +172,7 @@
     "@graphql-codegen/typescript-react-apollo": "^3.3.7",
     "@graphql-codegen/typescript-resolvers": "^3.2.1",
     "@juggle/resize-observer": "3.4.0",
-    "@ketankudikyal/smart-order-router": "3.17.3",
+    "@ketankudikyal/smart-order-router": "3.17.13",
     "@ketankudikyal/uniswap-sdk-core": "0.0.1",
     "@lingui/core": "4.5.0",
     "@lingui/macro": "4.5.0",

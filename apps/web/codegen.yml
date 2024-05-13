@@ -1,5 +1,5 @@
 overrideExisting: true
-schema: "https://127.0.0.1:8000/subgraphs/name/proxyswap/v3/graphql"
+schema: "https://subgraph.airstack.xyz/query/subgraphs/name/proxyswap"
 generates:
   ./src/graphql/thegraph/schema/schema.graphql:
     plugins:
