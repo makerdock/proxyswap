@@ -82,7 +82,7 @@
     "g:lint:changed": "./scripts/turbo-changed.sh lint",
     "g:lint": "turbo run lint --parallel",
     "g:lint:fix": "turbo run lint:fix --parallel",
-    "g:prepare": "turbo run prepare --parallel",
+    "g:prepare": "turbo run prepare --parallel --filter=web --filter=!wallet",
     "g:rm:local-packages": "rm -rf ./node_modules/utilities ./node_modules/wallet ./node_modules/ui",
     "g:rm:nodemodules": "rm -rf node_modules",
     "g:run-fast-checks": "turbo run typecheck lint build --parallel --filter=\"[HEAD]\"",
