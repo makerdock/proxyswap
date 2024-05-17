@@ -7,7 +7,6 @@ import {
 } from "@uniswap/sdk-core";
 // This is a test file, so the import of smart-order-router is allowed.
 // eslint-disable-next-line @typescript-eslint/no-restricted-imports
-import { V3Route } from "@ketankudikyal/smart-order-router";
 import { FeeAmount, Pool } from "@uniswap/v3-sdk";
 import { DAI, nativeOnChain, USDC_MAINNET } from "constants/tokens";
 import { BigNumber } from "ethers/lib/ethers";
@@ -21,6 +20,7 @@ import {
   PreviewTrade,
   QuoteMethod,
 } from "state/routing/types";
+import { V3Route } from "@ketankudikyal/smart-order-router";
 
 export const TEST_TOKEN_1 = new Token(
   1,

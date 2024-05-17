@@ -1,5 +1,5 @@
 overrideExisting: true
-schema: "https://subgraph.airstack.xyz/query/subgraphs/name/proxyswap"
+schema: "https://proxy-airstack-subgraph-api.vercel.app/api/subgraph"
 generates:
   ./src/graphql/thegraph/schema/schema.graphql:
     plugins:

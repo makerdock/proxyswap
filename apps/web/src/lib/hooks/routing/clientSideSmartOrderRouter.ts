@@ -10,6 +10,7 @@ import {
 import {
   AlphaRouter,
   AlphaRouterConfig,
+  V3SubgraphProvider,
 } from "@ketankudikyal/smart-order-router";
 import { asSupportedChain } from "constants/chains";
 import { DEPRECATED_RPC_PROVIDERS } from "constants/providers";
@@ -31,7 +32,11 @@ export function getRouter(chainId: ChainId): AlphaRouter {
   const supportedChainId = asSupportedChain(chainId);
   if (supportedChainId) {
     const provider = DEPRECATED_RPC_PROVIDERS[supportedChainId];
-    const router = new AlphaRouter({ chainId, provider });
+    const router = new AlphaRouter({
+      chainId: chainId,
+      provider,
+      v3SubgraphProvider: new V3SubgraphProvider(chainId, 3, 0),
+    });
     routers.set(chainId, router);
     return router;
   }
@@ -97,6 +102,7 @@ async function getQuote(
     baseCurrency,
     JSBI.BigInt(amountRaw),
   );
+  debugger;
   // TODO (WEB-2055): explore initializing client side routing on first load (when amountRaw is null) if there are enough users using client-side router preference.
   const swapRoute = await router.route(
     amount,

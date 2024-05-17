@@ -1,6 +1,6 @@
 import { ApolloClient, InMemoryCache } from "@apollo/client";
 const GRAPHQL_ENDPOINT =
-  "https://subgraph.airstack.xyz/query/subgraphs/name/proxyswap";
+  "https://proxy-airstack-subgraph-api.vercel.app/api/subgraph";
 
 //TODO: Figure out how to make ApolloClient global variable
 export default new ApolloClient({

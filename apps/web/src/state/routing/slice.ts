@@ -30,10 +30,10 @@ if (UNISWAP_API_URL === undefined || UNISWAP_GATEWAY_DNS_URL === undefined) {
 }
 
 const CLIENT_PARAMS = {
-  protocols: [Protocol.V2, Protocol.V3, Protocol.MIXED],
+  protocols: [Protocol.V3],
 };
 
-const protocols: Protocol[] = [Protocol.V2, Protocol.V3, Protocol.MIXED];
+const protocols: Protocol[] = [Protocol.V3];
 
 // routing API quote query params: https://github.com/Uniswap/routing-api/blob/main/lib/handlers/quote/schema/quote-schema.ts
 const DEFAULT_QUERY_PARAMS = {
@@ -122,7 +122,7 @@ export const routingApi = createApi({
           },
         );
       },
-      async queryFn(args, _api, _extraOptions, fetch) {
+      async queryFn(args: GetQuoteArgs, _api: any, _extraOptions: any) {
         logSwapQuoteRequest(args.tokenInChainId, args.routerPreference, false);
         const quoteStartMark = performance.mark(
           `quote-fetch-start-${Date.now()}`,
@@ -200,10 +200,15 @@ export const routingApi = createApi({
           const { getRouter, getClientSideQuote } = await import(
             "lib/hooks/routing/clientSideSmartOrderRouter"
           );
-
+          let newArgs = {
+            ...args,
+            routerPreference: "price",
+            needsWrapIfUniswapX: false,
+          };
           const router = getRouter(args.tokenInChainId);
+          debugger;
           const quoteResult = await getClientSideQuote(
-            args,
+            newArgs,
             router,
             CLIENT_PARAMS,
           );
