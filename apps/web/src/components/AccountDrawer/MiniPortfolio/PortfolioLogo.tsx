@@ -142,7 +142,7 @@ interface PortfolioLogoProps {
 }
 
 function SquareL2Logo({ chainId }: { chainId: ChainId }) {
-  if (chainId === ChainId.MAINNET) return null
+  if (chainId === ChainId.DEGEN) return null
 
   return (
     <L2LogoContainer>
@@ -156,6 +156,7 @@ function SquareL2Logo({ chainId }: { chainId: ChainId }) {
  * Renders an image by prioritizing a list of sources, and then eventually a fallback contract icon
  */
 export function PortfolioLogo(props: PortfolioLogoProps) {
+
   return (
     <LogoContainer style={props.style}>
       {getLogo(props)}

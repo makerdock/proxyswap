@@ -1,5 +1,5 @@
 overrideExisting: true
-schema: 'https://api.thegraph.com/subgraphs/name/uniswap/uniswap-v3?source=uniswap'
+schema: "https://proxy-airstack-subgraph-api.vercel.app/api/subgraph"
 generates:
   ./src/graphql/thegraph/schema/schema.graphql:
     plugins:

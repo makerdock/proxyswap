@@ -48,6 +48,7 @@ const DEFAULT_CHAINS = [
   ChainId.BNB,
   ChainId.AVALANCHE,
   ChainId.BASE,
+  ChainId.DEGEN
 ]
 
 type UseMultiChainPositionsData = { positions?: PositionInfo[]; loading: boolean }
@@ -109,10 +110,10 @@ export default function useMultiChainPositions(account: string, chains = DEFAULT
     const callData = positionIds.map((id) => pm.interface.encodeFunctionData('positions', [id]))
     return (await pm.callStatic.multicall(callData)).map(
       (positionBytes, index) =>
-        ({
-          ...pm.interface.decodeFunctionResult('positions', positionBytes),
-          tokenId: positionIds[index],
-        } as unknown as PositionDetails)
+      ({
+        ...pm.interface.decodeFunctionResult('positions', positionBytes),
+        tokenId: positionIds[index],
+      } as unknown as PositionDetails)
     )
   }, [])
 
@@ -212,10 +213,10 @@ export default function useMultiChainPositions(account: string, chains = DEFAULT
         const key = position.chainId.toString() + position.details.tokenId
         const fees = feeMap[key]
           ? [
-              // We parse away from SDK/ethers types so fees can be multiplied by primitive number prices
-              parseFloat(CurrencyAmount.fromRawAmount(position.pool.token0, feeMap[key]?.[0].toString()).toExact()),
-              parseFloat(CurrencyAmount.fromRawAmount(position.pool.token1, feeMap[key]?.[1].toString()).toExact()),
-            ]
+            // We parse away from SDK/ethers types so fees can be multiplied by primitive number prices
+            parseFloat(CurrencyAmount.fromRawAmount(position.pool.token0, feeMap[key]?.[0].toString()).toExact()),
+            parseFloat(CurrencyAmount.fromRawAmount(position.pool.token1, feeMap[key]?.[1].toString()).toExact()),
+          ]
           : undefined
         const prices = [priceMap[currencyKey(position.pool.token0)], priceMap[currencyKey(position.pool.token1)]]
         return { ...position, fees, prices } as PositionInfo

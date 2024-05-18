@@ -78,9 +78,9 @@ const CreateProposalButton = ({
 }) => {
   const formattedProposalThreshold = proposalThreshold
     ? JSBI.divide(
-        proposalThreshold.quotient,
-        JSBI.exponentiate(JSBI.BigInt(10), JSBI.BigInt(proposalThreshold.currency.decimals))
-      ).toLocaleString()
+      proposalThreshold.quotient,
+      JSBI.exponentiate(JSBI.BigInt(10), JSBI.BigInt(proposalThreshold.currency.decimals))
+    ).toLocaleString()
     : undefined
 
   return (
@@ -194,11 +194,11 @@ export default function CreateProposal() {
     () =>
       Boolean(
         !proposalAction ||
-          !isAddress(toAddressValue) ||
-          !currencyValue?.isToken ||
-          amountValue === '' ||
-          titleValue === '' ||
-          bodyValue === ''
+        !isAddress(toAddressValue) ||
+        !currencyValue?.isToken ||
+        amountValue === '' ||
+        titleValue === '' ||
+        bodyValue === ''
       ),
     [proposalAction, toAddressValue, currencyValue, amountValue, titleValue, bodyValue]
   )
@@ -260,10 +260,10 @@ ${bodyValue}
     <Trace page={InterfacePageName.VOTE_PAGE} shouldLogImpression>
       <PageWrapper>
         <AppBody $maxWidth="800px">
-          <Nav to="/vote">
+          {/* <Nav to="/vote">
             <BackArrow />
             <HeaderText>Create Proposal</HeaderText>
-          </Nav>
+          </Nav> */}
           <CreateProposalWrapper>
             <BlueCard>
               <AutoColumn gap="10px">

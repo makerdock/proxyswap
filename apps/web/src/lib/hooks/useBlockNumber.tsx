@@ -8,10 +8,10 @@ import { ReactNode, createContext, useCallback, useContext, useEffect, useMemo, 
 const MISSING_PROVIDER = Symbol()
 const BlockNumberContext = createContext<
   | {
-      fastForward(block: number): void
-      block?: number
-      mainnetBlock?: number
-    }
+    fastForward(block: number): void
+    block?: number
+    mainnetBlock?: number
+  }
   | typeof MISSING_PROVIDER
 >(MISSING_PROVIDER)
 
@@ -83,7 +83,7 @@ export function BlockNumberProvider({ children }: { children: ReactNode }) {
 
   const networkProviders = useFallbackProviderEnabled() ? RPC_PROVIDERS : DEPRECATED_RPC_PROVIDERS
   useEffect(() => {
-    networkProviders[ChainId.MAINNET]
+    networkProviders[ChainId.DEGEN]
       .getBlockNumber()
       .then((block) => {
         onChainBlock(ChainId.MAINNET, block)

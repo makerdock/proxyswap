@@ -1,7 +1,6 @@
 import { t, Trans } from '@lingui/macro'
 import { BrowserEvent, InterfaceElementName, InterfaceSectionName, SwapEventName } from '@uniswap/analytics-events'
 import { Currency, CurrencyAmount, Token } from '@uniswap/sdk-core'
-import { UNIVERSAL_ROUTER_ADDRESS } from '@uniswap/universal-router-sdk'
 import { useWeb3React } from '@web3-react/core'
 import { Trace, TraceEvent } from 'analytics'
 import { useAccountDrawer, useToggleAccountDrawer } from 'components/AccountDrawer/MiniPortfolio/hooks'
@@ -150,7 +149,8 @@ function LimitForm({ onCurrencyChange }: LimitFormProps) {
 
   const allowance = usePermit2Allowance(
     parsedAmounts.INPUT?.currency?.isNative ? undefined : (parsedAmounts.INPUT as CurrencyAmount<Token>),
-    isSupportedChain(chainId) ? UNIVERSAL_ROUTER_ADDRESS(chainId) : undefined,
+    // isSupportedChain(chainId) ? UNIVERSAL_ROUTER_ADDRESS(chainId) : undefined,
+    undefined,
     TradeFillType.UniswapX
   )
 
@@ -169,16 +169,16 @@ function LimitForm({ onCurrencyChange }: LimitFormProps) {
     const formattedInput = limitState.isInputAmountFixed
       ? limitState.inputAmount
       : formatCurrencyAmount({
-          amount: derivedLimitInfo.parsedAmounts[Field.INPUT],
-          type: NumberType.SwapTradeAmount,
-          placeholder: '',
-        })
+        amount: derivedLimitInfo.parsedAmounts[Field.INPUT],
+        type: NumberType.SwapTradeAmount,
+        placeholder: '',
+      })
     const formattedOutput = limitState.isInputAmountFixed
       ? formatCurrencyAmount({
-          amount: derivedLimitInfo.parsedAmounts[Field.OUTPUT],
-          type: NumberType.SwapTradeAmount,
-          placeholder: '',
-        })
+        amount: derivedLimitInfo.parsedAmounts[Field.OUTPUT],
+        type: NumberType.SwapTradeAmount,
+        placeholder: '',
+      })
       : limitState.outputAmount
 
     return {

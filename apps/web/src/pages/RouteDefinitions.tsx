@@ -11,7 +11,6 @@ import { isBrowserRouterEnabled } from 'utils/env'
 import { getDefaultTokensTitle } from './getDefaultTokensTitle'
 import { getExploreTitle } from './getExploreTitle'
 // High-traffic pages (index and /swap) should not be lazy-loaded.
-import Landing from './Landing'
 import Swap from './Swap'
 
 const NftExplore = lazy(() => import('nft/pages/explore'))
@@ -102,10 +101,8 @@ function createRouteDefinition(route: Partial<RouteDefinition>): RouteDefinition
 export const routes: RouteDefinition[] = [
   createRouteDefinition({
     path: '/',
-    getTitle: () => t`Uniswap | Trade crypto & NFTs safely on the top DeFi exchange`,
-    getElement: (args) => {
-      return args.browserRouterEnabled && args.hash ? <Navigate to={args.hash.replace('#', '')} replace /> : <Landing />
-    },
+    getTitle: () => t`Proxyswap | Trade crypto & NFTs safely on the top DeFi exchange`,
+    getElement: () => <Swap />,
   }),
   createRouteDefinition({
     path: '/explore',
@@ -151,24 +148,24 @@ export const routes: RouteDefinition[] = [
     ),
     enabled: (args) => Boolean(args.infoExplorePageEnabled && args.infoPoolPageEnabled),
   }),
-  createRouteDefinition({
-    path: '/vote/*',
-    getTitle: () => t`Vote on governance proposals on Uniswap`,
-    getElement: () => (
-      <Suspense fallback={<LazyLoadSpinner />}>
-        <Vote />
-      </Suspense>
-    ),
-  }),
-  createRouteDefinition({
-    path: '/create-proposal',
-    getTitle: () => t`Create a new governance proposal on Uniswap`,
-    getElement: () => <Navigate to="/vote/create-proposal" replace />,
-  }),
-  createRouteDefinition({
-    path: '/send',
-    getElement: () => <Navigate to={{ ...location, pathname: '/swap' }} replace />,
-  }),
+  // createRouteDefinition({
+  //   path: '/vote/*',
+  //   getTitle: () => t`Vote on governance proposals on Uniswap`,
+  //   getElement: () => (
+  //     <Suspense fallback={<LazyLoadSpinner />}>
+  //       <Vote />
+  //     </Suspense>
+  //   ),
+  // }),
+  // createRouteDefinition({
+  //   path: '/create-proposal',
+  //   getTitle: () => t`Create a new governance proposal on Uniswap`,
+  //   getElement: () => <Navigate to="/vote/create-proposal" replace />,
+  // }),
+  // createRouteDefinition({
+  //   path: '/send',
+  //   getElement: () => <Navigate to={{ ...location, pathname: '/swap' }} replace />,
+  // }),
   createRouteDefinition({
     path: '/swap',
     getElement: () => <Swap />,

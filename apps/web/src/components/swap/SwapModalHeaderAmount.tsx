@@ -13,7 +13,7 @@ import { NumberType, useFormatter } from 'utils/formatNumbers'
 
 import { Field } from './constants'
 
-const Label = styled(ThemedText.BodySmall)<{ cursor?: string }>`
+const Label = styled(ThemedText.BodySmall) <{ cursor?: string }>`
   cursor: ${({ cursor }) => cursor};
   color: ${({ theme }) => theme.neutral2};
   margin-right: 8px;

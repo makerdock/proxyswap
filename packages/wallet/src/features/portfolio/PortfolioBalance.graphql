@@ -4,7 +4,7 @@ query PortfolioBalance(
 ) {
   portfolios(
     ownerAddresses: [$owner]
-    chains: [ETHEREUM, POLYGON, ARBITRUM, OPTIMISM, BASE, BNB]
+    chains: [DEGEN]
     valueModifiers: $valueModifiers
   ) {
     id

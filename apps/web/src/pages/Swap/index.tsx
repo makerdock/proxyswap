@@ -10,7 +10,6 @@ import { SwitchLocaleLink } from 'components/SwitchLocaleLink'
 import { asSupportedChain } from 'constants/chains'
 import { useCurrency } from 'hooks/Tokens'
 import useParsedQueryString from 'hooks/useParsedQueryString'
-import { SendForm } from 'pages/Swap/Send/SendForm'
 import { ReactNode, useMemo } from 'react'
 import { useLocation } from 'react-router-dom'
 import { InterfaceTrade, TradeState } from 'state/routing/types'
@@ -24,7 +23,6 @@ import {
 } from 'state/swap/SwapContext'
 
 import { useIsDarkMode } from '../../theme/components/ThemeToggle'
-import { LimitFormWrapper } from './Limit/LimitForm'
 import { SwapForm } from './SwapForm'
 
 export function getIsReviewableQuote(
@@ -110,10 +108,10 @@ export function Swap({
               {currentTab === SwapTab.Swap && (
                 <SwapForm onCurrencyChange={onCurrencyChange} disableTokenInputs={disableTokenInputs} />
               )}
-              {currentTab === SwapTab.Limit && <LimitFormWrapper onCurrencyChange={onCurrencyChange} />}
-              {currentTab === SwapTab.Send && (
+              {/* {currentTab === SwapTab.Limit && <LimitFormWrapper onCurrencyChange={onCurrencyChange} />} */}
+              {/* {currentTab === SwapTab.Send && (
                 <SendForm disableTokenInputs={disableTokenInputs} onCurrencyChange={onCurrencyChange} />
-              )}
+              )} */}
             </SwapWrapper>
           </SwapContextProvider>
         )}
