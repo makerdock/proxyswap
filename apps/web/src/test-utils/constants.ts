@@ -20,7 +20,7 @@ import {
   PreviewTrade,
   QuoteMethod,
 } from "state/routing/types";
-import { V3Route } from "@ketankudikyal/smart-order-router";
+import { V3Route } from "@makerdock/proxyswap-smart-order-router";
 
 export const TEST_TOKEN_1 = new Token(
   1,

@@ -28,7 +28,7 @@ import {
   NonfungiblePositionManager,
   UniswapInterfaceMulticall,
 } from "wallet/src/abis/types/v3";
-import type { AddressMap } from "@ketankudikyal/smart-order-router";
+import type { AddressMap } from "@makerdock/proxyswap-smart-order-router";
 
 import { PositionInfo } from "./cache";
 

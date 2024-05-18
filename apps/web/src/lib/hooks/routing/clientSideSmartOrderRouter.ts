@@ -11,7 +11,7 @@ import {
   AlphaRouter,
   AlphaRouterConfig,
   V3SubgraphProvider,
-} from "@ketankudikyal/smart-order-router";
+} from "@makerdock/proxyswap-smart-order-router";
 import { asSupportedChain } from "constants/chains";
 import { DEPRECATED_RPC_PROVIDERS } from "constants/providers";
 import { nativeOnChain } from "constants/tokens";

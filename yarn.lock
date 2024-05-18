@@ -5226,80 +5226,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ketankudikyal/smart-order-router@npm:3.17.85":
-  version: 3.17.85
-  resolution: "@ketankudikyal/smart-order-router@npm:3.17.85::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40ketankudikyal%2Fsmart-order-router%2F3.17.85%2F382a22759957140bbd87e4ff47c7a12d825bc8a0"
-  dependencies:
-    "@ketankudikyal/uniswap-sdk-core": 0.0.2
-    "@uniswap/default-token-list": ^11.2.0
-    "@uniswap/permit2-sdk": ^1.2.0
-    "@uniswap/router-sdk": ^1.6.0
-    "@uniswap/sdk-core": "npm:@ketankudikyal/uniswap-sdk-core@0.0.2"
-    "@uniswap/swap-router-contracts": ^1.3.0
-    "@uniswap/token-lists": ^1.0.0-beta.31
-    "@uniswap/universal-router": ^1.0.1
-    "@uniswap/universal-router-sdk": ^1.5.8
-    "@uniswap/v2-sdk": ^3.2.3
-    "@uniswap/v3-sdk": ^3.10.0
-    async-retry: ^1.3.1
-    await-timeout: ^1.1.1
-    axios: ^0.21.1
-    bunyan: ^1.8.15
-    bunyan-blackhole: ^1.1.1
-    ethers: ^5.7.2
-    graphql: ^15.5.0
-    graphql-request: ^3.4.0
-    lodash: ^4.17.21
-    mnemonist: ^0.38.3
-    node-cache: ^5.1.2
-    stats-lite: ^2.2.0
-  peerDependencies:
-    jsbi: ^3.2.0
-  checksum: 8f2b371c833d63a91163a1b0c3c9b780e241366b5d68cc1434e614df090a41ed6181a3d64c4cb2953ba48aa40764e51e955055686126175226fa607f79e6d6ea
-  languageName: node
-  linkType: hard
-
-"@ketankudikyal/uniswap-router-sdk@npm:1.9.5, @uniswap/router-sdk@npm:@ketankudikyal/uniswap-router-sdk@1.9.5":
-  version: 1.9.5
-  resolution: "@ketankudikyal/uniswap-router-sdk@npm:1.9.5::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40ketankudikyal%2Funiswap-router-sdk%2F1.9.5%2F5727279d00cff283c56f6aa29af2cbc88500fb0a"
-  dependencies:
-    "@ethersproject/abi": ^5.5.0
-    "@uniswap/sdk-core": ^4.2.0
-    "@uniswap/swap-router-contracts": ^1.1.0
-    "@uniswap/v2-sdk": ^4.3.0
-    "@uniswap/v3-sdk": ^3.11.0
-  checksum: ba05812e2012f49235ed2e940ba2c9d3be961bb737ea7e2c57769c0d886ea879ff7433175a533dd1067843ba9db7a4f57e31756c40ace359ea85aa500a2294fc
-  languageName: node
-  linkType: hard
-
-"@ketankudikyal/uniswap-sdk-core@npm:0.0.1, @uniswap/sdk-core@npm:@ketankudikyal/uniswap-sdk-core@0.0.1":
-  version: 0.0.1
-  resolution: "@ketankudikyal/uniswap-sdk-core@npm:0.0.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40ketankudikyal%2Funiswap-sdk-core%2F0.0.1%2F08abe55c5c3bb3b337d61e63f5c92193daa216b9"
-  dependencies:
-    "@ethersproject/address": ^5.0.2
-    big.js: ^5.2.2
-    decimal.js-light: ^2.5.0
-    jsbi: ^3.1.4
-    tiny-invariant: ^1.1.0
-    toformat: ^2.0.0
-  checksum: 1116877818cce3a0e545b0895b3672a864c13c442f2a97c7023379ca4c7849659956a851c702d165ca6b6f4e7fc4c48fbf604b9bb3ec64affde55917b4384a13
-  languageName: node
-  linkType: hard
-
-"@ketankudikyal/uniswap-sdk-core@npm:0.0.2, @uniswap/sdk-core@npm:@ketankudikyal/uniswap-sdk-core@0.0.2":
-  version: 0.0.2
-  resolution: "@ketankudikyal/uniswap-sdk-core@npm:0.0.2::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40ketankudikyal%2Funiswap-sdk-core%2F0.0.2%2Fa7222ff86fe70dade95db74c9b47209cc23edc52"
-  dependencies:
-    "@ethersproject/address": ^5.0.2
-    big.js: ^5.2.2
-    decimal.js-light: ^2.5.0
-    jsbi: ^3.1.4
-    tiny-invariant: ^1.1.0
-    toformat: ^2.0.0
-  checksum: 000513bb197681a3328c35f7c6628b83b46b898371ee8947fd6ad65aa0e00510f5ba0e6af672cf2cfbb8b8d3d0848c4ad050121864269a5725864d9db9964c83
-  languageName: node
-  linkType: hard
-
 "@leichtgewicht/ip-codec@npm:^2.0.1":
   version: 2.0.5
   resolution: "@leichtgewicht/ip-codec@npm:2.0.5"
@@ -5470,6 +5396,66 @@ __metadata:
   version: 1.1.0
   resolution: "@lukeed/csprng@npm:1.1.0"
   checksum: 926f5f7fc629470ca9a8af355bfcd0271d34535f7be3890f69902432bddc3262029bb5dbe9025542cf6c9883d878692eef2815fc2f3ba5b92e9da1f9eba2e51b
+  languageName: node
+  linkType: hard
+
+"@makerdock/proxyswap-router-sdk@npm:1.9.5, @uniswap/router-sdk@npm:@makerdock/proxyswap-router-sdk@1.9.5":
+  version: 1.9.5
+  resolution: "@makerdock/proxyswap-router-sdk@npm:1.9.5::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40makerdock%2Fproxyswap-router-sdk%2F1.9.5%2F91b9775fccd73ae79f5bda95833fd6dba94a6ae5"
+  dependencies:
+    "@ethersproject/abi": ^5.5.0
+    "@uniswap/sdk-core": ^4.2.0
+    "@uniswap/swap-router-contracts": ^1.1.0
+    "@uniswap/v2-sdk": ^4.3.0
+    "@uniswap/v3-sdk": ^3.11.0
+  checksum: e4852562865ec4a7c2524aea63ecd876f4826f8ba8fd3a1946497c07d9ded6cceb6ae772f6c8f9e15cfd3f09c6d8e2b121bbf06f4634fbb3ee450be7853bac25
+  languageName: node
+  linkType: hard
+
+"@makerdock/proxyswap-sdk-core@npm:0.0.2, @uniswap/sdk-core@npm:@makerdock/proxyswap-sdk-core@0.0.2":
+  version: 0.0.2
+  resolution: "@makerdock/proxyswap-sdk-core@npm:0.0.2::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40makerdock%2Fproxyswap-sdk-core%2F0.0.2%2F3bbd6afefcf96f2547f4eda6473bdc9442dc72ae"
+  dependencies:
+    "@ethersproject/address": ^5.0.2
+    big.js: ^5.2.2
+    decimal.js-light: ^2.5.0
+    jsbi: ^3.1.4
+    tiny-invariant: ^1.1.0
+    toformat: ^2.0.0
+  checksum: 9db49082c40a2804a51846477f837602952b5481b4d2154eb73733173a553d39416cc0835dde49b37d908dacac87b3c9a6ec281a2588ab8b73f7f8d3f601429e
+  languageName: node
+  linkType: hard
+
+"@makerdock/proxyswap-smart-order-router@npm:3.17.86":
+  version: 3.17.86
+  resolution: "@makerdock/proxyswap-smart-order-router@npm:3.17.86::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40makerdock%2Fproxyswap-smart-order-router%2F3.17.86%2F984d94565251b9e6b623f2be0d69630b99fb0fe1"
+  dependencies:
+    "@makerdock/proxyswap-sdk-core": 0.0.2
+    "@uniswap/default-token-list": ^11.2.0
+    "@uniswap/permit2-sdk": ^1.2.0
+    "@uniswap/router-sdk": ^1.6.0
+    "@uniswap/sdk-core": "npm:@makerdock/proxyswap-sdk-core@0.0.2"
+    "@uniswap/swap-router-contracts": ^1.3.0
+    "@uniswap/token-lists": ^1.0.0-beta.31
+    "@uniswap/universal-router": ^1.0.1
+    "@uniswap/universal-router-sdk": ^1.5.8
+    "@uniswap/v2-sdk": ^3.2.3
+    "@uniswap/v3-sdk": ^3.10.0
+    async-retry: ^1.3.1
+    await-timeout: ^1.1.1
+    axios: ^0.21.1
+    bunyan: ^1.8.15
+    bunyan-blackhole: ^1.1.1
+    ethers: ^5.7.2
+    graphql: ^15.5.0
+    graphql-request: ^3.4.0
+    lodash: ^4.17.21
+    mnemonist: ^0.38.3
+    node-cache: ^5.1.2
+    stats-lite: ^2.2.0
+  peerDependencies:
+    jsbi: ^3.2.0
+  checksum: 98e7e7ec8289669d74caab24037b59e2ad609f93d3fc10bfba6ea79b615226c4018a9eba78238a8c65dc154100b226346b82582e29e5066a88b6bcbfc39364ee
   languageName: node
   linkType: hard
 
@@ -12149,15 +12135,15 @@ __metadata:
     "@graphql-codegen/typescript-react-apollo": ^3.3.7
     "@graphql-codegen/typescript-resolvers": ^3.2.1
     "@juggle/resize-observer": 3.4.0
-    "@ketankudikyal/smart-order-router": 3.17.85
-    "@ketankudikyal/uniswap-router-sdk": 1.9.5
-    "@ketankudikyal/uniswap-sdk-core": 0.0.1
     "@lingui/cli": 4.5.0
     "@lingui/core": 4.5.0
     "@lingui/macro": 4.5.0
     "@lingui/react": 4.5.0
     "@lingui/swc-plugin": 4.0.4
     "@looksrare/sdk": 0.10.4
+    "@makerdock/proxyswap-router-sdk": 1.9.5
+    "@makerdock/proxyswap-sdk-core": 0.0.2
+    "@makerdock/proxyswap-smart-order-router": 3.17.86
     "@metamask/jazzicon": 2.0.0
     "@opensea/seaport-js": 1.3.0
     "@popperjs/core": 2.11.8
@@ -12212,8 +12198,8 @@ __metadata:
     "@uniswap/merkle-distributor": 1.0.1
     "@uniswap/permit2-sdk": 1.2.0
     "@uniswap/redux-multicall": 1.1.8
-    "@uniswap/router-sdk": "npm:@ketankudikyal/uniswap-router-sdk@1.9.5"
-    "@uniswap/sdk-core": "npm:@ketankudikyal/uniswap-sdk-core@0.0.1"
+    "@uniswap/router-sdk": "npm:@makerdock/proxyswap-router-sdk@1.9.5"
+    "@uniswap/sdk-core": "npm:@makerdock/proxyswap-sdk-core@0.0.1"
     "@uniswap/token-lists": 1.0.0-beta.33
     "@uniswap/uniswapx-sdk": 1.4.1
     "@uniswap/universal-router-sdk": 1.5.8
@@ -12463,6 +12449,20 @@ __metadata:
     tiny-invariant: ^1.1.0
     toformat: ^2.0.0
   checksum: fc38a3b9ab9b4984c4b2e011bf0883278563e327218a85482644af14a67452fb9d7d20e703ef5e3376e56a62e39df59db93d6161257460e9c9a1cf6a89dc3fae
+  languageName: node
+  linkType: hard
+
+"@uniswap/sdk-core@npm:@makerdock/proxyswap-sdk-core@0.0.1":
+  version: 0.0.1
+  resolution: "@makerdock/proxyswap-sdk-core@npm:0.0.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40makerdock%2Fproxyswap-sdk-core%2F0.0.1%2Fd36318b8b55d3732a3b45a6e76081754d480d34b"
+  dependencies:
+    "@ethersproject/address": ^5.0.2
+    big.js: ^5.2.2
+    decimal.js-light: ^2.5.0
+    jsbi: ^3.1.4
+    tiny-invariant: ^1.1.0
+    toformat: ^2.0.0
+  checksum: 4236783796b700f0fa67fa4381734274b5d76f355dd8b4733ac62a9059441613e7e64ac04d8fbd1d739250d459376df41995aed755e4329fd42fb260f5546954
   languageName: node
   linkType: hard
 

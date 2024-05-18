@@ -5,7 +5,7 @@ import { Currency, CurrencyAmount, Token, TradeType } from "@uniswap/sdk-core";
 import {
   SwapRoute,
   routeAmountsToString,
-} from "@ketankudikyal/smart-order-router";
+} from "@makerdock/proxyswap-smart-order-router";
 import { Pair as V2Pair } from "@uniswap/v2-sdk";
 import { Pool } from "@uniswap/v3-sdk";
 import {
