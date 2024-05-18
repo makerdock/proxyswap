@@ -1,5 +1,5 @@
 import { Protocol } from "@uniswap/router-sdk";
-import { Currency, CurrencyAmount, TradeType } from "@uniswap/sdk-core";
+import { Currency, CurrencyAmount, Token, TradeType } from "@uniswap/sdk-core";
 // This file is lazy-loaded, so the import of smart-order-router is intentional.
 // eslint-disable-next-line @typescript-eslint/no-restricted-imports
 import {
@@ -34,14 +34,38 @@ export function transformSwapRouteToGetQuoteResult(
   }: SwapRoute,
 ): QuoteResult {
   const routeResponse: Array<(V3PoolInRoute | V2PoolInRoute)[]> = [];
-
   for (const subRoute of route) {
     const { amount, quote, tokenPath } = subRoute;
 
-    const pools =
+    const _pools =
       subRoute.protocol === Protocol.V2
         ? subRoute.route.pairs
         : subRoute.route.pools;
+    const pools = _pools.map((pool) => {
+      const token0 = new Token(
+        pool.token0.chainId,
+        pool.token0.address,
+        pool.token0.decimals,
+        pool.token0.symbol,
+        pool.token0.symbol,
+      );
+      const token1 = new Token(
+        pool.token1.chainId,
+        pool.token1.address,
+        pool.token1.decimals,
+        pool.token1.symbol,
+        pool.token1.symbol,
+      );
+
+      return new Pool(
+        token0,
+        token1,
+        (pool as unknown as Pool).fee,
+        (pool as unknown as Pool).sqrtRatioX96,
+        (pool as unknown as Pool).liquidity,
+        (pool as unknown as Pool).tickCurrent,
+      );
+    });
     const curRoute: (V3PoolInRoute | V2PoolInRoute)[] = [];
     for (let i = 0; i < pools.length; i++) {
       const nextPool = pools[i];
@@ -63,7 +87,6 @@ export function transformSwapRouteToGetQuoteResult(
             ? quote.quotient.toString()
             : amount.quotient.toString();
       }
-
       if (nextPool instanceof Pool) {
         curRoute.push({
           type: "v3-pool",
@@ -127,7 +150,6 @@ export function transformSwapRouteToGetQuoteResult(
         });
       }
     }
-
     routeResponse.push(curRoute);
   }
 

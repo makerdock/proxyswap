@@ -301,7 +301,7 @@ query PortfolioBalances(
 ) {
   portfolios(
     ownerAddresses: [$ownerAddress]
-    chains: [ETHEREUM, POLYGON, ARBITRUM, OPTIMISM, BASE, BNB]
+    chains: [DEGEN]
     valueModifiers: $valueModifiers
   ) {
     id
@@ -355,7 +355,7 @@ query MultiplePortfolioBalances(
 ) {
   portfolios(
     ownerAddresses: $ownerAddresses
-    chains: [ETHEREUM, POLYGON, ARBITRUM, OPTIMISM, BASE, BNB]
+    chains: [DEGEN]
     valueModifiers: $valueModifiers
   ) {
     id
@@ -405,10 +405,7 @@ query MultiplePortfolioBalances(
 }
 
 query SelectWalletScreen($ownerAddresses: [String!]!) {
-  portfolios(
-    ownerAddresses: $ownerAddresses
-    chains: [ETHEREUM, POLYGON, ARBITRUM, OPTIMISM, BASE, BNB]
-  ) {
+  portfolios(ownerAddresses: $ownerAddresses, chains: [DEGEN]) {
     id
     ownerAddress
     tokensTotalDenominatedValue {
@@ -418,10 +415,7 @@ query SelectWalletScreen($ownerAddresses: [String!]!) {
 }
 
 query TransactionHistoryUpdater($addresses: [String!]!) {
-  portfolios(
-    ownerAddresses: $addresses
-    chains: [ETHEREUM, POLYGON, ARBITRUM, OPTIMISM, BASE, BNB]
-  ) {
+  portfolios(ownerAddresses: $addresses, chains: [DEGEN]) {
     id
     ownerAddress
     assetActivities(pageSize: 1, page: 1) {
@@ -454,14 +448,14 @@ query Token($chain: Chain!, $address: String) {
 }
 
 query TokenDetailsScreen(
-  $chain: Chain!,
-  $address: String,
-  $includeSpanish: Boolean = false,
-  $includeFrench: Boolean = false,
-  $includeJapanese: Boolean = false,
-  $includePortuguese: Boolean = false,
-  $includeChineseSimplified: Boolean = false,
-  $includeChineseTraditional: Boolean = false,
+  $chain: Chain!
+  $address: String
+  $includeSpanish: Boolean = false
+  $includeFrench: Boolean = false
+  $includeJapanese: Boolean = false
+  $includePortuguese: Boolean = false
+  $includeChineseSimplified: Boolean = false
+  $includeChineseTraditional: Boolean = false
 ) {
   token(chain: $chain, address: $address) {
     address
@@ -541,16 +535,9 @@ query TokenProjects($contracts: [ContractInput!]!) {
 }
 
 query TransactionList($address: String!) {
-  portfolios(
-    ownerAddresses: [$address]
-    chains: [ETHEREUM, POLYGON, ARBITRUM, OPTIMISM, BASE, BNB]
-  ) {
+  portfolios(ownerAddresses: [$address], chains: [DEGEN]) {
     id
-    assetActivities(
-      pageSize: 100
-      page: 1
-      chains: [ETHEREUM, POLYGON, ARBITRUM, OPTIMISM, BASE, BNB]
-    ) {
+    assetActivities(pageSize: 100, page: 1, chains: [DEGEN]) {
       id
       timestamp
       chain
@@ -636,17 +623,10 @@ query TransactionList($address: String!) {
 }
 
 query FeedTransactionList($addresses: [String!]!) {
-  portfolios(
-    ownerAddresses: $addresses
-    chains: [ETHEREUM, POLYGON, ARBITRUM, OPTIMISM, BASE, BNB]
-  ) {
+  portfolios(ownerAddresses: $addresses, chains: [DEGEN]) {
     id
     ownerAddress
-    assetActivities(
-      pageSize: 30
-      page: 1
-      chains: [ETHEREUM, POLYGON, ARBITRUM, OPTIMISM, BASE, BNB]
-    ) {
+    assetActivities(pageSize: 30, page: 1, chains: [DEGEN]) {
       id
       timestamp
       chain

@@ -372,6 +372,7 @@ export function SwapForm({ disableTokenInputs = false, onCurrencyChange }: SwapF
         }))
       })
       .catch((error) => {
+        debugger
         setSwapFormState((currentState) => ({
           ...currentState,
           swapError: error,

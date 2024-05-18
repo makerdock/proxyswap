@@ -422,6 +422,7 @@ export default function ConfirmSwapModal({
   }
   const errorType = getErrorType()
 
+
   return (
     <Trace modal={InterfaceModalName.CONFIRM_SWAP}>
       <Modal isOpen $scrollOverlay onDismiss={onModalDismiss} maxHeight={90}>

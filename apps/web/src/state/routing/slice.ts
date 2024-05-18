@@ -206,18 +206,19 @@ export const routingApi = createApi({
             needsWrapIfUniswapX: false,
           };
           const router = getRouter(args.tokenInChainId);
-          debugger;
           const quoteResult = await getClientSideQuote(
-            newArgs,
+            args,
             router,
             CLIENT_PARAMS,
           );
+
           if (quoteResult.state === QuoteState.SUCCESS) {
             const trade = await transformQuoteToTrade(
               args,
               quoteResult.data,
               QuoteMethod.CLIENT_SIDE_FALLBACK,
             );
+            console.log(trade);
             return {
               data: {
                 ...trade,
@@ -233,7 +234,7 @@ export const routingApi = createApi({
             };
           }
         } catch (error: any) {
-          debugger;
+          console.error(error);
           console.warn(`GetQuote failed on client: ${error}`);
           return {
             error: {

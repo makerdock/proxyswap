@@ -5226,9 +5226,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ketankudikyal/smart-order-router@npm:3.17.78":
-  version: 3.17.78
-  resolution: "@ketankudikyal/smart-order-router@npm:3.17.78::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40ketankudikyal%2Fsmart-order-router%2F3.17.78%2Fdc4532d2cc97d6a57e94b134ae772c3c55c07cfb"
+"@ketankudikyal/smart-order-router@npm:3.17.85":
+  version: 3.17.85
+  resolution: "@ketankudikyal/smart-order-router@npm:3.17.85::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40ketankudikyal%2Fsmart-order-router%2F3.17.85%2F382a22759957140bbd87e4ff47c7a12d825bc8a0"
   dependencies:
     "@ketankudikyal/uniswap-sdk-core": 0.0.2
     "@uniswap/default-token-list": ^11.2.0
@@ -5255,7 +5255,20 @@ __metadata:
     stats-lite: ^2.2.0
   peerDependencies:
     jsbi: ^3.2.0
-  checksum: c27b2e8c923297c817142c9329d49838da362c4b9ecaf6baa489ec3f23a52355ff8b96d07c720e056755e356b87b99af16055524c1d51f1148ff458b74b1b3d0
+  checksum: 8f2b371c833d63a91163a1b0c3c9b780e241366b5d68cc1434e614df090a41ed6181a3d64c4cb2953ba48aa40764e51e955055686126175226fa607f79e6d6ea
+  languageName: node
+  linkType: hard
+
+"@ketankudikyal/uniswap-router-sdk@npm:1.9.5, @uniswap/router-sdk@npm:@ketankudikyal/uniswap-router-sdk@1.9.5":
+  version: 1.9.5
+  resolution: "@ketankudikyal/uniswap-router-sdk@npm:1.9.5::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40ketankudikyal%2Funiswap-router-sdk%2F1.9.5%2F5727279d00cff283c56f6aa29af2cbc88500fb0a"
+  dependencies:
+    "@ethersproject/abi": ^5.5.0
+    "@uniswap/sdk-core": ^4.2.0
+    "@uniswap/swap-router-contracts": ^1.1.0
+    "@uniswap/v2-sdk": ^4.3.0
+    "@uniswap/v3-sdk": ^3.11.0
+  checksum: ba05812e2012f49235ed2e940ba2c9d3be961bb737ea7e2c57769c0d886ea879ff7433175a533dd1067843ba9db7a4f57e31756c40ace359ea85aa500a2294fc
   languageName: node
   linkType: hard
 
@@ -12136,7 +12149,8 @@ __metadata:
     "@graphql-codegen/typescript-react-apollo": ^3.3.7
     "@graphql-codegen/typescript-resolvers": ^3.2.1
     "@juggle/resize-observer": 3.4.0
-    "@ketankudikyal/smart-order-router": 3.17.78
+    "@ketankudikyal/smart-order-router": 3.17.85
+    "@ketankudikyal/uniswap-router-sdk": 1.9.5
     "@ketankudikyal/uniswap-sdk-core": 0.0.1
     "@lingui/cli": 4.5.0
     "@lingui/core": 4.5.0
@@ -12198,7 +12212,7 @@ __metadata:
     "@uniswap/merkle-distributor": 1.0.1
     "@uniswap/permit2-sdk": 1.2.0
     "@uniswap/redux-multicall": 1.1.8
-    "@uniswap/router-sdk": 1.7.1
+    "@uniswap/router-sdk": "npm:@ketankudikyal/uniswap-router-sdk@1.9.5"
     "@uniswap/sdk-core": "npm:@ketankudikyal/uniswap-sdk-core@0.0.1"
     "@uniswap/token-lists": 1.0.0-beta.33
     "@uniswap/uniswapx-sdk": 1.4.1
@@ -12329,7 +12343,6 @@ __metadata:
     utilities: "workspace:^"
     uuid: 9.0.0
     video-extensions: 1.2.0
-    wallet: "workspace:^"
     wcag-contrast: 3.0.0
     web-vitals: 2.1.4
     webpack: 5.89.0
@@ -38954,7 +38967,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"wallet@workspace:^, wallet@workspace:packages/wallet":
+"wallet@workspace:packages/wallet":
   version: 0.0.0-use.local
   resolution: "wallet@workspace:packages/wallet"
   dependencies:
