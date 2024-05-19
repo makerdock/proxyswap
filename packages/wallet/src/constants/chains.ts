@@ -34,6 +34,7 @@ export enum ChainId {
   Polygon = 137,
   PolygonMumbai = 80001,
   Bnb = 56,
+  Degen = 666666666,
 }
 
 export const ALL_SUPPORTED_CHAINS: string[] = Object.values(ChainId).map((c) => c.toString())
