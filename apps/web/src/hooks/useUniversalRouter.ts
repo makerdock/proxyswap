@@ -2,26 +2,18 @@ import { BigNumber } from "@ethersproject/bignumber";
 import { t } from "@lingui/macro";
 import { CustomUserProperties, SwapEventName } from "@uniswap/analytics-events";
 import { Percent } from "@uniswap/sdk-core";
-import {
-  FlatFeeOptions,
-  SwapRouter,
-  UNIVERSAL_ROUTER_ADDRESS,
-} from "@uniswap/universal-router-sdk";
+import { FlatFeeOptions, SwapRouter } from "@uniswap/universal-router-sdk";
 import { FeeOptions, toHex } from "@uniswap/v3-sdk";
 import { useWeb3React } from "@web3-react/core";
 import { sendAnalyticsEvent, useTrace } from "analytics";
 import { useCachedPortfolioBalancesQuery } from "components/PrefetchBalancesWrapper/PrefetchBalancesWrapper";
 import { getConnection } from "connection";
 import useBlockNumber from "lib/hooks/useBlockNumber";
-import {
-  formatCommonPropertiesForTrade,
-  formatSwapSignedAnalyticsEventProperties,
-} from "lib/utils/analytics";
+import { formatSwapSignedAnalyticsEventProperties } from "lib/utils/analytics";
 import { useCallback } from "react";
 import { ClassicTrade, TradeFillType } from "state/routing/types";
 import { useUserSlippageTolerance } from "state/user/hooks";
 import { trace } from "tracing/trace";
-import { calculateGasMargin } from "utils/calculateGasMargin";
 import { UserRejectedRequestError, WrongChainError } from "utils/errors";
 import isZero from "utils/isZero";
 import {
@@ -30,6 +22,7 @@ import {
 } from "utils/swapErrorToUserReadableMessage";
 import { getWalletMeta } from "utils/walletMeta";
 
+import { calculateGasMargin } from "utils/calculateGasMargin";
 import { PermitSignature } from "./usePermitAllowance";
 
 /** Thrown when gas estimation fails. This class of error usually requires an emulator to determine the root cause. */
@@ -88,8 +81,9 @@ export function useUniversalRouterSwapCallback(
             "slippageTolerance",
             options.slippageTolerance.toFixed(2),
           );
+          console.log(options.slippageTolerance.toFixed(2), "Slippage", trade);
 
-          const { calldata: data, value } = SwapRouter.swapCallParameters(
+          const { calldata: data, value } = SwapRouter.swapERC20CallParameters(
             trade,
             {
               slippageTolerance: options.slippageTolerance,
@@ -99,10 +93,10 @@ export function useUniversalRouterSwapCallback(
               flatFee: options.flatFeeOptions,
             },
           );
-
+          debugger;
           const tx = {
             from: account,
-            to: UNIVERSAL_ROUTER_ADDRESS(chainId),
+            to: "0x519DB12468B77612841E47824c88f424A112d6A5",
             data,
             // TODO(https://github.com/Uniswap/universal-router-sdk/issues/113): universal-router-sdk returns a non-hexlified value.
             ...(value && !isZero(value) ? { value: toHex(value) } : {}),
@@ -112,22 +106,11 @@ export function useUniversalRouterSwapCallback(
           try {
             gasEstimate = await provider.estimateGas(tx);
           } catch (gasError) {
-            setTraceStatus("failed_precondition");
-            setTraceError(gasError);
-            sendAnalyticsEvent(SwapEventName.SWAP_ESTIMATE_GAS_CALL_FAILED, {
-              ...formatCommonPropertiesForTrade(
-                trade,
-                options.slippageTolerance,
-              ),
-              ...analyticsContext,
-              client_block_number: blockNumber,
-              tx,
-              isAutoSlippage,
-            });
             console.warn(gasError);
             throw new GasEstimationError();
           }
           const gasLimit = calculateGasMargin(gasEstimate);
+          // const gasLimit = ethers.utils.parseUnits("5000000", "wei");
           setTraceData("gasLimit", gasLimit.toNumber());
           const beforeSign = Date.now();
           const response = await provider

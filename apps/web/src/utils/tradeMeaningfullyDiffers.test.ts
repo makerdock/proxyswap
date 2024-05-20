@@ -1,7 +1,7 @@
 import { Percent, TradeType } from "@uniswap/sdk-core";
 // This is allowed in test files.
 // eslint-disable-next-line @typescript-eslint/no-restricted-imports
-import { V3Route } from "@ketankudikyal/smart-order-router";
+import { V3Route } from "@makerdock/proxyswap-smart-order-router";
 import { ClassicTrade, QuoteMethod } from "state/routing/types";
 import {
   TEST_POOL_13,

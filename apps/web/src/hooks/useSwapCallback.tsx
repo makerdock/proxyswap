@@ -82,19 +82,18 @@ export function useSwapCallback(
       isUniswapXOrder: result.type === TradeFillType.UniswapX,
       ...(trade.tradeType === TradeType.EXACT_INPUT
         ? {
-            tradeType: TradeType.EXACT_INPUT,
-            inputCurrencyAmountRaw: trade.inputAmount.quotient.toString(),
-            expectedOutputCurrencyAmountRaw: trade.outputAmount.quotient.toString(),
-            minimumOutputCurrencyAmountRaw: trade.minimumAmountOut(allowedSlippage).quotient.toString(),
-          }
+          tradeType: TradeType.EXACT_INPUT,
+          inputCurrencyAmountRaw: trade.inputAmount.quotient.toString(),
+          expectedOutputCurrencyAmountRaw: trade.outputAmount.quotient.toString(),
+          minimumOutputCurrencyAmountRaw: trade.minimumAmountOut(allowedSlippage).quotient.toString(),
+        }
         : {
-            tradeType: TradeType.EXACT_OUTPUT,
-            maximumInputCurrencyAmountRaw: trade.maximumAmountIn(allowedSlippage).quotient.toString(),
-            outputCurrencyAmountRaw: trade.outputAmount.quotient.toString(),
-            expectedInputCurrencyAmountRaw: trade.inputAmount.quotient.toString(),
-          }),
+          tradeType: TradeType.EXACT_OUTPUT,
+          maximumInputCurrencyAmountRaw: trade.maximumAmountIn(allowedSlippage).quotient.toString(),
+          outputCurrencyAmountRaw: trade.outputAmount.quotient.toString(),
+          expectedInputCurrencyAmountRaw: trade.inputAmount.quotient.toString(),
+        }),
     }
-
     if (result.type === TradeFillType.UniswapX) {
       addOrder(
         account,
