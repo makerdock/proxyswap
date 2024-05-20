@@ -84,6 +84,26 @@ module.exports = {
       }),
     ],
     configure: (webpackConfig) => {
+
+
+      /* 
+        Allow vanilla-extract in production builds.
+        This is necessary because create-react-app guards against external imports.
+        See https://sandroroth.com/blog/vanilla-extract-cra#production-build.
+        
+        More updates from @0xbhaisaab: previously there was a instaceof check for ModuleScopePlugin
+        but like everywhere else, the instanceof is not working, I defaulted the first element
+        in the array to be ModuleScopePlugin and it worked. 
+        
+        Check this commit hash using gitlens for exact changes.
+      */
+      const moduleScopePlugin = webpackConfig.resolve.plugins[0]
+
+      if (moduleScopePlugin) {
+        const currPath = path.join(__dirname, '..', '..', 'node_modules/@vanilla-extract/webpack-plugin')
+        moduleScopePlugin.allowedPaths.push(currPath);
+      }
+
       // Configure webpack plugins:
       webpackConfig.plugins = webpackConfig.plugins
         .map((plugin) => {
@@ -114,16 +134,7 @@ module.exports = {
 
       // Configure webpack resolution:
       webpackConfig.resolve = Object.assign(webpackConfig.resolve, {
-        plugins: webpackConfig.resolve.plugins.map((plugin) => {
-          // Allow vanilla-extract in production builds.
-          // This is necessary because create-react-app guards against external imports.
-          // See https://sandroroth.com/blog/vanilla-extract-cra#production-build.
-          if (plugin instanceof ModuleScopePlugin) {
-            plugin.allowedPaths.push(path.join(__dirname, '..', '..', 'node_modules/@vanilla-extract/webpack-plugin'))
-          }
-
-          return plugin
-        }),
+        plugins: webpackConfig.resolve.plugins,
         // Webpack 5 does not resolve node modules, so we do so for those necessary:
         fallback: {
           // - react-markdown requires path
@@ -168,16 +179,16 @@ module.exports = {
         webpackConfig.optimization,
         isProduction
           ? {
-              splitChunks: {
-                // Cap the chunk size to 5MB.
-                // react-scripts suggests a chunk size under 1MB after gzip, but we can only measure maxSize before gzip.
-                // react-scripts also caps cacheable chunks at 5MB, which gzips to below 1MB, so we cap chunk size there.
-                // See https://github.com/facebook/create-react-app/blob/d960b9e/packages/react-scripts/config/webpack.config.js#L713-L716.
-                maxSize: 5 * 1024 * 1024,
-                // Optimize over all chunks, instead of async chunks (the default), so that initial chunks are also optimized.
-                chunks: 'all',
-              },
-            }
+            splitChunks: {
+              // Cap the chunk size to 5MB.
+              // react-scripts suggests a chunk size under 1MB after gzip, but we can only measure maxSize before gzip.
+              // react-scripts also caps cacheable chunks at 5MB, which gzips to below 1MB, so we cap chunk size there.
+              // See https://github.com/facebook/create-react-app/blob/d960b9e/packages/react-scripts/config/webpack.config.js#L713-L716.
+              maxSize: 5 * 1024 * 1024,
+              // Optimize over all chunks, instead of async chunks (the default), so that initial chunks are also optimized.
+              chunks: 'all',
+            },
+          }
           : {}
       )
 

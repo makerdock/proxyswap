@@ -74,6 +74,7 @@
     "react-native-wagmi-charts@2.3.0": "patch:react-native-wagmi-charts@npm%3A2.3.0#./.yarn/patches/react-native-wagmi-charts-npm-2.3.0-8e836a8f3c.patch"
   },
   "scripts": {
+    "g:build:web": "turbo run build:production --filter=./apps/web --parallel",
     "g:build": "turbo run build --concurrency=100%",
     "g:check:deps:usage": " depcheck && turbo run check:deps:usage --parallel",
     "g:check:deps:mismatch": "manypkg check",
