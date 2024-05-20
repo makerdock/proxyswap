@@ -22,7 +22,7 @@ import {
 } from "utils/swapErrorToUserReadableMessage";
 import { getWalletMeta } from "utils/walletMeta";
 
-import { calculateGasMargin } from "utils/calculateGasMargin";
+import { ethers } from "ethers";
 import { PermitSignature } from "./usePermitAllowance";
 
 /** Thrown when gas estimation fails. This class of error usually requires an emulator to determine the root cause. */
@@ -102,15 +102,15 @@ export function useUniversalRouterSwapCallback(
             ...(value && !isZero(value) ? { value: toHex(value) } : {}),
           };
 
-          let gasEstimate: BigNumber;
-          try {
-            gasEstimate = await provider.estimateGas(tx);
-          } catch (gasError) {
-            console.warn(gasError);
-            throw new GasEstimationError();
-          }
-          const gasLimit = calculateGasMargin(gasEstimate);
-          // const gasLimit = ethers.utils.parseUnits("5000000", "wei");
+          // // let gasEstimate: BigNumber;
+          // // try {
+          // //   gasEstimate = await provider.estimateGas(tx);
+          // // } catch (gasError) {
+          // //   console.warn(gasError);
+          // //   throw new GasEstimationError();
+          // // }
+          // const gasLimit = calculateGasMargin(gasEstimate);
+          const gasLimit = ethers.utils.parseUnits("5000000", "wei");
           setTraceData("gasLimit", gasLimit.toNumber());
           const beforeSign = Date.now();
           const response = await provider
