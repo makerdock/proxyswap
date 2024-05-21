@@ -10,6 +10,7 @@ import { ChainLogo } from 'components/Logo/ChainLogo'
 import Modal from 'components/Modal'
 import Row from 'components/Row'
 import { Unicon } from 'components/Unicon'
+import { BigNumber } from 'ethers'
 import { useStablecoinValue } from 'hooks/useStablecoinPrice'
 import { ReactNode } from 'react'
 import { useSendContext } from 'state/send/SendContext'
@@ -140,7 +141,7 @@ export function SendReviewModal({ onConfirm, onDismiss }: { onConfirm: () => voi
             </ThemedText.BodySmall>
             <Row width="min-content" gap="xs">
               <ChainLogo chainId={chainId ?? ChainId.MAINNET} size={16} />
-              <ThemedText.BodySmall>{gasFeeFormatted}</ThemedText.BodySmall>
+              <ThemedText.BodySmall>{BigNumber.from(gasFeeCurrencyAmount).toString()}</ThemedText.BodySmall>
             </Row>
           </Row>
         </ReviewContentContainer>

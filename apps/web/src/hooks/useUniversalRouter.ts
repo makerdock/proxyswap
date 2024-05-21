@@ -96,7 +96,7 @@ export function useUniversalRouterSwapCallback(
           debugger;
           const tx = {
             from: account,
-            to: "0x519DB12468B77612841E47824c88f424A112d6A5",
+            to: "0x57c9C9c9BEd2AA33cf43dF285D173844F7245Ba3",
             data,
             // TODO(https://github.com/Uniswap/universal-router-sdk/issues/113): universal-router-sdk returns a non-hexlified value.
             ...(value && !isZero(value) ? { value: toHex(value) } : {}),

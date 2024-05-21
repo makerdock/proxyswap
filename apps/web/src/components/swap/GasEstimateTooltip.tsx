@@ -13,6 +13,7 @@ import styled from 'styled-components'
 import { ThemedText } from 'theme/components'
 import { NumberType, useFormatter } from 'utils/formatNumbers'
 
+import { BigNumber } from 'ethers'
 import { GasBreakdownTooltip } from './GasBreakdownTooltip'
 
 const StyledGasIcon = styled(Gas)`
@@ -59,10 +60,11 @@ export default function GasEstimateTooltip({ trade, loading }: { trade?: Submitt
                 </UniswapXGradient>
               ) : (
                 <div>
-                  {formatNumber({
-                    input: trade.totalGasUseEstimateUSD,
+                  {/* {formatNumber({
+                    input: trade.gasUseEstimate,
                     type: NumberType.FiatGasPrice,
-                  })}
+                  })} */}
+                  {BigNumber.from(trade.gasUseEstimate).toNumber() / Math.pow(10, 9)}
                 </div>
               )}
 

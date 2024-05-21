@@ -49,7 +49,7 @@ export function CancelConfirmationView({
   const onPressCancel = useCallback(async () => {
     await notificationAsync()
     if (authTrigger) {
-      await authTrigger({ successCallback: onCancelConfirm, failureCallback: () => {} })
+      await authTrigger({ successCallback: onCancelConfirm, failureCallback: () => { } })
     } else {
       onCancelConfirm()
     }

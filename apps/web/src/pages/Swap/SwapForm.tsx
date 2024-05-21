@@ -317,7 +317,7 @@ export function SwapForm({ disableTokenInputs = false, onCurrencyChange }: SwapF
     (parsedAmounts[Field.INPUT]?.currency.isToken
       ? (parsedAmounts[Field.INPUT] as CurrencyAmount<Token>)
       : undefined),
-    isSupportedChain(chainId) ? "0x519DB12468B77612841E47824c88f424A112d6A5" : undefined,
+    isSupportedChain(chainId) ? "0x57c9C9c9BEd2AA33cf43dF285D173844F7245Ba3" : undefined,
     trade?.fillType
   )
 

@@ -19,10 +19,10 @@ export function getURAddress(
   if (!chainId) return undefined;
   // if mainnet and on NFT flow, use the contract address returned by GQL
   if (chainId === ChainId.MAINNET) {
-    return nftURAddress ?? "0x519DB12468B77612841E47824c88f424A112d6A5";
+    return nftURAddress ?? "0x57c9C9c9BEd2AA33cf43dF285D173844F7245Ba3";
   }
   return isSupportedChain(chainId)
-    ? "0x519DB12468B77612841E47824c88f424A112d6A5"
+    ? "0x57c9C9c9BEd2AA33cf43dF285D173844F7245Ba3"
     : undefined;
   return undefined;
 }
