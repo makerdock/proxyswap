@@ -16,7 +16,6 @@ import { flexColumnNoWrap } from 'theme/styles'
 
 import ConnectionErrorView from './ConnectionErrorView'
 import { DeprecatedInjectorMessage } from './Option'
-import PrivacyPolicyNotice from './PrivacyPolicyNotice'
 import { useOrderedConnections } from './useOrderedConnections'
 
 const Wrapper = styled.div`
@@ -85,9 +84,9 @@ export default function WalletModal({ openSettings }: { openSettings: () => void
             </TextSectionWrapper>
           )}
           <Column gap="md">
-            <TextSectionWrapper>
+            {/* <TextSectionWrapper>
               <PrivacyPolicyNotice />
-            </TextSectionWrapper>
+            </TextSectionWrapper> */}
             {showMoonpayText && (
               <>
                 <Line />

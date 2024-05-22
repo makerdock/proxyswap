@@ -1,17 +1,11 @@
-import { Trans } from '@lingui/macro'
 import { BrowserEvent, InterfaceElementName, InterfaceEventName, SharedEventName } from '@uniswap/analytics-events'
 import { CurrencyAmount, Token } from '@uniswap/sdk-core'
 import { useWeb3React } from '@web3-react/core'
 import { sendAnalyticsEvent, TraceEvent } from 'analytics'
-import { OpenLimitOrdersButton } from 'components/AccountDrawer/MiniPortfolio/Limits/OpenLimitOrdersButton'
-import { ButtonEmphasis, ButtonSize, LoadingButtonSpinner, ThemeButton } from 'components/Button'
+import { LoadingButtonSpinner, ThemeButton } from 'components/Button'
 import Column from 'components/Column'
 import { Power } from 'components/Icons/Power'
 import { Settings } from 'components/Icons/Settings'
-import { AutoRow } from 'components/Row'
-import { LoadingBubble } from 'components/Tokens/loading'
-import { DeltaArrow } from 'components/Tokens/TokenDetails/Delta'
-import Tooltip from 'components/Tooltip'
 import { getConnection } from 'connection'
 import { useDisableNFTRoutes } from 'hooks/useDisableNFTRoutes'
 import useENSName from 'hooks/useENSName'
@@ -19,7 +13,7 @@ import { useProfilePageState, useSellAsset, useWalletCollections } from 'nft/hoo
 import { useIsNftClaimAvailable } from 'nft/hooks/useIsNftClaimAvailable'
 import { ProfilePageStateType } from 'nft/types'
 import { useCallback, useState } from 'react'
-import { CreditCard, Info } from 'react-feather'
+import { Info } from 'react-feather'
 import { useNavigate } from 'react-router-dom'
 import { useAppDispatch } from 'state/hooks'
 import { setRecentConnectionDisconnected } from 'state/user/reducer'
@@ -27,7 +21,7 @@ import styled from 'styled-components'
 import { CopyHelper, ExternalLink, ThemedText } from 'theme/components'
 import { shortenAddress } from 'utils'
 import { isPathBlocked } from 'utils/blockedPaths'
-import { NumberType, useFormatter } from 'utils/formatNumbers'
+import { useFormatter } from 'utils/formatNumbers'
 
 import { useCloseModal, useFiatOnrampAvailability, useOpenModal, useToggleModal } from '../../state/application/hooks'
 import { ApplicationModal } from '../../state/application/reducer'
@@ -35,7 +29,6 @@ import { useUserHasAvailableClaim, useUserUnclaimedAmount } from '../../state/cl
 import StatusIcon from '../Identicon/StatusIcon'
 import { useCachedPortfolioBalancesQuery } from '../PrefetchBalancesWrapper/PrefetchBalancesWrapper'
 import IconButton, { IconHoverText, IconWithConfirmTextButton } from './IconButton'
-import MiniPortfolio from './MiniPortfolio'
 import { useToggleAccountDrawer } from './MiniPortfolio/hooks'
 import { portfolioFadeInAnimation } from './MiniPortfolio/PortfolioRow'
 
@@ -275,7 +268,7 @@ export default function AuthenticatedHeader({
         </IconContainer>
       </HeaderWrapper>
       <PortfolioDrawerContainer>
-        {totalBalance !== undefined ? (
+        {/* {totalBalance !== undefined ? (
           <FadeInColumn gap="xs">
             <ThemedText.HeadlineLarge fontWeight={535} data-testid="portfolio-total-balance">
               {formatNumber({
@@ -302,8 +295,8 @@ export default function AuthenticatedHeader({
             <LoadingBubble height="44px" width="170px" />
             <LoadingBubble height="16px" width="100px" margin="4px 0 20px 0" />
           </Column>
-        )}
-        {!shouldDisableNFTRoutes && (
+        )} */}
+        {/* {!shouldDisableNFTRoutes && (
           <HeaderButton
             data-testid="nft-view-self-nfts"
             onClick={navigateToProfile}
@@ -312,8 +305,8 @@ export default function AuthenticatedHeader({
           >
             <Trans>View and sell NFTs</Trans>
           </HeaderButton>
-        )}
-        {shouldShowBuyFiatButton && (
+        )} */}
+        {/* {shouldShowBuyFiatButton && (
           <HeaderButton
             size={ButtonSize.medium}
             emphasis={ButtonEmphasis.highSoft}
@@ -334,8 +327,8 @@ export default function AuthenticatedHeader({
               </>
             )}
           </HeaderButton>
-        )}
-        {Boolean(!fiatOnrampAvailable && fiatOnrampAvailabilityChecked) && (
+        )} */}
+        {/* {Boolean(!fiatOnrampAvailable && fiatOnrampAvailabilityChecked) && (
           <FiatOnrampNotAvailableText marginTop="8px">
             <Trans>Not available in your region</Trans>
             <Tooltip
@@ -352,19 +345,19 @@ export default function AuthenticatedHeader({
               </FiatOnrampAvailabilityExternalLink>
             </Tooltip>
           </FiatOnrampNotAvailableText>
-        )}
-        <OpenLimitOrdersButton openLimitsMenu={openLimitsMenu} account={account} />
+        )} */}
+        {/* <OpenLimitOrdersButton openLimitsMenu={openLimitsMenu} account={account} />
         <MiniPortfolio account={account} />
         {isUnclaimed && (
           <UNIButton onClick={openClaimModal} size={ButtonSize.medium} emphasis={ButtonEmphasis.medium}>
             <Trans>Claim</Trans> {unclaimedAmount?.toFixed(0, { groupSeparator: ',' } ?? '-')} <Trans>reward</Trans>
           </UNIButton>
-        )}
-        {isClaimAvailable && (
+        )} */}
+        {/* {isClaimAvailable && (
           <UNIButton size={ButtonSize.medium} emphasis={ButtonEmphasis.medium} onClick={openNftModal}>
             <Trans>Claim Uniswap NFT Airdrop</Trans>
           </UNIButton>
-        )}
+        )} */}
       </PortfolioDrawerContainer>
     </AuthenticatedHeaderWrapper>
   )

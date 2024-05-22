@@ -244,18 +244,18 @@ const CardGrid = styled.div<{ cols: number }>`
   @media screen and (min-width: ${BREAKPOINTS.sm}px) {
     // At this screen size, we show up to 2 columns.
     grid-template-columns: ${({ cols }) =>
-      Array.from(Array(cols === 2 ? 2 : 1))
-        .map(() => '1fr')
-        .join(' ')};
+    Array.from(Array(cols === 2 ? 2 : 1))
+      .map(() => '1fr')
+      .join(' ')};
     gap: 32px;
   }
 
   @media screen and (min-width: ${BREAKPOINTS.lg}px) {
     // at this screen size, always show the max number of columns
     grid-template-columns: ${({ cols }) =>
-      Array.from(Array(cols))
-        .map(() => '1fr')
-        .join(' ')};
+    Array.from(Array(cols))
+      .map(() => '1fr')
+      .join(' ')};
     gap: 32px;
   }
 `
@@ -405,15 +405,15 @@ export default function Landing() {
               </ButtonCTA>
             </TraceEvent>
           </ActionsContainer>
-          <LearnMoreContainer
+          {/* <LearnMoreContainer
             onClick={() => {
               cardsRef?.current?.scrollIntoView({ behavior: 'smooth' })
             }}
           >
             <Trans>Learn more</Trans>
-          </LearnMoreContainer>
+          </LearnMoreContainer> */}
 
-          <DownloadWalletLink
+          {/* <DownloadWalletLink
             {...getDownloadAppLinkProps({
               element: InterfaceElementName.UNISWAP_WALLET_LANDING_PAGE_DOWNLOAD_BUTTON,
             })}
@@ -422,7 +422,7 @@ export default function Landing() {
               <UniswapAppLogo width="20" height="20" />
               Download the Uniswap app
             </>
-          </DownloadWalletLink>
+          </DownloadWalletLink> */}
         </ContentContainer>
         <AboutContentContainer isDarkMode={isDarkMode}>
           <CardGrid cols={cards.length} ref={cardsRef}>
