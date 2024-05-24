@@ -1,0 +1,88 @@
+[
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_univ2Router",
+        "type": "address"
+      },
+      {
+        "internalType": "string",
+        "name": "_name",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_symbol",
+        "type": "string"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_maxSupply",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_lockedLiquidity",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_sum",
+        "type": "uint256"
+      },
+      {
+        "internalType": "bytes32",
+        "name": "rootHash",
+        "type": "bytes32"
+      }
+    ],
+    "name": "deploy",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "token",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "creator",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "maxSupply",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "lockedLiquidity",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "deployerAmount",
+        "type": "uint256"
+      }
+    ],
+    "name": "NewToken",
+    "type": "event"
+  }
+]
