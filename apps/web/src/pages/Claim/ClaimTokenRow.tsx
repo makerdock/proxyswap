@@ -66,7 +66,7 @@ const TooltipText = styled.span`
   font-size: 12px;
   background-color: ${({ theme }) => theme.surface2};
   border: 1px solid ${({ theme }) => theme.surface3};
-  color: #fff;
+  color: ${({ theme }) => theme.neutral1};
   text-align: center;
   border-radius: 6px;
   padding: 5px;
@@ -85,7 +85,7 @@ const Image = styled.img`
   height: 28px;
   width: 28px;
   border-radius: 100%;
-  border: 0.5px solid rgba(255, 255, 255, 0.12);
+  border: 0.5px solid ${({ theme }) => theme.surface3};
 `;
 
 export default function ClaimTokenRow({

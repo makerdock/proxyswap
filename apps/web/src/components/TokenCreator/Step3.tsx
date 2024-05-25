@@ -10,8 +10,7 @@ import { useState, useCallback } from "react";
 const StyledHeader = styled.div`
   position: relative;
   padding: 0.75rem 0.5rem;
-  color: white;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  border-bottom: 1px solid ${({ theme }) => theme.surface3};
   display: flex;
   align-items: center;
   justify-content: center;
@@ -25,7 +24,7 @@ const CSVLabel = styled.label`
   width: 100%;
   height: 112px;
   border-radius: 12px;
-  border: 1px dashed rgba(255, 255, 255, 0.07);
+  border: 1px dashed ${({ theme }) => theme.surface3};
   cursor: pointer;
   background: ${({ theme }) => theme.surface2};
   display: flex;
@@ -43,11 +42,11 @@ const Table = styled.table`
 
 const TableHeader = styled.th`
   padding: 8px 16px 12px 16px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  border-bottom: 1px solid ${({ theme }) => theme.surface3};
 `;
 
 const TableRow = styled.tr`
-  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  border-bottom: 1px solid ${({ theme }) => theme.surface3};
 
   &:last-child {
     border-bottom: none;
@@ -74,27 +73,27 @@ const TableCell = styled.td`
 const GoBack = styled(Link)`
   margin-right: auto;
   position: absolute;
-  color: rgba(255, 255, 255, 0.7);
+  color: ${({ theme }) => theme.neutral2};
   left: 5px;
 `;
 
 const AirdropContainer = styled.div`
   border-radius: 12px;
   background: ${({ theme }) => theme.surface2};
-  border: 1px solid rgba(255, 255, 255, 0.07);
+  border: 1px solid ${({ theme }) => theme.surface3};
   margin-top: 12px;
   overflow-x: auto;
 `;
 
 const AirdropDetailsInput = styled.input`
   background: none;
-  color: white;
+  color: ${({ theme }) => theme.neutral1};
   outline: none;
   font-weight: 500;
   font-size: 14px;
   border-radius: 12px;
   padding: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  border: 1px solid ${({ theme }) => theme.surface3};
 
   &:last-child {
     text-align: right;
@@ -319,7 +318,6 @@ export default function Step3() {
                       <AirdropDetailsInput
                         style={{
                           width: "36px",
-                          border: "1px solid rgba(255, 255, 255, 0.1)",
                         }}
                         value={rowData[1]}
                         onChange={(e) => {
@@ -393,15 +391,11 @@ export default function Step3() {
         }}
       >
         <ButtonPrimary disabled={disableButton} marginTop={"0.5rem"}>
-          <ThemedText.BodyPrimary fontWeight={700} fontSize={16}>
-            <Trans>
-              {!csvData
-                ? "Skip"
-                : disableButton
-                  ? "Percentage is more than 100"
-                  : "Continue"}
-            </Trans>
-          </ThemedText.BodyPrimary>
+          {!csvData
+            ? "Skip"
+            : disableButton
+              ? "Percentage is more than 100"
+              : "Continue"}
         </ButtonPrimary>
       </ContinueLink>
     </>

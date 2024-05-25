@@ -1,7 +1,11 @@
 import { Trans } from "@lingui/macro";
 import { useWeb3React } from "@web3-react/core";
 import { useToggleAccountDrawer } from "components/AccountDrawer/MiniPortfolio/hooks";
-import { ButtonLight, ButtonPrimary } from "components/Button";
+import {
+  ButtonLight,
+  ButtonPrimary,
+  SmallButtonPrimary,
+} from "components/Button";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { ThemedText } from "theme/components";
@@ -65,11 +69,9 @@ export default function CreateToken() {
           <Trans>Connect wallet</Trans>
         </ButtonLight>
       ) : (
-        <ButtonPrimary as={Link} to={`/launch/step1`}>
-          <ThemedText.BodyPrimary fontWeight={700} fontSize={16}>
-            <Trans>Continue</Trans>
-          </ThemedText.BodyPrimary>
-        </ButtonPrimary>
+        <SmallButtonPrimary as={Link} to={`/launch/step1`}>
+          <Trans>Continue</Trans>
+        </SmallButtonPrimary>
       )}
     </>
   );

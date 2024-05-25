@@ -5,14 +5,25 @@ import { useBalanceAndRate } from "hooks/useBalanceandRate";
 import { useState } from "react";
 import { ArrowLeft } from "react-feather";
 import { Link, useLocation } from "react-router-dom";
-import styled from "styled-components";
+import styled, { createGlobalStyle } from "styled-components";
 import { Separator, ThemedText } from "theme/components";
+
+const GlobalStyle = createGlobalStyle`
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  input[type=number] {
+    -moz-appearance: textfield;
+  }
+`;
 
 const StyledHeader = styled.div`
   position: relative;
   padding: 0.75rem 0.5rem;
-  color: white;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  border-bottom: 1px solid ${({ theme }) => theme.surface3};
   display: flex;
   align-items: center;
   justify-content: center;
@@ -32,7 +43,7 @@ const LPDepositContainer = styled.div`
   border-radius: 16px;
   padding: 0.75rem;
   margin: 4px 0;
-  border: 1px solid rgba(255, 255, 255, 0.07);
+  border: 1px solid ${({ theme }) => theme.surface3};
 `;
 
 const DetailContainer = styled.div`
@@ -48,7 +59,7 @@ const Input = styled.div`
   padding: 12px;
   font-size: 1rem;
   outline: none;
-  color: white;
+  color: ${({ theme }) => theme.neutral1};
   margin-top: 4px;
   display: flex;
   justify-content: space-between;
@@ -60,7 +71,7 @@ const Button = styled.button`
   padding: 6px 10px;
   border-radius: 6px;
   border: none;
-  color: rgba(255, 255, 255, 0.76);
+  color: ${({ theme }) => theme.neutral1};
   font-weight: 500;
   font-size: 12px;
   cursor: pointer;
@@ -70,7 +81,7 @@ const TokenQuantityInput = styled.input`
   background: none;
   border: none;
   padding: 0;
-  color: white;
+  color: ${({ theme }) => theme.neutral1};
   outline: none;
   width: 100%;
   font-family: "Inter", sans-serif;
@@ -79,7 +90,7 @@ const TokenQuantityInput = styled.input`
 const GoBack = styled(Link)`
   margin-right: auto;
   position: absolute;
-  color: rgba(255, 255, 255, 0.7);
+  color: ${({ theme }) => theme.neutral2};
   left: 5px;
 `;
 
@@ -94,7 +105,7 @@ const TokenSupplyInput = styled.input`
   border: none;
   padding: 0;
   width: 60%;
-  color: white;
+  color: ${({ theme }) => theme.neutral1};
   outline: none;
 `;
 
@@ -158,12 +169,13 @@ export default function Step2() {
   const initialTokenPrice = priceOfDegen / tokenSupplyQuantity || 0;
 
   const degenInputError =
-    degenAmount === "" || parseFloat(degenAmount) > parseFloat(balance);
-  const tokenSupplyError = !tokenSupply || parseFloat(tokenSupply) > 97.5;
-  const tokenQuantityError = tokenQuantity === "";
+    degenAmount <= "0" || parseFloat(degenAmount) > parseFloat(balance);
+  const tokenSupplyError = tokenSupply <= "0" || parseFloat(tokenSupply) > 97.5;
+  const tokenQuantityError = tokenQuantity <= "0";
 
   return (
     <>
+      <GlobalStyle />
       <StyledHeader>
         <GoBack
           to={`/launch/step1?tokenQuantity=${tokenQuantity}&tokenSupply=${tokenSupply.replace(
@@ -186,11 +198,7 @@ export default function Step2() {
       </StyledHeader>
       <OuterContainer>
         <label htmlFor="tokenQuantity">
-          <ThemedText.BodySecondary
-            fontWeight={500}
-            fontSize={12}
-            opacity={"0.76"}
-          >
+          <ThemedText.BodySecondary fontWeight={500} fontSize={12}>
             <Trans>Token quantity</Trans>
           </ThemedText.BodySecondary>
           <Input>
@@ -198,6 +206,7 @@ export default function Step2() {
               name="tokenQuantity"
               id="tokenQuantity"
               placeholder="1000000"
+              min="0"
               type="number"
               onChange={(e) => setTokenQuantity(e.target.value)}
               value={tokenQuantity}
@@ -215,7 +224,6 @@ export default function Step2() {
         <ThemedText.BodySecondary
           fontWeight={500}
           fontSize={12}
-          opacity={"0.76"}
           marginTop={"16px"}
         >
           <Trans>LP Deposit</Trans>
@@ -223,11 +231,7 @@ export default function Step2() {
         <LPDepositContainer>
           <DepositInputContainer>
             <label htmlFor="tokenSupply">
-              <ThemedText.BodySecondary
-                fontWeight={500}
-                fontSize={12}
-                opacity={"0.76"}
-              >
+              <ThemedText.BodySecondary fontWeight={500} fontSize={12}>
                 <Trans>Token&apos;s supply</Trans>
               </ThemedText.BodySecondary>
               <Input>
@@ -253,11 +257,7 @@ export default function Step2() {
               </Input>
             </label>
             <label htmlFor="degenAmount">
-              <ThemedText.BodySecondary
-                fontWeight={500}
-                fontSize={12}
-                opacity={"0.76"}
-              >
+              <ThemedText.BodySecondary fontWeight={500} fontSize={12}>
                 <Trans>Deposit DEGEN</Trans>
               </ThemedText.BodySecondary>
               <Input>
@@ -265,6 +265,7 @@ export default function Step2() {
                   id="degenAmount"
                   name="degenAmount"
                   placeholder="1000000"
+                  min="0"
                   type="number"
                   value={degenAmount}
                   onChange={(e) => setDegenAmount(e.target.value)}
@@ -355,13 +356,9 @@ export default function Step2() {
           disabled={degenInputError || tokenQuantityError || tokenSupplyError}
           marginTop={"0.5rem"}
         >
-          <ThemedText.BodyPrimary fontWeight={700} fontSize={16}>
-            <Trans>
-              {parseFloat(degenAmount) > parseFloat(balance)
-                ? "Insufficient DEGEN balance"
-                : "Continue"}
-            </Trans>
-          </ThemedText.BodyPrimary>
+          {parseFloat(degenAmount) > parseFloat(balance)
+            ? "Insufficient DEGEN balance"
+            : "Continue"}
         </ButtonPrimary>
       </Link>
     </>

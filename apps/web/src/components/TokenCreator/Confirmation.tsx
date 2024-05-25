@@ -21,8 +21,7 @@ import {
 const StyledHeader = styled.div`
   position: relative;
   padding: 0.75rem 0.5rem;
-  color: white;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  border-bottom: 1px solid ${({ theme }) => theme.surface3};
   display: flex;
   align-items: center;
   justify-content: center;
@@ -70,7 +69,7 @@ const LiquidityPoolValueInnerDiv = styled.div`
 const GoBack = styled(Link)`
   margin-right: auto;
   position: absolute;
-  color: rgba(255, 255, 255, 0.7);
+  color: ${({ theme }) => theme.neutral2};
   left: 5px;
 `;
 
@@ -250,11 +249,6 @@ export default function Confirmation() {
           )}&degenAmount=${encodeURIComponent(
             degenAmount,
           )}&initialTokenPrice=${initialTokenPrice}&csvData=${encodeURIComponent(csvData)}`}
-          style={{
-            marginRight: "auto",
-            position: "absolute",
-            color: "rgba(255, 255, 255, 0.7)",
-          }}
         >
           <ArrowLeft size={16} />
         </GoBack>
@@ -391,13 +385,7 @@ export default function Confirmation() {
         onClick={handleConfirmTokenCreation}
         disabled={loading}
       >
-        {loading ? (
-          <Loader stroke="white" />
-        ) : (
-          <ThemedText.BodyPrimary fontWeight={700} fontSize={16}>
-            <Trans> Confirm & deploy</Trans>
-          </ThemedText.BodyPrimary>
-        )}
+        {loading ? <Loader stroke="white" /> : "Confirm & deploy"}
       </ButtonPrimary>
     </>
   );

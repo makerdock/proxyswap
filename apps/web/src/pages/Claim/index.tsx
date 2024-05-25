@@ -65,7 +65,7 @@ const LoaderDiv = styled.div`
   height: 10px;
   width: 20%;
   border-radius: 16px;
-  background: rgba(255, 255, 255, 0.1);
+  background: ${({ theme }) => theme.surface3};
   margin: 12px 16px;
 `;
 

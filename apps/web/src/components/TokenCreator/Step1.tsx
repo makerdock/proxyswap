@@ -3,7 +3,7 @@ import { Trans } from "@lingui/macro";
 import { ButtonPrimary } from "components/Button";
 import Loader from "components/Icons/LoadingSpinner";
 import { ChangeEvent, useState, useCallback, DragEvent } from "react";
-import { ArrowLeft } from "react-feather";
+import { ArrowLeft, Image } from "react-feather";
 import { Link, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { ThemedText } from "theme/components";
@@ -15,8 +15,7 @@ const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const StyledHeader = styled.div`
   position: relative;
   padding: 0.75rem 0.5rem;
-  color: white;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  border-bottom: 1px solid ${({ theme }) => theme.surface3};
   display: flex;
   align-items: center;
   justify-content: center;
@@ -30,7 +29,7 @@ const StyledContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 16px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  border-bottom: 1px solid ${({ theme }) => theme.surface3};
 `;
 
 const StyledInput = styled.input`
@@ -41,7 +40,7 @@ const StyledInput = styled.input`
   padding: 12px;
   font-size: 1rem;
   outline: none;
-  color: white;
+  color: ${({ theme }) => theme.neutral1};
   margin-top: 4px;
 `;
 
@@ -53,9 +52,9 @@ const LogoLabel = styled.label`
   width: 80px;
   height: 80px;
   border-radius: 100%;
-  border: 1px dashed rgba(255, 255, 255, 0.07);
+  border: 1px dashed ${({ theme }) => theme.surface3};
   cursor: pointer;
-  background: #1f1f1f;
+  background: ${({ theme }) => theme.surface2};
   display: flex;
   align-items: center;
   justify-content: center;
@@ -65,7 +64,7 @@ const LogoLabel = styled.label`
 const GoBack = styled(Link)`
   margin-right: auto;
   position: absolute;
-  color: rgba(255, 255, 255, 0.7);
+  color: ${({ theme }) => theme.neutral2};
   left: 5px;
 `;
 
@@ -209,7 +208,7 @@ export default function Step1() {
         >
           <LogoLabel htmlFor="logo">
             {loading ? (
-              <Loader stroke="white" />
+              <Loader />
             ) : logoUrl ? (
               <img
                 src={logoUrl}
@@ -218,12 +217,7 @@ export default function Step1() {
                 alt="Logo Preview"
               />
             ) : (
-              <img
-                src={ImageUploadIcon}
-                width={20}
-                height={20}
-                alt="Upload Icon"
-              />
+              <Image size={20} />
             )}
           </LogoLabel>
           <HelperText>
@@ -272,11 +266,7 @@ export default function Step1() {
           }
         }}
       >
-        <ButtonPrimary disabled={!isInputsFilled}>
-          <ThemedText.BodyPrimary fontWeight={700} fontSize={16}>
-            <Trans>Continue</Trans>
-          </ThemedText.BodyPrimary>
-        </ButtonPrimary>
+        <ButtonPrimary disabled={!isInputsFilled}>Continue</ButtonPrimary>
       </ContinueLink>
     </>
   );
