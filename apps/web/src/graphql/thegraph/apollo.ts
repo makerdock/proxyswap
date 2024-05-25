@@ -11,7 +11,8 @@ import { ChainId } from "@uniswap/sdk-core";
 import store from "../../state/index";
 
 const CHAIN_SUBGRAPH_URL: Record<number, string> = {
-  [ChainId.DEGEN]: "http://127.0.0.1:8000/subgraphs/name/proxyswap/v3",
+  [ChainId.DEGEN]:
+    "https://proxy-airstack-subgraph-api.vercel.app/api/subgraph",
 };
 
 const CHAIN_BLOCK_SUBGRAPH_URL: Record<number, string> = {
