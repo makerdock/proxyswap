@@ -11,6 +11,8 @@ import { Copy } from "react-feather";
 import styled from "styled-components";
 import { ThemedText } from "theme/components";
 import Loader from "components/Icons/LoadingSpinner";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 type ClaimTokenRowProps = {
   data: TokenData;
@@ -115,11 +117,19 @@ export default function ClaimTokenRow({
           method: "PUT",
         },
       );
+      toast.success("Token claimed successfully", {
+        autoClose: 2000,
+        hideProgressBar: true,
+      });
       setTokenData((prevTokenData) =>
         prevTokenData.filter((token) => token.token_address !== tokenAddress),
       );
     } catch (error) {
       console.error(error);
+      toast.error("Failed to claim token. Please try again.", {
+        autoClose: 2000,
+        hideProgressBar: true,
+      });
     } finally {
       setLoading(false);
     }

@@ -16618,6 +16618,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"clsx@npm:^2.1.0":
+  version: 2.1.1
+  resolution: "clsx@npm:2.1.1"
+  checksum: acd3e1ab9d8a433ecb3cc2f6a05ab95fe50b4a3cfc5ba47abb6cbf3754585fcb87b84e90c822a1f256c4198e3b41c7f6c391577ffc8678ad587fc0976b24fd57
+  languageName: node
+  linkType: hard
+
 "cmd-shim@npm:^5.0.0":
   version: 5.0.0
   resolution: "cmd-shim@npm:5.0.0"
@@ -33264,6 +33271,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-toastify@npm:10.0.5":
+  version: 10.0.5
+  resolution: "react-toastify@npm:10.0.5"
+  dependencies:
+    clsx: ^2.1.0
+  peerDependencies:
+    react: ">=18"
+    react-dom: ">=18"
+  checksum: 982d33918c63e99464623a1b3b023ab5fe18fe341143cb0cb04287e37fd0611c560d9ef451e151ac8ade15a1cda09df09d4c442b3db582965d71aaf42d49b230
+  languageName: node
+  linkType: hard
+
 "react-use-gesture@npm:6.0.14":
   version: 6.0.14
   resolution: "react-use-gesture@npm:6.0.14"
@@ -38181,6 +38200,7 @@ __metadata:
     i18next-parser: 8.6.0
     patch-package: ^7.0.0
     react-dev-utils: 12.0.1
+    react-toastify: 10.0.5
     syncpack: ^8.5.14
     turbo: 1.10.16
     turbo-ignore: ^1.11.3

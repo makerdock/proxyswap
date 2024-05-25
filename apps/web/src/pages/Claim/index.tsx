@@ -18,6 +18,7 @@ import { isSupportedChain } from "constants/chains";
 import { AutoColumn } from "components/Column";
 import { SwitchLocaleLink } from "components/SwitchLocaleLink";
 import useFetchTokenData from "hooks/useFetchTokenData";
+import { ToastContainer } from "react-toastify";
 
 const PageWrapper = styled(AutoColumn)`
   padding: 68px 8px 0px;
@@ -93,6 +94,17 @@ const InboxIcon = styled(Inbox)`
   ${IconStyle}
 `;
 
+const StyledToast = styled(ToastContainer)`
+  .Toastify__toast {
+    background: ${({ theme }) => theme.surface2};
+    color: ${({ theme }) => theme.neutral2};
+  }
+
+  .Toastify__close-button {
+    color: ${({ theme }) => theme.neutral1};
+  }
+`;
+
 function WrongNetworkCard() {
   const theme = useContext(ThemeContext);
   return (
@@ -153,6 +165,7 @@ export default function Claim() {
 
   return (
     <Trace page={InterfacePageName.CLAIM_PAGE} shouldLogImpression>
+      <StyledToast />
       <PageWrapper>
         <AutoColumn gap="lg" justify="center">
           <AutoColumn gap="lg" style={{ width: "100%" }}>
