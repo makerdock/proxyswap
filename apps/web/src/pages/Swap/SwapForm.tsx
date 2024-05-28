@@ -656,7 +656,7 @@ export function SwapForm({ disableTokenInputs = false, onCurrencyChange }: SwapF
                 }
               }}
             >
-              Connect to {getChainInfo(chainId)?.label}
+              Connect to Degen
             </ButtonPrimary>
           ) : showWrap ? (
             <ButtonPrimary

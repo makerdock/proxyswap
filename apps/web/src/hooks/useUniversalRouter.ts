@@ -1,15 +1,12 @@
 import { BigNumber } from "@ethersproject/bignumber";
 import { t } from "@lingui/macro";
-import { CustomUserProperties, SwapEventName } from "@uniswap/analytics-events";
 import { Percent } from "@uniswap/sdk-core";
 import { FlatFeeOptions, SwapRouter } from "@uniswap/universal-router-sdk";
 import { FeeOptions, toHex } from "@uniswap/v3-sdk";
 import { useWeb3React } from "@web3-react/core";
-import { sendAnalyticsEvent, useTrace } from "analytics";
+import { useTrace } from "analytics";
 import { useCachedPortfolioBalancesQuery } from "components/PrefetchBalancesWrapper/PrefetchBalancesWrapper";
-import { getConnection } from "connection";
 import useBlockNumber from "lib/hooks/useBlockNumber";
-import { formatSwapSignedAnalyticsEventProperties } from "lib/utils/analytics";
 import { useCallback } from "react";
 import { ClassicTrade, TradeFillType } from "state/routing/types";
 import { useUserSlippageTolerance } from "state/user/hooks";
@@ -20,7 +17,6 @@ import {
   didUserReject,
   swapErrorToUserReadableMessage,
 } from "utils/swapErrorToUserReadableMessage";
-import { getWalletMeta } from "utils/walletMeta";
 
 import { ethers } from "ethers";
 import { PermitSignature } from "./usePermitAllowance";
@@ -101,46 +97,13 @@ export function useUniversalRouterSwapCallback(
             // TODO(https://github.com/Uniswap/universal-router-sdk/issues/113): universal-router-sdk returns a non-hexlified value.
             ...(value && !isZero(value) ? { value: toHex(value) } : {}),
           };
-
-          // // let gasEstimate: BigNumber;
-          // // try {
-          // //   gasEstimate = await provider.estimateGas(tx);
-          // // } catch (gasError) {
-          // //   console.warn(gasError);
-          // //   throw new GasEstimationError();
-          // // }
-          // const gasLimit = calculateGasMargin(gasEstimate);
           const gasLimit = ethers.utils.parseUnits("5000000", "wei");
           setTraceData("gasLimit", gasLimit.toNumber());
-          const beforeSign = Date.now();
           const response = await provider
             .getSigner()
             .sendTransaction({ ...tx, gasLimit })
             .then((response) => {
-              sendAnalyticsEvent(SwapEventName.SWAP_SIGNED, {
-                ...formatSwapSignedAnalyticsEventProperties({
-                  trade,
-                  timeToSignSinceRequestMs: Date.now() - beforeSign,
-                  allowedSlippage: options.slippageTolerance,
-                  fiatValues,
-                  txHash: response.hash,
-                  portfolioBalanceUsd,
-                }),
-                ...analyticsContext,
-                // TODO (WEB-2993): remove these after debugging missing user properties.
-                [CustomUserProperties.WALLET_ADDRESS]: account,
-                [CustomUserProperties.WALLET_TYPE]:
-                  getConnection(connector).getProviderInfo().name,
-                [CustomUserProperties.PEER_WALLET_AGENT]: provider
-                  ? getWalletMeta(provider)?.agent
-                  : undefined,
-              });
               if (tx.data !== response.data) {
-                sendAnalyticsEvent(SwapEventName.SWAP_MODIFIED_IN_WALLET, {
-                  txHash: response.hash,
-                  ...analyticsContext,
-                });
-
                 if (
                   !response.data ||
                   response.data.length === 0 ||
@@ -156,6 +119,7 @@ export function useUniversalRouterSwapCallback(
             response,
           };
         } catch (swapError: unknown) {
+          debugger;
           if (swapError instanceof ModifiedSwapError) throw swapError;
 
           // GasEstimationErrors are already traced when they are thrown.

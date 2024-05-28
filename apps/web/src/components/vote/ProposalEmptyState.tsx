@@ -41,7 +41,7 @@ export default function ProposalEmptyState() {
   if (chainId && chainId !== ChainId.MAINNET) {
     return (
       <EmptyState
-        HeaderContent={() => <Trans>Please connect to Layer 1 Ethereum</Trans>}
+        HeaderContent={() => <Trans>Please connect to Degen</Trans>}
         SubHeaderContent={() => (
           <Trans>
             Uniswap governance is only available on Layer 1. Switch your network to Ethereum Mainnet to view Proposals

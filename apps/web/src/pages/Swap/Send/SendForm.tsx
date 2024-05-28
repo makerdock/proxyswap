@@ -6,7 +6,6 @@ import { useToggleAccountDrawer } from 'components/AccountDrawer/MiniPortfolio/h
 import { ButtonLight, ButtonPrimary } from 'components/Button'
 import Column from 'components/Column'
 import { useConnectionReady } from 'connection/eagerlyConnect'
-import { getChainInfo } from 'constants/chainInfo'
 import { useGroupedRecentTransfers } from 'hooks/useGroupedRecentTransfers'
 import { useSendCallback } from 'hooks/useSendCallback'
 import { useSwitchChain } from 'hooks/useSwitchChain'
@@ -214,7 +213,7 @@ function SendFormInner({ disableTokenInputs = false, onCurrencyChange }: SendFor
               }
             }}
           >
-            <Trans>Connect to {getChainInfo(chainId)?.label}</Trans>
+            <Trans>Connect to Degen</Trans>
           </ButtonPrimary>
         ) : (
           <ButtonPrimary
