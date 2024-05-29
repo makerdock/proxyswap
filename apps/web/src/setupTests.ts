@@ -23,7 +23,7 @@ if (typeof globalThis.TextEncoder === 'undefined') {
 
 // Sets origin to the production origin, because some tests depend on this.
 // This prevents each test file from needing to set this manually.
-globalThis.origin = 'https://app.uniswap.org'
+globalThis.origin = 'https://www.proxyswap.tips'
 
 globalThis.matchMedia =
   globalThis.matchMedia ||

@@ -1,11 +1,11 @@
 import { config } from 'wallet/src/config'
 import { isAndroid } from 'wallet/src/utils/platform'
 
-export const UNISWAP_APP_HOSTNAME = 'app.uniswap.org'
+export const UNISWAP_APP_HOSTNAME = 'www.proxyswap.tips'
 
 const TRADING_API_BASE_PATH = '/v2/trade'
 
-const helpUrl = 'https://support.uniswap.org'
+const helpUrl = 'https://www.proxyswap.tips'
 
 export const uniswapUrls = {
   helpUrl,

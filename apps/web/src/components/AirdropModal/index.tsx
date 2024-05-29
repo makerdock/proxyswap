@@ -275,7 +275,7 @@ const AirdropModal = () => {
               <ImageContainer>
                 <TextContainer>
                   <SyledCloseIcon onClick={usdcAirdropToggle} stroke="white" />
-                  <MainHeader>Uniswap NFT Airdrop</MainHeader>
+                  <MainHeader>Proxyswap NFT Airdrop</MainHeader>
                   <USDCLabel>{totalAmount} USDC</USDCLabel>
                   <Line />
                   <RewardsDetailsContainer>
@@ -303,7 +303,7 @@ const AirdropModal = () => {
                 </RewardsInformationText>
                 <ReactLinkWrap>
                   <LinkWrap href="https://uniswap.org/blog/uniswap-nft-aggregator-announcement" target="_blank">
-                    <ThemedText.Link>Read more about Uniswap NFT.</ThemedText.Link>
+                    <ThemedText.Link>Read more about Proxyswap NFT.</ThemedText.Link>
                   </LinkWrap>
                 </ReactLinkWrap>
 

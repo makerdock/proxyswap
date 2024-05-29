@@ -90,7 +90,6 @@ export function useUniversalRouterSwapCallback(
               flatFee: options.flatFeeOptions,
             }
           );
-          debugger;
           const tx = {
             from: account,
             to: UNIVERSAL_ROUTER_ADDRESS,

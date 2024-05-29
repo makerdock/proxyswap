@@ -52,7 +52,7 @@ export const MORE_CARDS = [
   {
     to: '/pools',
     title: 'Earn',
-    description: 'Provide liquidity to pools on Uniswap and earn fees on swaps.',
+    description: 'Provide liquidity to pools on Proxyswap and earn fees on swaps.',
     lightIcon: <StyledCardLogo src={lightArrowImgSrc} alt="Analytics" />,
     darkIcon: <StyledCardLogo src={darkArrowImgSrc} alt="Analytics" />,
     cta: 'Provide liquidity',

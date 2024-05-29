@@ -15,11 +15,11 @@ export default async function getCollection(collectionAddress: string, url: stri
     return undefined
   }
   const formattedAsset = {
-    title: collection.name + ' on Uniswap',
+    title: collection.name + ' on Proxyswap',
     image,
     url,
     name: collection.name ?? 'Collection',
-    ogImage: collection.image?.url ?? origin + '/images/192x192_App_Icon.png',
+    ogImage: collection.image?.url ?? origin + '/images/192.svg',
     isVerified: collection.isVerified ?? false,
   }
   return formattedAsset

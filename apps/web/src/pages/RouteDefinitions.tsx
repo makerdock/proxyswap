@@ -89,7 +89,7 @@ export interface RouteDefinition {
 function createRouteDefinition(route: Partial<RouteDefinition>): RouteDefinition {
   return {
     getElement: () => null,
-    getTitle: () => 'Uniswap Interface',
+    getTitle: () => 'Proxyswap Interface',
     enabled: () => true,
     path: '/',
     nestedPaths: [],
@@ -101,7 +101,7 @@ function createRouteDefinition(route: Partial<RouteDefinition>): RouteDefinition
 export const routes: RouteDefinition[] = [
   createRouteDefinition({
     path: '/',
-    getTitle: () => t`Proxyswap | Trade crypto & NFTs safely on the top DeFi exchange`,
+    getTitle: () => t`ProxySwap - Swap or provide liquidity on the Proxyswap Protocol`,
     getElement: () => <Swap />,
   }),
   createRouteDefinition({
@@ -113,7 +113,7 @@ export const routes: RouteDefinition[] = [
   }),
   createRouteDefinition({
     path: '/explore/tokens/:chainName/:tokenAddress',
-    getTitle: () => t`Buy & sell on Uniswap`,
+    getTitle: () => t`ProxySwap - Swap or provide liquidity on the Proxyswap Protocol`,
     getElement: () => <TokenDetails />,
     enabled: (args) => Boolean(args.infoExplorePageEnabled),
   }),
@@ -140,7 +140,7 @@ export const routes: RouteDefinition[] = [
   }),
   createRouteDefinition({
     path: '/explore/pools/:chainName/:poolAddress',
-    getTitle: () => t`Explore pools on Uniswap`,
+    getTitle: () => t`ProxySwap - Swap or provide liquidity on the Proxyswap Protocol`,
     getElement: () => (
       <Suspense fallback={null}>
         <PoolDetails />
@@ -150,7 +150,7 @@ export const routes: RouteDefinition[] = [
   }),
   // createRouteDefinition({
   //   path: '/vote/*',
-  //   getTitle: () => t`Vote on governance proposals on Uniswap`,
+  //   getTitle: () => t`Vote on governance proposals on Proxyswap`,
   //   getElement: () => (
   //     <Suspense fallback={<LazyLoadSpinner />}>
   //       <Vote />
@@ -159,7 +159,7 @@ export const routes: RouteDefinition[] = [
   // }),
   // createRouteDefinition({
   //   path: '/create-proposal',
-  //   getTitle: () => t`Create a new governance proposal on Uniswap`,
+  //   getTitle: () => t`Create a new governance proposal on Proxyswap`,
   //   getElement: () => <Navigate to="/vote/create-proposal" replace />,
   // }),
   // createRouteDefinition({
@@ -169,49 +169,49 @@ export const routes: RouteDefinition[] = [
   createRouteDefinition({
     path: '/swap',
     getElement: () => <Swap />,
-    getTitle: () => t`Buy, sell & trade Ethereum and other top tokens on Uniswap`,
+    getTitle: () => t`ProxySwap - Swap or provide liquidity on the Proxyswap Protocol`,
   }),
   createRouteDefinition({
     path: '/pool/v2/find',
     getElement: () => <PoolFinder />,
-    getTitle: () => t`Explore top liquidity pools (v2) on Uniswap`,
+    getTitle: () => t`ProxySwap - Swap or provide liquidity on the Proxyswap Protocol`,
   }),
   createRouteDefinition({
     path: '/pool/v2',
     getElement: () => <PoolV2 />,
-    getTitle: () => t`Provide liquidity to pools (v2) on Uniswap`,
+    getTitle: () => t`ProxySwap - Swap or provide liquidity on the Proxyswap Protocol`,
   }),
   createRouteDefinition({ path: '/pool', getElement: () => <Pool /> }),
   createRouteDefinition({
     path: '/pool/:tokenId',
     getElement: () => <PositionPage />,
-    getTitle: () => t`Manage pool liquidity on Uniswap`,
+    getTitle: () => t`ProxySwap - Swap or provide liquidity on the Proxyswap Protocol`,
   }),
   createRouteDefinition({
     path: '/pools/v2/find',
     getElement: () => <PoolFinder />,
-    getTitle: () => t`Explore top liquidity pools (v2) on Uniswap`,
+    getTitle: () => t`ProxySwap - Swap or provide liquidity on the Proxyswap Protocol`,
   }),
   createRouteDefinition({
     path: '/pools/v2',
     getElement: () => <PoolV2 />,
-    getTitle: () => t`Manage & provide v2 pool liquidity on Uniswap`,
+    getTitle: () => t`ProxySwap - Swap or provide liquidity on the Proxyswap Protocol`,
   }),
   createRouteDefinition({
     path: '/pools',
     getElement: () => <Pool />,
-    getTitle: () => t`Manage & provide pool liquidity on Uniswap`,
+    getTitle: () => t`ProxySwap - Swap or provide liquidity on the Proxyswap Protocol`,
   }),
   createRouteDefinition({
     path: '/pools/:tokenId',
     getElement: () => <PositionPage />,
-    getTitle: () => t`Manage pool liquidity on Uniswap`,
+    getTitle: () => t`ProxySwap - Swap or provide liquidity on the Proxyswap Protocol`,
   }),
   createRouteDefinition({
     path: '/add/v2',
     nestedPaths: [':currencyIdA', ':currencyIdA/:currencyIdB'],
     getElement: () => <AddLiquidityV2WithTokenRedirects />,
-    getTitle: () => t`Provide liquidity to pools (v2) on Uniswap`,
+    getTitle: () => t`ProxySwap - Swap or provide liquidity on the Proxyswap Protocol`,
   }),
   createRouteDefinition({
     path: '/add',
@@ -222,27 +222,27 @@ export const routes: RouteDefinition[] = [
       ':currencyIdA/:currencyIdB/:feeAmount/:tokenId',
     ],
     getElement: () => <AddLiquidityWithTokenRedirects />,
-    getTitle: () => t`Provide liquidity to pools on Uniswap`,
+    getTitle: () => t`ProxySwap - Swap or provide liquidity on the Proxyswap Protocol`,
   }),
   createRouteDefinition({
     path: '/remove/v2/:currencyIdA/:currencyIdB',
     getElement: () => <RemoveLiquidity />,
-    getTitle: () => t`Manage v2 pool liquidity on Uniswap`,
+    getTitle: () => t`ProxySwap - Swap or provide liquidity on the Proxyswap Protocol`,
   }),
   createRouteDefinition({
     path: '/remove/:tokenId',
     getElement: () => <RemoveLiquidityV3 />,
-    getTitle: () => t`Manage pool liquidity on Uniswap`,
+    getTitle: () => t`ProxySwap - Swap or provide liquidity on the Proxyswap Protocol`,
   }),
   createRouteDefinition({
     path: '/migrate/v2',
     getElement: () => <MigrateV2 />,
-    getTitle: () => t`Migrate v2 pool liquidity to Uniswap v3`,
+    getTitle: () => t`ProxySwap - Swap or provide liquidity on the Proxyswap Protocol`,
   }),
   createRouteDefinition({
     path: '/migrate/v2/:address',
     getElement: () => <MigrateV2Pair />,
-    getTitle: () => t`Migrate v2 pool liquidity to Uniswap v3`,
+    getTitle: () => t`ProxySwap - Swap or provide liquidity on the Proxyswap Protocol`,
   }),
   createRouteDefinition({
     path: '/nfts',
@@ -252,7 +252,7 @@ export const routes: RouteDefinition[] = [
       </Suspense>
     ),
     enabled: (args) => !args.shouldDisableNFTRoutes,
-    getTitle: () => t`Trade NFTs across OpenSea & other top marketplaces on Uniswap`,
+    getTitle: () => t`ProxySwap - Swap or provide liquidity on the Proxyswap Protocol`,
   }),
   createRouteDefinition({
     path: '/nfts/asset/:contractAddress/:tokenId',
@@ -262,7 +262,7 @@ export const routes: RouteDefinition[] = [
       </Suspense>
     ),
     enabled: (args) => !args.shouldDisableNFTRoutes,
-    getTitle: () => t`Explore NFTs on Uniswap`,
+    getTitle: () => t`ProxySwap - Swap or provide liquidity on the Proxyswap Protocol`,
   }),
   createRouteDefinition({
     path: '/nfts/profile',
@@ -272,7 +272,7 @@ export const routes: RouteDefinition[] = [
       </Suspense>
     ),
     enabled: (args) => !args.shouldDisableNFTRoutes,
-    getTitle: () => t`Explore NFTs on Uniswap`,
+    getTitle: () => t`ProxySwap - Swap or provide liquidity on the Proxyswap Protocol`,
   }),
   createRouteDefinition({
     path: '/nfts/collection/:contractAddress',
@@ -282,7 +282,7 @@ export const routes: RouteDefinition[] = [
       </Suspense>
     ),
     enabled: (args) => !args.shouldDisableNFTRoutes,
-    getTitle: () => t`Explore NFTs on Uniswap`,
+    getTitle: () => t`ProxySwap - Swap or provide liquidity on the Proxyswap Protocol`,
   }),
   createRouteDefinition({
     path: '/nfts/collection/:contractAddress/activity',
@@ -292,7 +292,7 @@ export const routes: RouteDefinition[] = [
       </Suspense>
     ),
     enabled: (args) => !args.shouldDisableNFTRoutes,
-    getTitle: () => t`Explore NFTs on Uniswap`,
+    getTitle: () => t`ProxySwap - Swap or provide liquidity on the Proxyswap Protocol`,
   }),
   createRouteDefinition({ path: '*', getElement: () => <Navigate to="/not-found" replace /> }),
   createRouteDefinition({ path: '/not-found', getElement: () => <NotFound /> }),

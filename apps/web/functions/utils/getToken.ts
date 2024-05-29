@@ -3,12 +3,12 @@ import client from '../client'
 
 function formatTitleName(symbol: string | undefined, name: string | undefined) {
   if (symbol) {
-    return 'Get ' + symbol + ' on Uniswap'
+    return 'Get ' + symbol + ' on Proxyswap'
   }
   if (name) {
-    return 'Get ' + name + ' on Uniswap'
+    return 'Get ' + name + ' on Proxyswap'
   }
-  return 'View Token on Uniswap'
+  return 'View Token on Proxyswap'
 }
 
 const convertTokenAddress = (networkName: string, tokenAddress: string) => {

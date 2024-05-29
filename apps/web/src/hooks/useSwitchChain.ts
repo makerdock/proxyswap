@@ -3,7 +3,6 @@ import { Connector } from "@web3-react/types";
 import {
   deprecatedNetworkConnection,
   networkConnection,
-  uniwalletWCV2ConnectConnection,
   walletConnectV2Connection,
 } from "connection";
 import { getChainInfo } from "constants/chainInfo";
@@ -40,7 +39,7 @@ export function useSwitchChain() {
           if (
             [
               walletConnectV2Connection.connector,
-              uniwalletWCV2ConnectConnection.connector,
+              // uniwalletWCV2ConnectConnection.connector,
               networkConnection.connector,
               deprecatedNetworkConnection.connector,
             ].includes(connector)

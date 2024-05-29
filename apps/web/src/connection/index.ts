@@ -7,7 +7,7 @@ import { MetaMask } from "@web3-react/metamask";
 import { Network } from "@web3-react/network";
 import { Actions, Connector } from "@web3-react/types";
 import GNOSIS_ICON from "assets/images/gnosis.png";
-import UNISWAP_LOGO from "assets/svg/logo.svg";
+import PROXYSWAP_LOGO from "assets/svg/logo.svg";
 import COINBASE_ICON from "assets/wallets/coinbase-icon.svg";
 import UNIWALLET_ICON from "assets/wallets/uniswap-wallet-icon.png";
 import WALLET_CONNECT_ICON from "assets/wallets/walletconnect-icon.svg";
@@ -90,7 +90,7 @@ const [deprecatedWeb3Network, deprecatedWeb3NetworkHooks] =
       new Network({
         actions,
         urlMap: DEPRECATED_RPC_PROVIDERS,
-        defaultChainId: 1,
+        defaultChainId: ChainId.DEGEN,
       }),
   );
 export const deprecatedNetworkConnection: Connection = {
@@ -150,7 +150,7 @@ export const gnosisSafeConnection: Connection = {
 export const walletConnectV2Connection: Connection = new (class
   implements Connection
 {
-  private initializer = (actions: Actions, defaultChainId = ChainId.MAINNET) =>
+  private initializer = (actions: Actions, defaultChainId = ChainId.DEGEN) =>
     new WalletConnectV2({ actions, defaultChainId, onError });
 
   type = ConnectionType.WALLET_CONNECT_V2;
@@ -223,14 +223,15 @@ const [web3WCV2UniwalletConnect, web3WCV2UniwalletConnectHooks] =
   initializeConnector<UniwalletWCV2Connect>(
     (actions) => new UniwalletWCV2Connect({ actions, onError }),
   );
-export const uniwalletWCV2ConnectConnection: Connection = {
-  getProviderInfo: () => ({ name: "Uniswap Wallet", icon: UNIWALLET_ICON }),
-  connector: web3WCV2UniwalletConnect,
-  hooks: web3WCV2UniwalletConnectHooks,
-  type: ConnectionType.UNISWAP_WALLET_V2,
-  shouldDisplay: () =>
-    Boolean(!getIsInjectedMobileBrowser() && !isNonSupportedDevice),
-};
+// export const uniwalletWCV2ConnectConnection: Connection = {
+//   getProviderInfo: () => ({ name: "Uniswap Wallet", icon: UNIWALLET_ICON }),
+//   connector: web3WCV2UniwalletConnect,
+//   hooks: web3WCV2UniwalletConnectHooks,
+//   type: ConnectionType.UNISWAP_WALLET_V2,
+//   shouldDisplay: () =>
+//     Boolean(!getIsInjectedMobileBrowser() && !isNonSupportedDevice),
+// };
+
 
 const [web3CoinbaseWallet, web3CoinbaseWalletHooks] =
   initializeConnector<CoinbaseWallet>(
@@ -239,8 +240,8 @@ const [web3CoinbaseWallet, web3CoinbaseWalletHooks] =
         actions,
         options: {
           url: RPC_URLS[ChainId.DEGEN][0],
-          appName: "Uniswap",
-          appLogoUrl: UNISWAP_LOGO,
+          appName: "Proxyswap",
+          appLogoUrl: PROXYSWAP_LOGO,
           reloadOnDisconnect: false,
         },
         onError,
@@ -269,7 +270,7 @@ const coinbaseWalletConnection: Connection = {
 
 export const connections = [
   gnosisSafeConnection,
-  uniwalletWCV2ConnectConnection,
+  // uniwalletWCV2ConnectConnection,
   deprecatedInjectedConnection,
   walletConnectV2Connection,
   coinbaseWalletConnection,
@@ -296,8 +297,8 @@ export function getConnection(c: Connector | ConnectionType) {
         return coinbaseWalletConnection;
       case ConnectionType.WALLET_CONNECT_V2:
         return walletConnectV2Connection;
-      case ConnectionType.UNISWAP_WALLET_V2:
-        return uniwalletWCV2ConnectConnection;
+      // case ConnectionType.UNISWAP_WALLET_V2:
+      //   return uniwalletWCV2ConnectConnection;
       case ConnectionType.NETWORK:
         return networkConnection;
       case ConnectionType.DEPRECATED_NETWORK:
