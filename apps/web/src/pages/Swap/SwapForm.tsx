@@ -7,7 +7,7 @@ import {
   SharedEventName,
   SwapEventName,
 } from '@uniswap/analytics-events'
-import { Currency, CurrencyAmount, Token } from '@uniswap/sdk-core'
+import { ChainId, Currency, CurrencyAmount, Token } from '@uniswap/sdk-core'
 import { useWeb3React } from '@web3-react/core'
 import { sendAnalyticsEvent, Trace, TraceEvent, useTrace } from 'analytics'
 import { useToggleAccountDrawer } from 'components/AccountDrawer/MiniPortfolio/hooks'
@@ -320,6 +320,8 @@ export function SwapForm({ disableTokenInputs = false, onCurrencyChange }: SwapF
     isSupportedChain(chainId) ? "0x57c9C9c9BEd2AA33cf43dF285D173844F7245Ba3" : undefined,
     trade?.fillType
   )
+
+  console.log(allowance, "allowance");
 
   const maxInputAmount: CurrencyAmount<Currency> | undefined = useMemo(
     () => maxAmountSpend(currencyBalances[Field.INPUT]),
@@ -645,7 +647,7 @@ export function SwapForm({ disableTokenInputs = false, onCurrencyChange }: SwapF
               $borderRadius="16px"
               onClick={async () => {
                 try {
-                  await switchChain(connector, chainId)
+                  await switchChain(connector, ChainId.DEGEN)
                 } catch (error) {
                   if (didUserReject(error)) {
                     // Ignore error, which keeps the user on the previous chain.

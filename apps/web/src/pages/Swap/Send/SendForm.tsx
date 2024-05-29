@@ -15,6 +15,7 @@ import { CurrencyState, useSwapAndLimitContext } from 'state/swap/SwapContext'
 import { didUserReject } from 'utils/swapErrorToUserReadableMessage'
 import { useIsSmartContractAddress } from 'utils/transfer'
 
+import { ChainId } from '@uniswap/sdk-core'
 import { NewAddressSpeedBumpModal } from './NewAddressSpeedBump'
 import SendCurrencyInputForm from './SendCurrencyInputForm'
 import { SendRecipientForm } from './SendRecipientForm'
@@ -202,7 +203,7 @@ function SendFormInner({ disableTokenInputs = false, onCurrencyChange }: SendFor
             $borderRadius="16px"
             onClick={async () => {
               try {
-                await switchChain(connector, chainId)
+                await switchChain(connector, ChainId.DEGEN)
               } catch (error) {
                 if (didUserReject(error)) {
                   // Ignore error, which keeps the user on the previous chain.
