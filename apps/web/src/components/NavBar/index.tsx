@@ -13,7 +13,6 @@ import { useAccountDrawer } from 'components/AccountDrawer/MiniPortfolio/hooks'
 import Blur from './Blur'
 import { ChainSelector } from './ChainSelector'
 import * as styles from './style.css'
-import { ProxyIcon } from 'components/Logo/ProxyIcon'
 
 const Nav = styled.nav`
   padding: ${({ theme }) => `${theme.navVerticalPad}px 12px`};
@@ -97,15 +96,17 @@ const Navbar = ({ blur }: { blur: boolean }) => {
     <>
       {blur && <Blur />}
       <Nav>
-        <Box display="flex" height="full" flexWrap="nowrap">
+        <Box display="flex" height="full" paddingTop={{
+          xl: "20"
+        }} paddingRight={{
+          xl: "20"
+        }} flexWrap="nowrap">
           <Box className={styles.leftSideContainer}>
             <Box className={styles.logoContainer}>
-              <ProxyIcon
-                width="48"
-                height="48"
-                data-testid="uniswap-logo"
-                className={styles.logo}
-                clickable={!account}
+              <img src='/images/proxylogo.png' style={{
+                width: 190,
+                height: 35
+              }}
                 onClick={handleUniIconClick}
               />
             </Box>
