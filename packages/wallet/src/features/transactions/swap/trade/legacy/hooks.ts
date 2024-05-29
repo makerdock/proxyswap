@@ -34,6 +34,7 @@ import {
 import { DerivedSwapInfo } from "wallet/src/features/transactions/swap/types";
 import {
   PermitSignatureInfo,
+  UNIVERSAL_ROUTER_ADDRESS,
   usePermit2Signature,
 } from "wallet/src/features/transactions/swap/usePermit2Signature";
 import {
@@ -299,7 +300,7 @@ function useSwapTransactionRequest(
 
     const transactionRequest = {
       from: address,
-      to: "0x57c9C9c9BEd2AA33cf43dF285D173844F7245Ba3",
+      to: UNIVERSAL_ROUTER_ADDRESS,
       gasLimit,
       chainId,
       data: calldata,

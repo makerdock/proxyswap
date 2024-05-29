@@ -33,6 +33,7 @@ import { OpenLimitOrdersButton } from 'components/AccountDrawer/MiniPortfolio/Li
 import { CurrencySearchFilters } from 'components/SearchModal/CurrencySearch'
 import { useAtom } from 'jotai'
 import { LimitExpirySection } from './LimitExpirySection'
+import { UNIVERSAL_ROUTER_ADDRESS } from 'utils/addresses'
 
 const CustomHeightSwapSection = styled(SwapSection)`
   height: unset;
@@ -149,7 +150,7 @@ function LimitForm({ onCurrencyChange }: LimitFormProps) {
 
   const allowance = usePermit2Allowance(
     parsedAmounts.INPUT?.currency?.isNative ? undefined : (parsedAmounts.INPUT as CurrencyAmount<Token>),
-    isSupportedChain(chainId) ? "0x57c9C9c9BEd2AA33cf43dF285D173844F7245Ba3" : undefined,
+    isSupportedChain(chainId) ? UNIVERSAL_ROUTER_ADDRESS : undefined,
     TradeFillType.UniswapX
   )
 

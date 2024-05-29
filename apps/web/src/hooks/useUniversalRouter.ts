@@ -20,6 +20,7 @@ import {
 
 import { ethers } from "ethers";
 import { PermitSignature } from "./usePermitAllowance";
+import { UNIVERSAL_ROUTER_ADDRESS } from "utils/addresses";
 
 /** Thrown when gas estimation fails. This class of error usually requires an emulator to determine the root cause. */
 class GasEstimationError extends Error {
@@ -35,7 +36,7 @@ class GasEstimationError extends Error {
 class ModifiedSwapError extends Error {
   constructor() {
     super(
-      t`Your swap was modified through your wallet. If this was a mistake, please cancel immediately or risk losing your funds.`,
+      t`Your swap was modified through your wallet. If this was a mistake, please cancel immediately or risk losing your funds.`
     );
   }
 }
@@ -51,7 +52,7 @@ interface SwapOptions {
 export function useUniversalRouterSwapCallback(
   trade: ClassicTrade | undefined,
   fiatValues: { amountIn?: number; amountOut?: number; feeUsd?: number },
-  options: SwapOptions,
+  options: SwapOptions
 ) {
   const { account, chainId, provider, connector } = useWeb3React();
   const analyticsContext = useTrace();
@@ -75,7 +76,7 @@ export function useUniversalRouterSwapCallback(
 
           setTraceData(
             "slippageTolerance",
-            options.slippageTolerance.toFixed(2),
+            options.slippageTolerance.toFixed(2)
           );
           console.log(options.slippageTolerance.toFixed(2), "Slippage", trade);
 
@@ -87,12 +88,12 @@ export function useUniversalRouterSwapCallback(
               inputTokenPermit: options.permit,
               fee: options.feeOptions,
               flatFee: options.flatFeeOptions,
-            },
+            }
           );
           debugger;
           const tx = {
             from: account,
-            to: "0x57c9C9c9BEd2AA33cf43dF285D173844F7245Ba3",
+            to: UNIVERSAL_ROUTER_ADDRESS,
             data,
             // TODO(https://github.com/Uniswap/universal-router-sdk/issues/113): universal-router-sdk returns a non-hexlified value.
             ...(value && !isZero(value) ? { value: toHex(value) } : {}),
@@ -131,13 +132,13 @@ export function useUniversalRouterSwapCallback(
             setTraceStatus("cancelled");
             // This error type allows us to distinguish between user rejections and other errors later too.
             throw new UserRejectedRequestError(
-              swapErrorToUserReadableMessage(swapError),
+              swapErrorToUserReadableMessage(swapError)
             );
           }
 
           throw new Error(swapErrorToUserReadableMessage(swapError));
         }
-      },
+      }
     );
   }, [
     account,

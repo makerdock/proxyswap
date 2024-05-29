@@ -63,6 +63,7 @@ import { didUserReject } from 'utils/swapErrorToUserReadableMessage'
 
 import { getIsReviewableQuote } from '.'
 import { OutputTaxTooltipBody } from './TaxTooltipBody'
+import { UNIVERSAL_ROUTER_ADDRESS } from 'utils/addresses'
 
 const SWAP_FORM_CURRENCY_SEARCH_FILTERS = {
   showCommonBases: true,
@@ -317,7 +318,7 @@ export function SwapForm({ disableTokenInputs = false, onCurrencyChange }: SwapF
     (parsedAmounts[Field.INPUT]?.currency.isToken
       ? (parsedAmounts[Field.INPUT] as CurrencyAmount<Token>)
       : undefined),
-    isSupportedChain(chainId) ? "0x57c9C9c9BEd2AA33cf43dF285D173844F7245Ba3" : undefined,
+    isSupportedChain(chainId) ? UNIVERSAL_ROUTER_ADDRESS : undefined,
     trade?.fillType
   )
 

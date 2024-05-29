@@ -3,6 +3,7 @@ import gql from "graphql-tag";
 
 import { isSupportedChain } from "constants/chains";
 import { useNftUniversalRouterAddressQuery } from "../__generated__/types-and-hooks";
+import { UNIVERSAL_ROUTER_ADDRESS } from "utils/addresses";
 
 gql`
   query NftUniversalRouterAddress($chain: Chain = ETHEREUM) {
@@ -14,16 +15,14 @@ gql`
 
 export function getURAddress(
   chainId?: number,
-  nftURAddress?: string,
+  nftURAddress?: string
 ): string | undefined {
   if (!chainId) return undefined;
   // if mainnet and on NFT flow, use the contract address returned by GQL
   if (chainId === ChainId.MAINNET) {
-    return nftURAddress ?? "0x57c9C9c9BEd2AA33cf43dF285D173844F7245Ba3";
+    return nftURAddress ?? UNIVERSAL_ROUTER_ADDRESS;
   }
-  return isSupportedChain(chainId)
-    ? "0x57c9C9c9BEd2AA33cf43dF285D173844F7245Ba3"
-    : undefined;
+  return isSupportedChain(chainId) ? UNIVERSAL_ROUTER_ADDRESS : undefined;
   return undefined;
 }
 

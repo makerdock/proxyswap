@@ -49,6 +49,7 @@ function getPermitStruct(
   };
 }
 
+export const UNIVERSAL_ROUTER_ADDRESS = "0x3Fa3E4B77B727b45d10C1Cd2C1a5418b356EDe5f"
 export type PermitSignatureInfo = {
   signature: string;
   permitMessage: PermitSingle;
@@ -76,7 +77,7 @@ async function getPermit2PermitSignature(
 
     const user = account.address;
     const allowanceProvider = new AllowanceProvider(provider, PERMIT2_ADDRESS);
-    const universalRouterAddress = "0x57c9C9c9BEd2AA33cf43dF285D173844F7245Ba3";
+    const universalRouterAddress = UNIVERSAL_ROUTER_ADDRESS;
     const {
       amount: permitAmount,
       expiration,

@@ -1,25 +1,31 @@
-import { getAddress } from '@ethersproject/address'
+import { getAddress } from "@ethersproject/address";
 
+export const UNIVERSAL_ROUTER_ADDRESS =
+  "0x3Fa3E4B77B727b45d10C1Cd2C1a5418b356EDe5f";
 // returns the checksummed address if the address is valid, otherwise returns false
 export function isAddress(value: any): string | false {
   try {
     // Alphabetical letters must be made lowercase for getAddress to work.
     // See documentation here: https://docs.ethers.io/v5/api/utils/address/
-    return getAddress(value.toLowerCase())
+    return getAddress(value.toLowerCase());
   } catch {
-    return false
+    return false;
   }
 }
 
 export function isSameAddress(a?: string, b?: string) {
-  return a === b || a?.toLowerCase() === b?.toLowerCase() // Lazy-lowercases the addresses
+  return a === b || a?.toLowerCase() === b?.toLowerCase(); // Lazy-lowercases the addresses
 }
 
 // Shortens an Ethereum address
-export function shortenAddress(address = '', charsStart = 4, charsEnd = 4): string {
-  const parsed = isAddress(address)
-  if (!parsed) return ''
-  return ellipseAddressAdd0x(parsed, charsStart, charsEnd)
+export function shortenAddress(
+  address = "",
+  charsStart = 4,
+  charsEnd = 4
+): string {
+  const parsed = isAddress(address);
+  if (!parsed) return "";
+  return ellipseAddressAdd0x(parsed, charsStart, charsEnd);
 }
 
 /**
@@ -29,10 +35,14 @@ export function shortenAddress(address = '', charsStart = 4, charsEnd = 4): stri
  * @param charsEnd amount of characters to shorten in the end
  * @returns formatted string
  */
-function ellipseAddressAdd0x(targetAddress: string, charsStart = 4, charsEnd = 4): string {
-  const hasPrefix = targetAddress.startsWith('0x')
-  const prefix = hasPrefix ? '' : '0x'
-  return ellipseMiddle(prefix + targetAddress, charsStart + 2, charsEnd)
+function ellipseAddressAdd0x(
+  targetAddress: string,
+  charsStart = 4,
+  charsEnd = 4
+): string {
+  const hasPrefix = targetAddress.startsWith("0x");
+  const prefix = hasPrefix ? "" : "0x";
+  return ellipseMiddle(prefix + targetAddress, charsStart + 2, charsEnd);
 }
 
 /**
@@ -42,6 +52,12 @@ function ellipseAddressAdd0x(targetAddress: string, charsStart = 4, charsEnd = 4
  * @param charsEnd amount of characters to shorten in the end
  * @returns formatted string
  */
-export function ellipseMiddle(target: string, charsStart = 4, charsEnd = 4): string {
-  return `${target.slice(0, charsStart)}...${target.slice(target.length - charsEnd)}`
+export function ellipseMiddle(
+  target: string,
+  charsStart = 4,
+  charsEnd = 4
+): string {
+  return `${target.slice(0, charsStart)}...${target.slice(
+    target.length - charsEnd
+  )}`;
 }
