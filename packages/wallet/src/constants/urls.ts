@@ -1,11 +1,11 @@
-import { config } from 'wallet/src/config'
-import { isAndroid } from 'wallet/src/utils/platform'
+import { config } from "wallet/src/config";
+import { isAndroid } from "wallet/src/utils/platform";
 
-export const UNISWAP_APP_HOSTNAME = 'www.proxyswap.tips'
+export const UNISWAP_APP_HOSTNAME = "www.proxyswap.tips";
 
-const TRADING_API_BASE_PATH = '/v2/trade'
+const TRADING_API_BASE_PATH = "/v2/trade";
 
-const helpUrl = 'https://www.proxyswap.tips'
+const helpUrl = "https://v2.proxyswap.tips";
 
 export const uniswapUrls = {
   helpUrl,
@@ -24,16 +24,16 @@ export const uniswapUrls = {
   apiBaseUrl: getUniswapApiBaseUrl(),
   apiBaseExtensionUrl: getExtensionApiBaseUrl(),
   apiBaseUrlCloudflare: getCloudflareApiBaseUrl(),
-  appBaseUrl: 'https://uniswap.org/app',
+  appBaseUrl: "https://uniswap.org/app",
   gasServicePath: getUniswapGasServicePath(),
   routingApiUrl: getUniswapRoutingApiUrl(),
   graphQLUrl: getUniswapGraphQLUrl(),
   trmPath: getUniswapTrmPath(),
   amplitudeProxyUrl: getUniswapAmplitudeProxyUrl(),
   statsigProxyUrl: getUniswapStatsigProxyUrl(),
-  termsOfServiceUrl: 'https://uniswap.org/terms-of-service',
-  privacyPolicyUrl: 'https://uniswap.org/privacy-policy',
-  reportUnitagUrl: 'https://support.uniswap.org/hc/en-us/requests/new',
+  termsOfServiceUrl: "https://uniswap.org/terms-of-service",
+  privacyPolicyUrl: "https://uniswap.org/privacy-policy",
+  reportUnitagUrl: "https://support.uniswap.org/hc/en-us/requests/new",
   appUrl: `https://${UNISWAP_APP_HOSTNAME}`,
   interfaceUrl: `https://${UNISWAP_APP_HOSTNAME}/#/swap`,
   unitagsApiUrl: getUnitagsApiUrl(),
@@ -42,56 +42,56 @@ export const uniswapUrls = {
     approval: getTradingApiApprovalPath(),
     swap: getTradingApiSwapPath(),
   },
-}
+};
 
 function getCloudflareApiBaseUrl(): string {
-  return `https://${isAndroid ? 'android' : 'ios'}.wallet.gateway.uniswap.org`
+  return `https://${isAndroid ? "android" : "ios"}.wallet.gateway.uniswap.org`;
 }
 
 function getUniswapApiBaseUrl(): string {
-  return config.uniswapApiBaseUrl
+  return config.uniswapApiBaseUrl;
 }
 
 function getExtensionApiBaseUrl(): string {
-  return 'https://gateway.uniswap.org/v2'
+  return "https://gateway.uniswap.org/v2";
 }
 
 function getUniswapRoutingApiUrl(): string {
-  return `${config.uniswapApiBaseUrl}/v1`
+  return `${config.uniswapApiBaseUrl}/v1`;
 }
 
 function getUniswapGasServicePath(): string {
-  return '/v1/gas-fee'
+  return "/v1/gas-fee";
 }
 
 function getUniswapGraphQLUrl(): string {
-  return `${config.uniswapApiBaseUrl}/v1/graphql`
+  return `${config.uniswapApiBaseUrl}/v1/graphql`;
 }
 
 function getUniswapTrmPath(): string {
-  return '/v1/screen'
+  return "/v1/screen";
 }
 
 function getUniswapAmplitudeProxyUrl(): string {
-  return `${config.uniswapApiBaseUrl}/v1/amplitude-proxy`
+  return `${config.uniswapApiBaseUrl}/v1/amplitude-proxy`;
 }
 
 function getUniswapStatsigProxyUrl(): string {
-  return `${config.uniswapApiBaseUrl}/v1/statsig-proxy`
+  return `${config.uniswapApiBaseUrl}/v1/statsig-proxy`;
 }
 
 function getUnitagsApiUrl(): string {
-  return config.unitagsApiUrl
+  return config.unitagsApiUrl;
 }
 
 function getTradingApiQuotePath(): string {
-  return `${TRADING_API_BASE_PATH}/quote`
+  return `${TRADING_API_BASE_PATH}/quote`;
 }
 
 function getTradingApiApprovalPath(): string {
-  return `${TRADING_API_BASE_PATH}/check_approval`
+  return `${TRADING_API_BASE_PATH}/check_approval`;
 }
 
 function getTradingApiSwapPath(): string {
-  return `${TRADING_API_BASE_PATH}/swap`
+  return `${TRADING_API_BASE_PATH}/swap`;
 }

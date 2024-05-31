@@ -95,7 +95,7 @@ const ProtocolBanner = () => {
         </DescriptionText>
       </TextContainer>
       <BannerButtonContainer>
-        <BannerButton width="200px" as="a" href="https://www.proxyswap.tips" rel="noopener noreferrer" target="_blank">
+        <BannerButton width="200px" as="a" href="https://v2.proxyswap.tips" rel="noopener noreferrer" target="_blank">
           Learn more
         </BannerButton>
       </BannerButtonContainer>

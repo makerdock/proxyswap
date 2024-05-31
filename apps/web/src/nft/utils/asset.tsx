@@ -76,17 +76,15 @@ export const getMarketplaceIcon = (marketplace: string, size: string | number = 
 }
 
 export const generateTweetForAsset = (asset: GenieAsset): string => {
-  return `https://twitter.com/intent/tweet?text=Check%20out%20${
-    asset.name ? encodeURIComponent(asset.name) : `${asset.collectionName}%20%23${asset.tokenId}`
-  }%20(${asset.collectionName})%20https://www.proxyswap.tips/nfts/asset/${asset.address}/${asset.tokenId}%20via%20@uniswap`
+  return `https://twitter.com/intent/tweet?text=Check%20out%20${asset.name ? encodeURIComponent(asset.name) : `${asset.collectionName}%20%23${asset.tokenId}`
+    }%20(${asset.collectionName})%20https://v2.proxyswap.tips/nfts/asset/${asset.address}/${asset.tokenId}%20via%20@uniswap`
 }
 
 export const generateTweetForPurchase = (assets: UpdatedGenieAsset[], txHashUrl: string): string => {
   const multipleCollections = assets.length > 0 && assets.some((asset) => asset.address !== assets[0].address)
   const collectionUrl = assets.length > 0 && !multipleCollections ? `collection/${assets[0].address}` : ''
-  const tweetText = `I just purchased ${
-    multipleCollections ? `${assets.length} NFTs` : `${assets.length} ${assets[0].collectionName ?? 'NFT'}`
-  } with @Proxyswap \n\nhttps://www.proxyswap.tips/nfts/${collectionUrl}\n${txHashUrl}`
+  const tweetText = `I just purchased ${multipleCollections ? `${assets.length} NFTs` : `${assets.length} ${assets[0].collectionName ?? 'NFT'}`
+    } with @Proxyswap \n\nhttps://v2.proxyswap.tips/nfts/${collectionUrl}\n${txHashUrl}`
   return `https://twitter.com/intent/tweet?text=${encodeURIComponent(tweetText)}`
 }
 
@@ -110,17 +108,15 @@ function mapAssetsToCollections(assets: WalletAsset[]): { collection: string; it
 export const generateTweetForList = (assets: WalletAsset[]): string => {
   const tweetText =
     assets.length == 1
-      ? `I just listed ${
-          assets[0].collection?.twitterUrl
-            ? `${assets[0].collection?.twitterUrl} `
-            : `${assets[0].collection?.name} ` ?? ''
-        }${assets[0].name} for ${getMinListingPrice(assets[0].newListings ?? [])} ETH on ${assets[0].marketplaces
-          ?.map((market) => market.name)
-          .join(', ')}. Buy it on @Proxyswap at https://www.proxyswap.tips/${getAssetHref(assets[0])}`
-      : `I just listed ${
-          assets.length
-        } items on @Proxyswap at https://www.proxyswap.tips/nfts/profile\n\nCollections: ${mapAssetsToCollections(assets)
-          .map(({ collection, items }) => `${collection} ${items.map((item) => item).join(', ')}`)
-          .join(', ')} \n\nMarketplaces: ${assets[0].marketplaces?.map((market) => market.name).join(', ')}`
+      ? `I just listed ${assets[0].collection?.twitterUrl
+        ? `${assets[0].collection?.twitterUrl} `
+        : `${assets[0].collection?.name} ` ?? ''
+      }${assets[0].name} for ${getMinListingPrice(assets[0].newListings ?? [])} ETH on ${assets[0].marketplaces
+        ?.map((market) => market.name)
+        .join(', ')}. Buy it on @Proxyswap at https://v2.proxyswap.tips/${getAssetHref(assets[0])}`
+      : `I just listed ${assets.length
+      } items on @Proxyswap at https://v2.proxyswap.tips/nfts/profile\n\nCollections: ${mapAssetsToCollections(assets)
+        .map(({ collection, items }) => `${collection} ${items.map((item) => item).join(', ')}`)
+        .join(', ')} \n\nMarketplaces: ${assets[0].marketplaces?.map((market) => market.name).join(', ')}`
   return `https://twitter.com/intent/tweet?text=${encodeURIComponent(tweetText)}`
 }

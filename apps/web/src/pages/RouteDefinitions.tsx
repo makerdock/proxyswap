@@ -89,7 +89,7 @@ export interface RouteDefinition {
 function createRouteDefinition(route: Partial<RouteDefinition>): RouteDefinition {
   return {
     getElement: () => null,
-    getTitle: () => 'Proxyswap Interface',
+    getTitle: () => 'Proxyswap',
     enabled: () => true,
     path: '/',
     nestedPaths: [],
