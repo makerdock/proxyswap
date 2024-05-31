@@ -1,10 +1,10 @@
 {
   "background_color": "#2B49A3",
   "display": "standalone",
-  "homepage_url": "https://proxyswap.tips",
+  "homepage_url": "https://v2.proxyswap.tips",
   "providedBy": {
     "name": "Proxyswap",
-    "url": "https://proxyswap.tips"
+    "url": "https://v2.proxyswap.tips"
   },
   "icons": [
     {
