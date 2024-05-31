@@ -41,14 +41,25 @@
     -->
                 <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
 
-                <link rel="preconnect" href="https://proxyswap.onrender.com" crossorigin />
-                <link rel="preconnect" href="https://mainnet.infura.io/" crossorigin />
+                <link rel="preconnect" href="https://proxy-airstack-subgraph-api.vercel.app/api/subgraph" crossorigin />
+                <!-- <link rel="preconnect" href="https://mainnet.infura.io/" crossorigin /> -->
 
                 <link rel="preload" href="%PUBLIC_URL%/fonts/Basel-Grotesk-Book.woff2" as="font" type="font/woff2"
                   crossorigin />
                 <link rel="preload" href="%PUBLIC_URL%/fonts/Basel-Grotesk-Medium.woff2" as="font" type="font/woff2"
                   crossorigin />
 
+                <meta property="og:title" content="Proxyswap" data-rh="true">
+                <meta property="og:url" content="https://v2.proxyswap.tips" data-rh="true">
+                <meta property="twitter:title" content="Proxyswap" data-rh="true">
+                <meta property="og:description" content="Swap or provide liquidity for DEGEN L3" data-rh="true">
+                <meta name="description" content="Swap or provide liquidity for DEGEN L3" data-rh="true">
+                <meta property="og:image"
+                  content="https://v2.proxyswap.tips/images/1200x630_Rich_Link_Preview_Image.png" data-rh="true">
+                <meta property="og:image:alt" content="Proxyswap" data-rh="true">
+                <meta property="twitter:image"
+                  content="https://v2.proxyswap.tips/images/1200x630_Rich_Link_Preview_Image.png" data-rh="true">
+                <meta property="twitter:image:alt" content="Proxyswap" data-rh="true">
                 <!-- Include <link rel="preload"> for js assets so that they are loaded with high priority. -->
                 <%= htmlWebpackPlugin.files.js.map((href)=> `
                   <link rel="preload" href="${href}" as="script" />`).join('\n ') %>
