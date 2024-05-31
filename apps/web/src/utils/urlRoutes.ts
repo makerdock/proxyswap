@@ -27,6 +27,10 @@ export function getCurrentPageFromLocation(locationPathname: string): InterfaceP
       return InterfacePageName.NFT_COLLECTION_PAGE
     case locationPathname.startsWith('/nfts'):
       return InterfacePageName.NFT_EXPLORE_PAGE
+    case locationPathname.startsWith('/launch'):
+      return InterfacePageName.LAUNCH_PAGE
+      case locationPathname.startsWith('/claim'):
+        return InterfacePageName.CLAIM_PAGE
     default:
       return undefined
   }

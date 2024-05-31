@@ -1,43 +1,61 @@
-import { t } from '@lingui/macro'
-import { useInfoExplorePageEnabled } from 'featureFlags/flags/infoExplore'
-import { useInfoPoolPageEnabled } from 'featureFlags/flags/infoPoolPage'
-import { useAtom } from 'jotai'
-import { lazy, ReactNode, Suspense, useMemo } from 'react'
-import { matchPath, Navigate, useLocation } from 'react-router-dom'
-import { shouldDisableNFTRoutesAtom } from 'state/application/atoms'
-import { SpinnerSVG } from 'theme/components'
-import { isBrowserRouterEnabled } from 'utils/env'
+import { t } from "@lingui/macro";
+import { useInfoExplorePageEnabled } from "featureFlags/flags/infoExplore";
+import { useInfoPoolPageEnabled } from "featureFlags/flags/infoPoolPage";
+import { useAtom } from "jotai";
+import { lazy, ReactNode, Suspense, useMemo } from "react";
+import { matchPath, Navigate, useLocation } from "react-router-dom";
+import { shouldDisableNFTRoutesAtom } from "state/application/atoms";
+import { SpinnerSVG } from "theme/components";
+import { isBrowserRouterEnabled } from "utils/env";
 
-import { getDefaultTokensTitle } from './getDefaultTokensTitle'
-import { getExploreTitle } from './getExploreTitle'
+import { getDefaultTokensTitle } from "./getDefaultTokensTitle";
+import { getExploreTitle } from "./getExploreTitle";
 // High-traffic pages (index and /swap) should not be lazy-loaded.
-import Swap from './Swap'
+import Swap from "./Swap";
 
-const NftExplore = lazy(() => import('nft/pages/explore'))
-const Collection = lazy(() => import('nft/pages/collection'))
-const Profile = lazy(() => import('nft/pages/profile'))
-const Asset = lazy(() => import('nft/pages/asset/Asset'))
-const Explore = lazy(() => import('pages/Explore'))
-const AddLiquidityWithTokenRedirects = lazy(() => import('pages/AddLiquidity/redirects'))
-const AddLiquidityV2WithTokenRedirects = lazy(() => import('pages/AddLiquidityV2/redirects'))
-const RedirectExplore = lazy(() => import('pages/Explore/redirects'))
-const MigrateV2 = lazy(() => import('pages/MigrateV2'))
-const MigrateV2Pair = lazy(() => import('pages/MigrateV2/MigrateV2Pair'))
-const NotFound = lazy(() => import('pages/NotFound'))
-const Pool = lazy(() => import('pages/Pool'))
-const PositionPage = lazy(() => import('pages/Pool/PositionPage'))
-const PoolV2 = lazy(() => import('pages/Pool/v2'))
-const PoolDetails = lazy(() => import('pages/PoolDetails'))
-const PoolFinder = lazy(() => import('pages/PoolFinder'))
-const RemoveLiquidity = lazy(() => import('pages/RemoveLiquidity'))
-const RemoveLiquidityV3 = lazy(() => import('pages/RemoveLiquidity/V3'))
-const TokenDetails = lazy(() => import('pages/TokenDetails'))
-const Vote = lazy(() => import('pages/Vote'))
+const NftExplore = lazy(() => import("nft/pages/explore"));
+const Collection = lazy(() => import("nft/pages/collection"));
+const Profile = lazy(() => import("nft/pages/profile"));
+const Asset = lazy(() => import("nft/pages/asset/Asset"));
+const Explore = lazy(() => import("pages/Explore"));
+const AddLiquidityWithTokenRedirects = lazy(
+  () => import("pages/AddLiquidity/redirects"),
+);
+const AddLiquidityV2WithTokenRedirects = lazy(
+  () => import("pages/AddLiquidityV2/redirects"),
+);
+const RedirectExplore = lazy(() => import("pages/Explore/redirects"));
+const MigrateV2 = lazy(() => import("pages/MigrateV2"));
+const MigrateV2Pair = lazy(() => import("pages/MigrateV2/MigrateV2Pair"));
+const NotFound = lazy(() => import("pages/NotFound"));
+const Pool = lazy(() => import("pages/Pool"));
+const PositionPage = lazy(() => import("pages/Pool/PositionPage"));
+const PoolV2 = lazy(() => import("pages/Pool/v2"));
+const PoolDetails = lazy(() => import("pages/PoolDetails"));
+const PoolFinder = lazy(() => import("pages/PoolFinder"));
+const RemoveLiquidity = lazy(() => import("pages/RemoveLiquidity"));
+const RemoveLiquidityV3 = lazy(() => import("pages/RemoveLiquidity/V3"));
+const TokenDetails = lazy(() => import("pages/TokenDetails"));
+const Launch = lazy(() => import("pages/Launch"));
+const Claim = lazy(() => import("pages/Claim"));
+const Step1Page = lazy(() => import("pages/Launch/Step1"));
+const Step2Page = lazy(() => import("pages/Launch/Step2"));
+const Step3Page = lazy(() => import("pages/Launch/Step3"));
+const ConfirmationPage = lazy(() => import("pages/Launch/Confirmation"));
+const SuccessPage = lazy(() => import("pages/Launch/Success"));
+
+const Vote = lazy(() => import("pages/Vote"));
 
 // this is the same svg defined in assets/images/blue-loader.svg
 // it is defined here because the remote asset may not have had time to load when this file is executing
 const LazyLoadSpinner = () => (
-  <SpinnerSVG width="94" height="94" viewBox="0 0 94 94" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <SpinnerSVG
+    width="94"
+    height="94"
+    viewBox="0 0 94 94"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
     <path
       d="M92 47C92 22.1472 71.8528 2 47 2C22.1472 2 2 22.1472 2 47C2 71.8528 22.1472 92 47 92"
       stroke="#2172E5"
@@ -46,25 +64,25 @@ const LazyLoadSpinner = () => (
       strokeLinejoin="round"
     />
   </SpinnerSVG>
-)
+);
 
 interface RouterConfig {
-  browserRouterEnabled?: boolean
-  hash?: string
-  infoExplorePageEnabled?: boolean
-  infoPoolPageEnabled?: boolean
-  shouldDisableNFTRoutes?: boolean
+  browserRouterEnabled?: boolean;
+  hash?: string;
+  infoExplorePageEnabled?: boolean;
+  infoPoolPageEnabled?: boolean;
+  shouldDisableNFTRoutes?: boolean;
 }
 
 /**
  * Convenience hook which organizes the router configuration into a single object.
  */
 export function useRouterConfig(): RouterConfig {
-  const browserRouterEnabled = isBrowserRouterEnabled()
-  const { hash } = useLocation()
-  const infoPoolPageEnabled = useInfoPoolPageEnabled()
-  const infoExplorePageEnabled = useInfoExplorePageEnabled()
-  const [shouldDisableNFTRoutes] = useAtom(shouldDisableNFTRoutesAtom)
+  const browserRouterEnabled = isBrowserRouterEnabled();
+  const { hash } = useLocation();
+  const infoPoolPageEnabled = useInfoPoolPageEnabled();
+  const infoExplorePageEnabled = useInfoExplorePageEnabled();
+  const [shouldDisableNFTRoutes] = useAtom(shouldDisableNFTRoutesAtom);
   return useMemo(
     () => ({
       browserRouterEnabled,
@@ -73,80 +91,142 @@ export function useRouterConfig(): RouterConfig {
       infoPoolPageEnabled,
       shouldDisableNFTRoutes: Boolean(shouldDisableNFTRoutes),
     }),
-    [browserRouterEnabled, hash, infoExplorePageEnabled, infoPoolPageEnabled, shouldDisableNFTRoutes]
-  )
+    [
+      browserRouterEnabled,
+      hash,
+      infoExplorePageEnabled,
+      infoPoolPageEnabled,
+      shouldDisableNFTRoutes,
+    ],
+  );
 }
 
 export interface RouteDefinition {
-  path: string
-  nestedPaths: string[]
-  getTitle: (path?: string) => string
-  enabled: (args: RouterConfig) => boolean
-  getElement: (args: RouterConfig) => ReactNode
+  path: string;
+  nestedPaths: string[];
+  getTitle: (path?: string) => string;
+  enabled: (args: RouterConfig) => boolean;
+  getElement: (args: RouterConfig) => ReactNode;
 }
 
 // Assigns the defaults to the route definition.
-function createRouteDefinition(route: Partial<RouteDefinition>): RouteDefinition {
+function createRouteDefinition(
+  route: Partial<RouteDefinition>,
+): RouteDefinition {
   return {
     getElement: () => null,
-    getTitle: () => 'Proxyswap',
+    getTitle: () => "Proxyswap",
     enabled: () => true,
-    path: '/',
+    path: "/",
     nestedPaths: [],
     // overwrite the defaults
     ...route,
-  }
+  };
 }
 
 export const routes: RouteDefinition[] = [
   createRouteDefinition({
-    path: '/',
-    getTitle: () => t`ProxySwap - Swap or provide liquidity on the Proxyswap Protocol`,
+    path: "/",
+    getTitle: () =>
+      t`ProxySwap - Swap or provide liquidity on the Proxyswap Protocol`,
     getElement: () => <Swap />,
   }),
   createRouteDefinition({
-    path: '/explore',
+    path: "/explore",
     getTitle: getExploreTitle,
-    nestedPaths: [':tab', ':chainName', ':tab/:chainName'],
+    nestedPaths: [":tab", ":chainName", ":tab/:chainName"],
     getElement: () => <RedirectExplore />,
     enabled: (args) => Boolean(args.infoExplorePageEnabled),
   }),
   createRouteDefinition({
-    path: '/explore/tokens/:chainName/:tokenAddress',
-    getTitle: () => t`ProxySwap - Swap or provide liquidity on the Proxyswap Protocol`,
+    path: "/explore/tokens/:chainName/:tokenAddress",
+    getTitle: () =>
+      t`ProxySwap - Swap or provide liquidity on the Proxyswap Protocol`,
     getElement: () => <TokenDetails />,
     enabled: (args) => Boolean(args.infoExplorePageEnabled),
   }),
   createRouteDefinition({
-    path: '/tokens',
+    path: "/tokens",
     getTitle: getDefaultTokensTitle,
     getElement: (args) => {
-      return args.infoExplorePageEnabled ? <Navigate to="/explore/tokens" replace /> : <Explore />
+      return args.infoExplorePageEnabled ? (
+        <Navigate to="/explore/tokens" replace />
+      ) : (
+        <Explore />
+      );
     },
   }),
   createRouteDefinition({
-    path: '/tokens/:chainName',
+    path: "/tokens/:chainName",
     getTitle: getDefaultTokensTitle,
     getElement: (args) => {
-      return args.infoExplorePageEnabled ? <RedirectExplore /> : <Explore />
+      return args.infoExplorePageEnabled ? <RedirectExplore /> : <Explore />;
     },
   }),
   createRouteDefinition({
-    path: '/tokens/:chainName/:tokenAddress',
+    path: "/tokens/:chainName/:tokenAddress",
     getTitle: getDefaultTokensTitle,
     getElement: (args) => {
-      return args.infoExplorePageEnabled ? <RedirectExplore /> : <TokenDetails />
+      return args.infoExplorePageEnabled ? (
+        <RedirectExplore />
+      ) : (
+        <TokenDetails />
+      );
     },
   }),
   createRouteDefinition({
-    path: '/explore/pools/:chainName/:poolAddress',
-    getTitle: () => t`ProxySwap - Swap or provide liquidity on the Proxyswap Protocol`,
+    path: "/launch",
+    getTitle: () =>
+      t`Proxyswap | Trade crypto & NFTs safely on the top DeFi exchange`,
+    getElement: () => <Launch />,
+  }),
+  createRouteDefinition({
+    path: "/launch/step1",
+    getTitle: () =>
+      t`Proxyswap | Trade crypto & NFTs safely on the top DeFi exchange`,
+    getElement: () => <Step1Page />,
+  }),
+  createRouteDefinition({
+    path: "/launch/step2",
+    getTitle: () =>
+      t`Proxyswap | Trade crypto & NFTs safely on the top DeFi exchange`,
+    getElement: () => <Step2Page />,
+  }),
+  createRouteDefinition({
+    path: "/launch/step3",
+    getTitle: () =>
+      t`Proxyswap | Trade crypto & NFTs safely on the top DeFi exchange`,
+    getElement: () => <Step3Page />,
+  }),
+  createRouteDefinition({
+    path: "/launch/confirmation",
+    getTitle: () =>
+      t`Proxyswap | Trade crypto & NFTs safely on the top DeFi exchange`,
+    getElement: () => <ConfirmationPage />,
+  }),
+  createRouteDefinition({
+    path: "/launch/success",
+    getTitle: () =>
+      t`Proxyswap | Trade crypto & NFTs safely on the top DeFi exchange`,
+    getElement: () => <SuccessPage />,
+  }),
+  createRouteDefinition({
+    path: "/claim",
+    getTitle: () =>
+      t`Proxyswap | Trade crypto & NFTs safely on the top DeFi exchange`,
+    getElement: () => <Claim />,
+  }),
+  createRouteDefinition({
+    path: "/explore/pools/:chainName/:poolAddress",
+    getTitle: () =>
+      t`ProxySwap - Swap or provide liquidity on the Proxyswap Protocol`,
     getElement: () => (
       <Suspense fallback={null}>
         <PoolDetails />
       </Suspense>
     ),
-    enabled: (args) => Boolean(args.infoExplorePageEnabled && args.infoPoolPageEnabled),
+    enabled: (args) =>
+      Boolean(args.infoExplorePageEnabled && args.infoPoolPageEnabled),
   }),
   // createRouteDefinition({
   //   path: '/vote/*',
@@ -167,150 +247,174 @@ export const routes: RouteDefinition[] = [
   //   getElement: () => <Navigate to={{ ...location, pathname: '/swap' }} replace />,
   // }),
   createRouteDefinition({
-    path: '/swap',
+    path: "/swap",
     getElement: () => <Swap />,
-    getTitle: () => t`ProxySwap - Swap or provide liquidity on the Proxyswap Protocol`,
+    getTitle: () =>
+      t`ProxySwap - Swap or provide liquidity on the Proxyswap Protocol`,
   }),
   createRouteDefinition({
-    path: '/pool/v2/find',
+    path: "/pool/v2/find",
     getElement: () => <PoolFinder />,
-    getTitle: () => t`ProxySwap - Swap or provide liquidity on the Proxyswap Protocol`,
+    getTitle: () =>
+      t`ProxySwap - Swap or provide liquidity on the Proxyswap Protocol`,
   }),
   createRouteDefinition({
-    path: '/pool/v2',
+    path: "/pool/v2",
     getElement: () => <PoolV2 />,
-    getTitle: () => t`ProxySwap - Swap or provide liquidity on the Proxyswap Protocol`,
+    getTitle: () =>
+      t`ProxySwap - Swap or provide liquidity on the Proxyswap Protocol`,
   }),
-  createRouteDefinition({ path: '/pool', getElement: () => <Pool /> }),
+  createRouteDefinition({ path: "/pool", getElement: () => <Pool /> }),
   createRouteDefinition({
-    path: '/pool/:tokenId',
+    path: "/pool/:tokenId",
     getElement: () => <PositionPage />,
-    getTitle: () => t`ProxySwap - Swap or provide liquidity on the Proxyswap Protocol`,
+    getTitle: () =>
+      t`ProxySwap - Swap or provide liquidity on the Proxyswap Protocol`,
   }),
   createRouteDefinition({
-    path: '/pools/v2/find',
+    path: "/pools/v2/find",
     getElement: () => <PoolFinder />,
-    getTitle: () => t`ProxySwap - Swap or provide liquidity on the Proxyswap Protocol`,
+    getTitle: () =>
+      t`ProxySwap - Swap or provide liquidity on the Proxyswap Protocol`,
   }),
   createRouteDefinition({
-    path: '/pools/v2',
+    path: "/pools/v2",
     getElement: () => <PoolV2 />,
-    getTitle: () => t`ProxySwap - Swap or provide liquidity on the Proxyswap Protocol`,
+    getTitle: () =>
+      t`ProxySwap - Swap or provide liquidity on the Proxyswap Protocol`,
   }),
   createRouteDefinition({
-    path: '/pools',
+    path: "/pools",
     getElement: () => <Pool />,
-    getTitle: () => t`ProxySwap - Swap or provide liquidity on the Proxyswap Protocol`,
+    getTitle: () =>
+      t`ProxySwap - Swap or provide liquidity on the Proxyswap Protocol`,
   }),
   createRouteDefinition({
-    path: '/pools/:tokenId',
+    path: "/pools/:tokenId",
     getElement: () => <PositionPage />,
-    getTitle: () => t`ProxySwap - Swap or provide liquidity on the Proxyswap Protocol`,
+    getTitle: () =>
+      t`ProxySwap - Swap or provide liquidity on the Proxyswap Protocol`,
   }),
   createRouteDefinition({
-    path: '/add/v2',
-    nestedPaths: [':currencyIdA', ':currencyIdA/:currencyIdB'],
+    path: "/add/v2",
+    nestedPaths: [":currencyIdA", ":currencyIdA/:currencyIdB"],
     getElement: () => <AddLiquidityV2WithTokenRedirects />,
-    getTitle: () => t`ProxySwap - Swap or provide liquidity on the Proxyswap Protocol`,
+    getTitle: () =>
+      t`ProxySwap - Swap or provide liquidity on the Proxyswap Protocol`,
   }),
   createRouteDefinition({
-    path: '/add',
+    path: "/add",
     nestedPaths: [
-      ':currencyIdA',
-      ':currencyIdA/:currencyIdB',
-      ':currencyIdA/:currencyIdB/:feeAmount',
-      ':currencyIdA/:currencyIdB/:feeAmount/:tokenId',
+      ":currencyIdA",
+      ":currencyIdA/:currencyIdB",
+      ":currencyIdA/:currencyIdB/:feeAmount",
+      ":currencyIdA/:currencyIdB/:feeAmount/:tokenId",
     ],
     getElement: () => <AddLiquidityWithTokenRedirects />,
-    getTitle: () => t`ProxySwap - Swap or provide liquidity on the Proxyswap Protocol`,
+    getTitle: () =>
+      t`ProxySwap - Swap or provide liquidity on the Proxyswap Protocol`,
   }),
   createRouteDefinition({
-    path: '/remove/v2/:currencyIdA/:currencyIdB',
+    path: "/remove/v2/:currencyIdA/:currencyIdB",
     getElement: () => <RemoveLiquidity />,
-    getTitle: () => t`ProxySwap - Swap or provide liquidity on the Proxyswap Protocol`,
+    getTitle: () =>
+      t`ProxySwap - Swap or provide liquidity on the Proxyswap Protocol`,
   }),
   createRouteDefinition({
-    path: '/remove/:tokenId',
+    path: "/remove/:tokenId",
     getElement: () => <RemoveLiquidityV3 />,
-    getTitle: () => t`ProxySwap - Swap or provide liquidity on the Proxyswap Protocol`,
+    getTitle: () =>
+      t`ProxySwap - Swap or provide liquidity on the Proxyswap Protocol`,
   }),
   createRouteDefinition({
-    path: '/migrate/v2',
+    path: "/migrate/v2",
     getElement: () => <MigrateV2 />,
-    getTitle: () => t`ProxySwap - Swap or provide liquidity on the Proxyswap Protocol`,
+    getTitle: () =>
+      t`ProxySwap - Swap or provide liquidity on the Proxyswap Protocol`,
   }),
   createRouteDefinition({
-    path: '/migrate/v2/:address',
+    path: "/migrate/v2/:address",
     getElement: () => <MigrateV2Pair />,
-    getTitle: () => t`ProxySwap - Swap or provide liquidity on the Proxyswap Protocol`,
+    getTitle: () =>
+      t`ProxySwap - Swap or provide liquidity on the Proxyswap Protocol`,
   }),
   createRouteDefinition({
-    path: '/nfts',
+    path: "/nfts",
     getElement: () => (
       <Suspense fallback={null}>
         <NftExplore />
       </Suspense>
     ),
     enabled: (args) => !args.shouldDisableNFTRoutes,
-    getTitle: () => t`ProxySwap - Swap or provide liquidity on the Proxyswap Protocol`,
+    getTitle: () =>
+      t`ProxySwap - Swap or provide liquidity on the Proxyswap Protocol`,
   }),
   createRouteDefinition({
-    path: '/nfts/asset/:contractAddress/:tokenId',
+    path: "/nfts/asset/:contractAddress/:tokenId",
     getElement: () => (
       <Suspense fallback={null}>
         <Asset />
       </Suspense>
     ),
     enabled: (args) => !args.shouldDisableNFTRoutes,
-    getTitle: () => t`ProxySwap - Swap or provide liquidity on the Proxyswap Protocol`,
+    getTitle: () =>
+      t`ProxySwap - Swap or provide liquidity on the Proxyswap Protocol`,
   }),
   createRouteDefinition({
-    path: '/nfts/profile',
+    path: "/nfts/profile",
     getElement: () => (
       <Suspense fallback={null}>
         <Profile />
       </Suspense>
     ),
     enabled: (args) => !args.shouldDisableNFTRoutes,
-    getTitle: () => t`ProxySwap - Swap or provide liquidity on the Proxyswap Protocol`,
+    getTitle: () =>
+      t`ProxySwap - Swap or provide liquidity on the Proxyswap Protocol`,
   }),
   createRouteDefinition({
-    path: '/nfts/collection/:contractAddress',
+    path: "/nfts/collection/:contractAddress",
     getElement: () => (
       <Suspense fallback={null}>
         <Collection />
       </Suspense>
     ),
     enabled: (args) => !args.shouldDisableNFTRoutes,
-    getTitle: () => t`ProxySwap - Swap or provide liquidity on the Proxyswap Protocol`,
+    getTitle: () =>
+      t`ProxySwap - Swap or provide liquidity on the Proxyswap Protocol`,
   }),
   createRouteDefinition({
-    path: '/nfts/collection/:contractAddress/activity',
+    path: "/nfts/collection/:contractAddress/activity",
     getElement: () => (
       <Suspense fallback={null}>
         <Collection />
       </Suspense>
     ),
     enabled: (args) => !args.shouldDisableNFTRoutes,
-    getTitle: () => t`ProxySwap - Swap or provide liquidity on the Proxyswap Protocol`,
+    getTitle: () =>
+      t`ProxySwap - Swap or provide liquidity on the Proxyswap Protocol`,
   }),
-  createRouteDefinition({ path: '*', getElement: () => <Navigate to="/not-found" replace /> }),
-  createRouteDefinition({ path: '/not-found', getElement: () => <NotFound /> }),
-]
+  createRouteDefinition({
+    path: "*",
+    getElement: () => <Navigate to="/not-found" replace />,
+  }),
+  createRouteDefinition({ path: "/not-found", getElement: () => <NotFound /> }),
+];
 
 export const findRouteByPath = (pathname: string) => {
   for (const route of routes) {
-    const match = matchPath(route.path, pathname)
+    const match = matchPath(route.path, pathname);
     if (match) {
-      return route
+      return route;
     }
-    const subPaths = route.nestedPaths.map((nestedPath) => `${route.path}/${nestedPath}`)
+    const subPaths = route.nestedPaths.map(
+      (nestedPath) => `${route.path}/${nestedPath}`,
+    );
     for (const subPath of subPaths) {
-      const match = matchPath(subPath, pathname)
+      const match = matchPath(subPath, pathname);
       if (match) {
-        return route
+        return route;
       }
     }
   }
-  return undefined
-}
+  return undefined;
+};
