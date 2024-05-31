@@ -1,6 +1,5 @@
 /* eslint-disable import/no-unused-modules */
 import { paths } from "../src/pages/paths";
-import { MetaTagInjector } from "./components/metaTagInjector";
 
 function doesMatchPath(path: string): boolean {
   const regexPaths = paths.map(
@@ -22,10 +21,7 @@ export const onRequest: PagesFunction = async ({ request, next }) => {
   };
   const res = next();
   try {
-    const content = new HTMLRewriter()
-      .on("head", new MetaTagInjector(data, request))
-      .transform(await res).body;
-    return new Response(content, {
+    return new Response(null, {
       status:
         doesMatchPath(requestURL.pathname) || requestURL.pathname.includes(".")
           ? 200
