@@ -118,7 +118,7 @@ export default function Confirmation() {
     }, 0);
 
   const signer = provider?.getSigner();
-  const contractAddress = "0x6f245169ec4980828A9612292be92469e19B81f1";
+  const contractAddress = "0x9FD46C80C890D579d08d2434aC44aF3D6B497c16";
   const maxSupply = BigInt(
     Math.floor(parseFloat(tokenQuantity) * 10 ** 6),
   ).toString();
@@ -179,16 +179,11 @@ export default function Confirmation() {
       );
 
       const tx = await tokenCreatorContract.deploy(
-        uniswapRouterAddress,
         tokenName,
         tickerName,
         maxSupply,
-        liquidityTokenAmount,
         totalDistributionAmountString,
         rootHash,
-        {
-          value: parseEther(degenAmount),
-        },
       );
 
       const token = await tx.wait();
