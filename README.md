@@ -35,6 +35,10 @@ To run the ProxySwap frontend locally, follow these steps:
 
 6. Open your browser and visit `http://localhost:3000` to access the ProxySwap frontend.
 
+## License
+
+ProxySwap is in compliance with the Uniswap v3 Business Source License. The Uniswap v3 Core software is licensed under the Business Source License 1.1 and the Uniswap v3 Periphery software is licensed under GPL 2.0, as per the original Uniswap v3 protocol
+
 ## Contributing
 
 We welcome contributions from the community to enhance ProxySwap. To contribute, please follow these steps:
