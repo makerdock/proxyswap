@@ -1,11 +1,13 @@
 import { Trans } from "@lingui/macro";
 import { ButtonPrimary } from "components/Button";
 import { useCSVData } from "hooks/useCSVData";
+import { useCallback, useState } from "react";
 import { ArrowLeft, Upload } from "react-feather";
+import { useDispatch } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
+import { Field, typeInput, typeStartPriceInput } from "state/mint/v3/actions";
 import styled from "styled-components";
 import { Separator, ThemedText } from "theme/components";
-import { useState, useCallback } from "react";
 
 const StyledHeader = styled.div`
   position: relative;
@@ -163,6 +165,7 @@ export default function Step3() {
     setCSVData,
   } = useCSVData(initialCSVData);
 
+  const dispatch = useDispatch()
   const [isDragOver, setIsDragOver] = useState(false);
 
   const tokenName = queryParams.get("tokenName") || "";
@@ -366,25 +369,29 @@ export default function Step3() {
         to={
           !csvData
             ? `/launch/confirmation?tokenName=${encodeURIComponent(tokenName)}&tickerName=${encodeURIComponent(
+              tickerName,
+            )}&tokenLogo=${tokenLogo}&tokenQuantity=${encodeURIComponent(
+              tokenQuantity,
+            )}&tokenSupply=${encodeURIComponent(tokenSupply)}&degenAmount=${encodeURIComponent(
+              degenAmount,
+            )}&initialTokenPrice=${initialTokenPrice}`
+            : !disableButton
+              ? `/launch/confirmation?tokenName=${encodeURIComponent(tokenName)}&tickerName=${encodeURIComponent(
                 tickerName,
               )}&tokenLogo=${tokenLogo}&tokenQuantity=${encodeURIComponent(
                 tokenQuantity,
               )}&tokenSupply=${encodeURIComponent(tokenSupply)}&degenAmount=${encodeURIComponent(
                 degenAmount,
-              )}&initialTokenPrice=${initialTokenPrice}`
-            : !disableButton
-              ? `/launch/confirmation?tokenName=${encodeURIComponent(tokenName)}&tickerName=${encodeURIComponent(
-                  tickerName,
-                )}&tokenLogo=${tokenLogo}&tokenQuantity=${encodeURIComponent(
-                  tokenQuantity,
-                )}&tokenSupply=${encodeURIComponent(tokenSupply)}&degenAmount=${encodeURIComponent(
-                  degenAmount,
-                )}&initialTokenPrice=${initialTokenPrice}&csvData=${encodeURIComponent(
-                  editedCSVData?.map((row) => row.join(",")).join("\n") || "",
-                )}`
+              )}&initialTokenPrice=${initialTokenPrice}&csvData=${encodeURIComponent(
+                editedCSVData?.map((row) => row.join(",")).join("\n") || "",
+              )}`
               : ""
         }
         onClick={(e) => {
+          // Note this is for setting the initial value of CURRENCY_A
+          dispatch(typeStartPriceInput({ typedValue: "0.1" }))
+          // Note this is for initializing the pool for the first time when there is no liquidity
+          dispatch(typeInput({ typedValue: "0.001", field: Field.CURRENCY_A, noLiquidity: true }))
           if (disableButton) {
             e.preventDefault();
           }

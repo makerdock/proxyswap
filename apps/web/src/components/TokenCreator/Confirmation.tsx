@@ -1,16 +1,17 @@
 import { Contract } from "@ethersproject/contracts";
 import { Trans } from "@lingui/macro";
 import { useWeb3React } from "@web3-react/core";
-import TOKEN_CREATOR_ABI from "wallet/src/abis/token-creator.json";
 import { ButtonPrimary } from "components/Button";
-import { defaultAbiCoder, parseEther } from "ethers/lib/utils";
+import Loader from "components/Icons/LoadingSpinner";
+import { defaultAbiCoder } from "ethers/lib/utils";
+import { useBalanceAndRate } from "hooks/useBalanceandRate";
+import useCreateLiquidityPool, { liquidityPoolConfig } from "hooks/useCreateLiquidityPool";
 import { useState } from "react";
 import { ArrowLeft } from "react-feather";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { Separator, ThemedText } from "theme/components";
-import Loader from "components/Icons/LoadingSpinner";
-import { useBalanceAndRate } from "hooks/useBalanceandRate";
+import TOKEN_CREATOR_ABI from "wallet/src/abis/token-creator.json";
 import {
   TokenHolderData,
   createMerkleRoot,
@@ -89,6 +90,14 @@ const formatNumberWithAbbreviation = (number: number) => {
 };
 
 export default function Confirmation() {
+  // @TODO need to pass DEGEN ADDRESS as TokenB and the creatortoken as TokenB
+  const { onAdd } = useCreateLiquidityPool({
+    currencyIdA: liquidityPoolConfig.currencyIdA,
+    currencyIdB: liquidityPoolConfig.currencyIdB,
+    feeAmountFromUrl: liquidityPoolConfig.feeAmountFromUrl,
+    maxPrice: liquidityPoolConfig.maxPrice,
+    minPrice: liquidityPoolConfig.minPrice
+  })
   const { provider, account } = useWeb3React();
   const navigate = useNavigate();
   const location = useLocation();
@@ -163,6 +172,7 @@ export default function Confirmation() {
         "0x0000000000000000000000000000000000000000000000000000000000000000";
       let proofs: Record<string, any> = {};
 
+      await onAdd()
       if (!!distribution.length) {
         const { hash } = await createMerkleRoot(distribution);
         rootHash = hash;
