@@ -5,7 +5,9 @@ import { ButtonPrimary } from "components/Button";
 import Loader from "components/Icons/LoadingSpinner";
 import { defaultAbiCoder } from "ethers/lib/utils";
 import { useBalanceAndRate } from "hooks/useBalanceandRate";
-import useCreateLiquidityPool, { liquidityPoolConfig } from "hooks/useCreateLiquidityPool";
+import useCreateLiquidityPool, {
+  liquidityPoolConfig,
+} from "hooks/useCreateLiquidityPool";
 import { useState } from "react";
 import { ArrowLeft } from "react-feather";
 import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -90,14 +92,17 @@ const formatNumberWithAbbreviation = (number: number) => {
 };
 
 export default function Confirmation() {
+  const [tokenAddress, setTokenAddress] = useState(
+    "0xE81d59eC4C4b309748059D2DF4980F27a06d876D",
+  );
   // @TODO need to pass DEGEN ADDRESS as TokenB and the creatortoken as TokenB
   const { onAdd } = useCreateLiquidityPool({
-    currencyIdA: liquidityPoolConfig.currencyIdA,
-    currencyIdB: liquidityPoolConfig.currencyIdB,
+    currencyIdA: "0x4ed4E862860beD51a9570b96d89aF5E1B0Efefed",
+    currencyIdB: tokenAddress,
     feeAmountFromUrl: liquidityPoolConfig.feeAmountFromUrl,
     maxPrice: liquidityPoolConfig.maxPrice,
-    minPrice: liquidityPoolConfig.minPrice
-  })
+    minPrice: liquidityPoolConfig.minPrice,
+  });
   const { provider, account } = useWeb3React();
   const navigate = useNavigate();
   const location = useLocation();
@@ -172,7 +177,8 @@ export default function Confirmation() {
         "0x0000000000000000000000000000000000000000000000000000000000000000";
       let proofs: Record<string, any> = {};
 
-      await onAdd()
+      await onAdd();
+
       if (!!distribution.length) {
         const { hash } = await createMerkleRoot(distribution);
         rootHash = hash;
@@ -205,7 +211,7 @@ export default function Confirmation() {
         ["address"],
         tokenAddressWithZeros,
       );
-
+      setTokenAddress(String(tokenAddress));
       const tokenData = {
         address: String(tokenAddress),
         createdBy: account,

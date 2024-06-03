@@ -144,6 +144,7 @@ function useCreateLiquidityPool({ currencyIdA, currencyIdB, feeAmountFromUrl, ma
         if (showApprovalB) {
             await approveBCallback()
         }
+        debugger
         if (position && account && deadline) {
             const useNative = baseCurrency.isNative ? baseCurrency : quoteCurrency.isNative ? quoteCurrency : undefined
             const { calldata, value } =
@@ -226,6 +227,7 @@ function useCreateLiquidityPool({ currencyIdA, currencyIdB, feeAmountFromUrl, ma
                         })
                 })
                 .catch((error) => {
+                    debugger
                     console.error('Failed to send transaction', error)
                     // we only care if the error is something _other_ than the user rejected the tx
                     if (error?.code !== 4001) {

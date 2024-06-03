@@ -165,7 +165,7 @@ export default function Step3() {
     setCSVData,
   } = useCSVData(initialCSVData);
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const [isDragOver, setIsDragOver] = useState(false);
 
   const tokenName = queryParams.get("tokenName") || "";
@@ -176,6 +176,11 @@ export default function Step3() {
   const tokenLogo = queryParams.get("tokenLogo") || "";
   const initialTokenPrice = queryParams.get("initialTokenPrice") || "";
   const logo = queryParams.get("logo") || "";
+  const tokenAmount = (
+    parseFloat(tokenSupply) *
+    0.01 *
+    parseFloat(tokenQuantity)
+  ).toString();
 
   const disableButton = totalPercentage + Number(tokenSupply) >= 97.5;
 
@@ -369,29 +374,42 @@ export default function Step3() {
         to={
           !csvData
             ? `/launch/confirmation?tokenName=${encodeURIComponent(tokenName)}&tickerName=${encodeURIComponent(
-              tickerName,
-            )}&tokenLogo=${tokenLogo}&tokenQuantity=${encodeURIComponent(
-              tokenQuantity,
-            )}&tokenSupply=${encodeURIComponent(tokenSupply)}&degenAmount=${encodeURIComponent(
-              degenAmount,
-            )}&initialTokenPrice=${initialTokenPrice}`
-            : !disableButton
-              ? `/launch/confirmation?tokenName=${encodeURIComponent(tokenName)}&tickerName=${encodeURIComponent(
                 tickerName,
               )}&tokenLogo=${tokenLogo}&tokenQuantity=${encodeURIComponent(
                 tokenQuantity,
               )}&tokenSupply=${encodeURIComponent(tokenSupply)}&degenAmount=${encodeURIComponent(
                 degenAmount,
-              )}&initialTokenPrice=${initialTokenPrice}&csvData=${encodeURIComponent(
-                editedCSVData?.map((row) => row.join(",")).join("\n") || "",
-              )}`
+              )}&initialTokenPrice=${initialTokenPrice}`
+            : !disableButton
+              ? `/launch/confirmation?tokenName=${encodeURIComponent(tokenName)}&tickerName=${encodeURIComponent(
+                  tickerName,
+                )}&tokenLogo=${tokenLogo}&tokenQuantity=${encodeURIComponent(
+                  tokenQuantity,
+                )}&tokenSupply=${encodeURIComponent(tokenSupply)}&degenAmount=${encodeURIComponent(
+                  degenAmount,
+                )}&initialTokenPrice=${initialTokenPrice}&csvData=${encodeURIComponent(
+                  editedCSVData?.map((row) => row.join(",")).join("\n") || "",
+                )}`
               : ""
         }
         onClick={(e) => {
           // Note this is for setting the initial value of CURRENCY_A
-          dispatch(typeStartPriceInput({ typedValue: "0.1" }))
+          dispatch(typeStartPriceInput({ typedValue: initialTokenPrice }));
           // Note this is for initializing the pool for the first time when there is no liquidity
-          dispatch(typeInput({ typedValue: "0.001", field: Field.CURRENCY_A, noLiquidity: true }))
+          dispatch(
+            typeInput({
+              typedValue: degenAmount,
+              field: Field.CURRENCY_A,
+              noLiquidity: true,
+            }),
+          );
+          dispatch(
+            typeInput({
+              typedValue: tokenAmount,
+              field: Field.CURRENCY_B,
+              noLiquidity: true,
+            }),
+          );
           if (disableButton) {
             e.preventDefault();
           }
