@@ -8,7 +8,6 @@ import { sendAnalyticsEvent, useTrace } from 'analytics'
 import usePrevious from 'hooks/usePrevious'
 import { useSingleCallResult } from 'lib/hooks/multicall'
 import { BodyWrapper } from 'pages/AppBody'
-import { useEffect } from 'react'
 import { useParams, useSearchParams } from 'react-router-dom'
 import {
     useRangeHopCallbacks,
@@ -47,18 +46,14 @@ type LiquidityPoolConfigType = {
     currencyIdA: string;
     currencyIdB: string;
     feeAmountFromUrl: string;
-    minPrice: string;
-    maxPrice: string;
 }
 export const liquidityPoolConfig: LiquidityPoolConfigType = {
     currencyIdA: "0xA051A2Cb19C00eCDffaE94D0Ff98c17758041D16",
     currencyIdB: "0x4c9436d7AaC04A40aca30ab101107081223D6e92",
     feeAmountFromUrl: '500',
-    minPrice: "0.0000000000000000000000000000000000000029395",
-    maxPrice: "340190000000000000000000000000000000000"
 }
 
-function useCreateLiquidityPool({ currencyIdA, currencyIdB, feeAmountFromUrl, maxPrice, minPrice }: LiquidityPoolConfigType) {
+function useCreateLiquidityPool({ currencyIdA, currencyIdB, feeAmountFromUrl }: LiquidityPoolConfigType) {
     const {
         tokenId,
     } = useParams<{
@@ -109,8 +104,8 @@ function useCreateLiquidityPool({ currencyIdA, currencyIdB, feeAmountFromUrl, ma
         existingPosition
     )
 
-    const { onLeftRangeInput, onRightRangeInput } =
-        useV3MintActionHandlers(noLiquidity)
+    // const { onLeftRangeInput, onRightRangeInput } =
+    //     useV3MintActionHandlers(noLiquidity)
 
     const deadline = useTransactionDeadline() // custom from users settings
 
@@ -129,7 +124,9 @@ function useCreateLiquidityPool({ currencyIdA, currencyIdB, feeAmountFromUrl, ma
         outOfRange ? ZERO_PERCENT : DEFAULT_ADD_IN_RANGE_SLIPPAGE_TOLERANCE
     )
 
-    const addIsUnsupported = useIsSwapUnsupported(currencies?.CURRENCY_A, currencies?.CURRENCY_B)
+    // const addIsUnsupported = useIsSwapUnsupported(currencies?.CURRENCY_A, currencies?.CURRENCY_B)
+
+    console.log(position, "pos");
 
 
     async function onAdd() {
@@ -240,10 +237,10 @@ function useCreateLiquidityPool({ currencyIdA, currencyIdB, feeAmountFromUrl, ma
     }
 
     // get value and prices at ticks
-    const { [Bound.LOWER]: tickLower, [Bound.UPPER]: tickUpper } = ticks
+    // const { [Bound.LOWER]: tickLower, [Bound.UPPER]: tickUpper } = ticks
 
-    const { getSetFullRange } =
-        useRangeHopCallbacks(baseCurrency ?? undefined, quoteCurrency ?? undefined, feeAmount, tickLower, tickUpper, pool)
+    // const { getSetFullRange } =
+    //     useRangeHopCallbacks(baseCurrency ?? undefined, quoteCurrency ?? undefined, feeAmount, tickLower, tickUpper, pool)
 
     // we need an existence check on parsed amounts for single-asset deposits
     const showApprovalA =
@@ -251,39 +248,39 @@ function useCreateLiquidityPool({ currencyIdA, currencyIdB, feeAmountFromUrl, ma
     const showApprovalB =
         !argentWalletContract && approvalB !== ApprovalState.APPROVED && !!parsedAmounts[Field.CURRENCY_B]
 
-    const [searchParams, setSearchParams] = useSearchParams()
+    // const [searchParams, setSearchParams] = useSearchParams()
 
     // START: sync values with query string
-    const oldSearchParams = usePrevious(searchParams)
+    // const oldSearchParams = usePrevious(searchParams)
     // use query string as an input to onInput handlers
-    useEffect(() => {
-        const oldMinPrice = oldSearchParams?.get('minPrice')
-        if (
-            minPrice &&
-            typeof minPrice === 'string' &&
-            !isNaN(minPrice as any) &&
-            (!oldMinPrice || oldMinPrice !== minPrice)
-        ) {
-            onLeftRangeInput(minPrice)
-        }
-        // disable eslint rule because this hook only cares about the url->input state data flow
-        // input state -> url updates are handled in the input handlers
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [searchParams])
-    useEffect(() => {
-        const oldMaxPrice = oldSearchParams?.get('maxPrice')
-        if (
-            maxPrice &&
-            typeof maxPrice === 'string' &&
-            !isNaN(maxPrice as any) &&
-            (!oldMaxPrice || oldMaxPrice !== maxPrice)
-        ) {
-            onRightRangeInput(maxPrice)
-        }
-        // disable eslint rule because this hook only cares about the url->input state data flow
-        // input state -> url updates are handled in the input handlers
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [searchParams])
+    // useEffect(() => {
+    //     const oldMinPrice = oldSearchParams?.get('minPrice')
+    //     if (
+    //         minPrice &&
+    //         typeof minPrice === 'string' &&
+    //         !isNaN(minPrice as any) &&
+    //         (!oldMinPrice || oldMinPrice !== minPrice)
+    //     ) {
+    //         onLeftRangeInput(minPrice)
+    //     }
+    //     // disable eslint rule because this hook only cares about the url->input state data flow
+    //     // input state -> url updates are handled in the input handlers
+    //     // eslint-disable-next-line react-hooks/exhaustive-deps
+    // }, [searchParams])
+    // useEffect(() => {
+    //     const oldMaxPrice = oldSearchParams?.get('maxPrice')
+    //     if (
+    //         maxPrice &&
+    //         typeof maxPrice === 'string' &&
+    //         !isNaN(maxPrice as any) &&
+    //         (!oldMaxPrice || oldMaxPrice !== maxPrice)
+    //     ) {
+    //         onRightRangeInput(maxPrice)
+    //     }
+    //     // disable eslint rule because this hook only cares about the url->input state data flow
+    //     // input state -> url updates are handled in the input handlers
+    //     // eslint-disable-next-line react-hooks/exhaustive-deps
+    // }, [searchParams])
     // END: sync values with query string
 
     const owner = useSingleCallResult(tokenId ? positionManager : null, 'ownerOf', [tokenId]).result?.[0]

@@ -91,8 +91,6 @@ export default function Success() {
     currencyIdA: "0x4ed4E862860beD51a9570b96d89aF5E1B0Efefed",
     currencyIdB: tokenAddress,
     feeAmountFromUrl: liquidityPoolConfig.feeAmountFromUrl,
-    maxPrice: liquidityPoolConfig.maxPrice,
-    minPrice: liquidityPoolConfig.minPrice,
   });
 
   useEffect(() => {

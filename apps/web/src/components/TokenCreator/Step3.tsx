@@ -3,17 +3,17 @@ import { Market } from "components/Icons/Market";
 import { Money } from "components/Icons/Money";
 import { User } from "components/Icons/User";
 import { RowBetween } from "components/Row";
+import { isAddress } from "ethers/lib/utils";
 import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { ArrowLeft } from "react-feather";
+import { useDispatch } from "react-redux";
+import { Link, useLocation } from "react-router-dom";
+import { Field, setFullRange, typeInput, typeStartPriceInput } from "state/mint/v3/actions";
 import styled, { useTheme } from "styled-components";
 import { ThemedText } from "theme/components";
 import { Z_INDEX } from "theme/zIndex";
-import AddressInput from "./AddressInput";
-import { Link, useLocation } from "react-router-dom";
 import { v4 as uuid } from "uuid";
-import { isAddress } from "ethers/lib/utils";
-import { Field, typeInput, typeStartPriceInput } from "state/mint/v3/actions";
-import { useDispatch } from "react-redux";
+import AddressInput from "./AddressInput";
 
 type ContainerProps = {
   highlight: boolean;
@@ -429,42 +429,44 @@ export default function Step3() {
             to={
               !addressEntries.length
                 ? `/launch/confirmation?tokenName=${encodeURIComponent(tokenName)}&tickerName=${encodeURIComponent(
+                  tickerName,
+                )}&tokenLogo=${tokenLogo}&tokenQuantity=${encodeURIComponent(
+                  tokenQuantity,
+                )}&tokenSupply=${encodeURIComponent(tokenSupply)}&degenAmount=${encodeURIComponent(
+                  degenAmount,
+                )}&initialTokenPrice=${initialTokenPrice}`
+                : !isContinueDisabled
+                  ? `/launch/confirmation?tokenName=${encodeURIComponent(tokenName)}&tickerName=${encodeURIComponent(
                     tickerName,
                   )}&tokenLogo=${tokenLogo}&tokenQuantity=${encodeURIComponent(
                     tokenQuantity,
                   )}&tokenSupply=${encodeURIComponent(tokenSupply)}&degenAmount=${encodeURIComponent(
                     degenAmount,
-                  )}&initialTokenPrice=${initialTokenPrice}`
-                : !isContinueDisabled
-                  ? `/launch/confirmation?tokenName=${encodeURIComponent(tokenName)}&tickerName=${encodeURIComponent(
-                      tickerName,
-                    )}&tokenLogo=${tokenLogo}&tokenQuantity=${encodeURIComponent(
-                      tokenQuantity,
-                    )}&tokenSupply=${encodeURIComponent(tokenSupply)}&degenAmount=${encodeURIComponent(
-                      degenAmount,
-                    )}&initialTokenPrice=${initialTokenPrice}&csvData=${encodeURIComponent(
-                      addresses?.map((row) => row.join(",")).join("\n") || "",
-                    )}`
+                  )}&initialTokenPrice=${initialTokenPrice}&csvData=${encodeURIComponent(
+                    addresses?.map((row) => row.join(",")).join("\n") || "",
+                  )}`
                   : ""
             }
             onClick={(e) => {
               // Note this is for setting the initial value of CURRENCY_A
-              dispatch(typeStartPriceInput({ typedValue: initialTokenPrice }));
+              // We need to calculate these values correctly or else the pool creation will fail
+              dispatch(typeStartPriceInput({ typedValue: '0.1' }));
               // Note this is for initializing the pool for the first time when there is no liquidity
               dispatch(
                 typeInput({
-                  typedValue: degenAmount,
+                  typedValue: '10',
                   field: Field.CURRENCY_A,
                   noLiquidity: true,
                 }),
               );
               dispatch(
                 typeInput({
-                  typedValue: tokenAmount,
+                  typedValue: '1000',
                   field: Field.CURRENCY_B,
                   noLiquidity: true,
                 }),
               );
+              dispatch(setFullRange())
               if (isContinueDisabled) {
                 e.preventDefault();
               }
