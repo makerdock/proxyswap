@@ -2,6 +2,7 @@ import { InterfacePageName } from "@uniswap/analytics-events";
 import { Trace } from "analytics";
 import { AutoColumn } from "components/Column";
 import Step3 from "components/TokenCreator/Step3";
+
 import AppBody from "pages/AppBody";
 import styled from "styled-components";
 
@@ -27,11 +28,7 @@ export default function Step3Page() {
       <PageWrapper>
         <AutoColumn gap="lg" justify="center">
           <AutoColumn gap="lg" style={{ width: "100%" }}>
-            <AppBody>
-              <div style={{ margin: "0.5rem" }}>
-                <Step3 />
-              </div>
-            </AppBody>
+            <Step3 />
           </AutoColumn>
         </AutoColumn>
       </PageWrapper>

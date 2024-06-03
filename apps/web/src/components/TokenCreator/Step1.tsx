@@ -8,7 +8,6 @@ import { Link, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { ThemedText } from "theme/components";
 import useFetchLogo from "hooks/useFetchLogo";
-import ImageUploadIcon from "assets/images/upload-image.svg";
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
@@ -184,6 +183,11 @@ export default function Step1() {
     e.preventDefault();
   };
 
+  const handleDrop = (e: DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    handleLogoChange(e);
+  };
+
   const isInputsFilled =
     tokenName.trim() && tickerName.trim() && logoFileName.trim();
 
@@ -202,10 +206,7 @@ export default function Step1() {
         </ThemedText.BodySecondary>
       </StyledHeader>
       <StyledContainer>
-        <LogoUploadContainer
-          onDrop={handleLogoChange}
-          onDragOver={handleDragOver}
-        >
+        <LogoUploadContainer onDrop={handleDrop} onDragOver={handleDragOver}>
           <LogoLabel htmlFor="logo">
             {loading ? (
               <Loader />
