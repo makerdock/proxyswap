@@ -243,7 +243,7 @@ export default function Step1() {
           placeholder="Enter token name"
         />
         <InputField
-          label={<Trans>Ticker name</Trans>}
+          label={<Trans>Ticker</Trans>}
           onChange={setTickerName}
           value={tickerName}
           id="tickerName"

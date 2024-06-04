@@ -220,7 +220,7 @@ export default function Step2() {
       <OuterContainer>
         <label htmlFor="tokenQuantity">
           <ThemedText.BodySecondary fontWeight={500} fontSize={12}>
-            <Trans>Token quantity</Trans>
+            <Trans>Token Supply</Trans>
           </ThemedText.BodySecondary>
           <Input>
             <TokenQuantityInput
@@ -253,7 +253,7 @@ export default function Step2() {
           <DepositInputContainer>
             <label htmlFor="tokenSupply">
               <ThemedText.BodySecondary fontWeight={500} fontSize={12}>
-                <Trans>Token&apos;s supply</Trans>
+                <Trans>Deposit Token</Trans>
               </ThemedText.BodySecondary>
               <Input>
                 <TokenSupplyInput

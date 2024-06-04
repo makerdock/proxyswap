@@ -275,7 +275,7 @@ export default function Confirmation() {
           </DetailContainer>
           <DetailContainer>
             <ThemedText.BodySecondary fontWeight={500} fontSize={14}>
-              <Trans>Ticker name</Trans>
+              <Trans>Ticker</Trans>
             </ThemedText.BodySecondary>
             <ThemedText.BodyPrimary fontWeight={500} fontSize={14}>
               ${tickerName}
@@ -283,7 +283,7 @@ export default function Confirmation() {
           </DetailContainer>
           <DetailContainer>
             <ThemedText.BodySecondary fontWeight={500} fontSize={14}>
-              <Trans>Token quantity</Trans>
+              <Trans>Token supply</Trans>
             </ThemedText.BodySecondary>
             <ThemedText.BodyPrimary fontWeight={500} fontSize={14}>
               {tokenQuantity}
