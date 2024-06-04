@@ -8,7 +8,12 @@ import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { ArrowLeft } from "react-feather";
 import { useDispatch } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
-import { Field, setFullRange, typeInput, typeStartPriceInput } from "state/mint/v3/actions";
+import {
+  Field,
+  setFullRange,
+  typeInput,
+  typeStartPriceInput,
+} from "state/mint/v3/actions";
 import styled, { useTheme } from "styled-components";
 import { ThemedText } from "theme/components";
 import { Z_INDEX } from "theme/zIndex";
@@ -175,9 +180,12 @@ export default function Step3() {
     0.01 *
     parseFloat(tokenQuantity)
   ).toString();
+  const tokenSupplyQuantity =
+    parseFloat(tokenSupply) * 0.01 * parseFloat(tokenQuantity);
+  const initialPoolPrice = tokenSupplyQuantity / parseFloat(degenAmount);
 
   const [addressEntries, setAddressEntries] = useState<ManualEntry[]>([]);
-  const initialMarketPercentage = 10;
+  const initialMarketPercentage = parseFloat(tokenSupply);
   const initialFeesPercentage = 2.5;
   const theme = useTheme();
   const [showStats, setShowStats] = useState(true);
@@ -429,44 +437,51 @@ export default function Step3() {
             to={
               !addressEntries.length
                 ? `/launch/confirmation?tokenName=${encodeURIComponent(tokenName)}&tickerName=${encodeURIComponent(
-                  tickerName,
-                )}&tokenLogo=${tokenLogo}&tokenQuantity=${encodeURIComponent(
-                  tokenQuantity,
-                )}&tokenSupply=${encodeURIComponent(tokenSupply)}&degenAmount=${encodeURIComponent(
-                  degenAmount,
-                )}&initialTokenPrice=${initialTokenPrice}`
-                : !isContinueDisabled
-                  ? `/launch/confirmation?tokenName=${encodeURIComponent(tokenName)}&tickerName=${encodeURIComponent(
                     tickerName,
                   )}&tokenLogo=${tokenLogo}&tokenQuantity=${encodeURIComponent(
                     tokenQuantity,
                   )}&tokenSupply=${encodeURIComponent(tokenSupply)}&degenAmount=${encodeURIComponent(
                     degenAmount,
-                  )}&initialTokenPrice=${initialTokenPrice}&csvData=${encodeURIComponent(
-                    addresses?.map((row) => row.join(",")).join("\n") || "",
-                  )}`
+                  )}&initialTokenPrice=${initialTokenPrice}`
+                : !isContinueDisabled
+                  ? `/launch/confirmation?tokenName=${encodeURIComponent(tokenName)}&tickerName=${encodeURIComponent(
+                      tickerName,
+                    )}&tokenLogo=${tokenLogo}&tokenQuantity=${encodeURIComponent(
+                      tokenQuantity,
+                    )}&tokenSupply=${encodeURIComponent(tokenSupply)}&degenAmount=${encodeURIComponent(
+                      degenAmount,
+                    )}&initialTokenPrice=${initialTokenPrice}&csvData=${encodeURIComponent(
+                      addresses?.map((row) => row.join(",")).join("\n") || "",
+                    )}`
                   : ""
             }
             onClick={(e) => {
+              // console.log({ degenAmount, tokenSupply, initialPoolPrice });
+              // debugger;
               // Note this is for setting the initial value of CURRENCY_A
               // We need to calculate these values correctly or else the pool creation will fail
-              dispatch(typeStartPriceInput({ typedValue: '0.1' }));
+              dispatch(
+                typeStartPriceInput({
+                  typedValue: initialPoolPrice.toString(),
+                }),
+              );
               // Note this is for initializing the pool for the first time when there is no liquidity
+              // debugger;
               dispatch(
                 typeInput({
-                  typedValue: '10',
+                  typedValue: degenAmount,
                   field: Field.CURRENCY_A,
                   noLiquidity: true,
                 }),
               );
-              dispatch(
-                typeInput({
-                  typedValue: '1000',
-                  field: Field.CURRENCY_B,
-                  noLiquidity: true,
-                }),
-              );
-              dispatch(setFullRange())
+              // dispatch(
+              //   typeInput({
+              //     typedValue: "0.02",
+              //     field: Field.CURRENCY_B,
+              //     noLiquidity: true,
+              //   }),
+              // );
+              dispatch(setFullRange());
               if (isContinueDisabled) {
                 e.preventDefault();
               }
@@ -532,7 +547,7 @@ export default function Step3() {
                 <Market fill={theme.neutral2} /> Market
               </ThemedText.BodySecondary>
               <ThemedText.BodyPrimary fontSize={14} fontWeight={500}>
-                10%
+                {initialMarketPercentage}%
               </ThemedText.BodyPrimary>
             </RowBetween>
           </StatsContainer>

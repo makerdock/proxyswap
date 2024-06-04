@@ -88,7 +88,7 @@ export default function Success() {
   const { logoUrl: logo } = useFetchLogo(tokenLogo);
 
   const { onAdd } = useCreateLiquidityPool({
-    currencyIdA: "0x4ed4E862860beD51a9570b96d89aF5E1B0Efefed",
+    currencyIdA: "ETH",
     currencyIdB: tokenAddress,
     feeAmountFromUrl: liquidityPoolConfig.feeAmountFromUrl,
   });
@@ -124,7 +124,7 @@ export default function Success() {
     try {
       setLoading(true);
       await onAdd();
-      setCreatePoolSuccess(true);
+      // setCreatePoolSuccess(true);
     } catch (error) {
       console.error(error);
     } finally {
