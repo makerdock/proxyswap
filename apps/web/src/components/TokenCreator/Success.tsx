@@ -1,8 +1,12 @@
 import { Trans } from "@lingui/macro";
 import ProxyLogo from "assets/images/Icon.png";
+import { ButtonPrimary } from "components/Button";
+import useCreateLiquidityPool, {
+  liquidityPoolConfig,
+} from "hooks/useCreateLiquidityPool";
 import useFetchLogo from "hooks/useFetchLogo";
 import { useEffect, useState } from "react";
-import { Copy } from "react-feather";
+import { Copy, Loader } from "react-feather";
 import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { ThemedText } from "theme/components";
@@ -70,16 +74,24 @@ const TooltipText = styled.span`
 export default function Success() {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
+  const [createPoolSuccess, setCreatePoolSuccess] = useState(false);
   const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth <= 500);
   const [tokenTooltipVisible, setTokenTooltipVisible] = useState(false);
   const [transactionTooltipVisible, setTransactionTooltipVisible] =
     useState(false);
+  const [loading, setLoading] = useState(false);
 
   const tickerName = queryParams.get("tickerName") || "";
   const tokenAddress = queryParams.get("tokenAddress") || "";
   const tokenLogo = queryParams.get("tokenLogo") || "";
   const transactionAddress = queryParams.get("transactionAddress") || "";
   const { logoUrl: logo } = useFetchLogo(tokenLogo);
+
+  const { onAdd } = useCreateLiquidityPool({
+    currencyIdA: "ETH",
+    currencyIdB: tokenAddress,
+    feeAmountFromUrl: liquidityPoolConfig.feeAmountFromUrl,
+  });
 
   useEffect(() => {
     const handleResize = () => {
@@ -106,6 +118,18 @@ export default function Success() {
     navigator.clipboard.writeText(address);
     setTooltipVisible(true);
     setTimeout(() => setTooltipVisible(false), 2000);
+  };
+
+  const handleCreateLp = async () => {
+    try {
+      setLoading(true);
+      await onAdd();
+      // setCreatePoolSuccess(true);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const tokenLogoUrl = tokenLogo && logo ? logo : ProxyLogo;
@@ -185,6 +209,11 @@ export default function Success() {
             </TooltipText>
           </Tooltip>
         </CopyContainer>
+        {!createPoolSuccess && (
+          <ButtonPrimary onClick={handleCreateLp} marginTop="1rem">
+            {loading ? <Loader stroke="white" /> : "Create Liquidity Pool"}
+          </ButtonPrimary>
+        )}
       </StyledContainer>
     </>
   );

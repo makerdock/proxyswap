@@ -1,16 +1,16 @@
 import { Contract } from "@ethersproject/contracts";
 import { Trans } from "@lingui/macro";
 import { useWeb3React } from "@web3-react/core";
-import TOKEN_CREATOR_ABI from "wallet/src/abis/token-creator.json";
 import { ButtonPrimary } from "components/Button";
-import { defaultAbiCoder, parseEther } from "ethers/lib/utils";
+import Loader from "components/Icons/LoadingSpinner";
+import { defaultAbiCoder } from "ethers/lib/utils";
+import { useBalanceAndRate } from "hooks/useBalanceandRate";
 import { useState } from "react";
 import { ArrowLeft } from "react-feather";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { Separator, ThemedText } from "theme/components";
-import Loader from "components/Icons/LoadingSpinner";
-import { useBalanceAndRate } from "hooks/useBalanceandRate";
+import TOKEN_CREATOR_ABI from "wallet/src/abis/token-creator.json";
 import {
   TokenHolderData,
   createMerkleRoot,
@@ -89,6 +89,9 @@ const formatNumberWithAbbreviation = (number: number) => {
 };
 
 export default function Confirmation() {
+  const [tokenAddress, setTokenAddress] = useState(
+    "0xE81d59eC4C4b309748059D2DF4980F27a06d876D",
+  );
   const { provider, account } = useWeb3React();
   const navigate = useNavigate();
   const location = useLocation();
@@ -118,7 +121,7 @@ export default function Confirmation() {
     }, 0);
 
   const signer = provider?.getSigner();
-  const contractAddress = "0x6f245169ec4980828A9612292be92469e19B81f1";
+  const contractAddress = "0x9FD46C80C890D579d08d2434aC44aF3D6B497c16";
   const maxSupply = BigInt(
     Math.floor(parseFloat(tokenQuantity) * 10 ** 6),
   ).toString();
@@ -163,6 +166,7 @@ export default function Confirmation() {
         "0x0000000000000000000000000000000000000000000000000000000000000000";
       let proofs: Record<string, any> = {};
 
+
       if (!!distribution.length) {
         const { hash } = await createMerkleRoot(distribution);
         rootHash = hash;
@@ -179,16 +183,11 @@ export default function Confirmation() {
       );
 
       const tx = await tokenCreatorContract.deploy(
-        uniswapRouterAddress,
         tokenName,
         tickerName,
         maxSupply,
-        liquidityTokenAmount,
         totalDistributionAmountString,
         rootHash,
-        {
-          value: parseEther(degenAmount),
-        },
       );
 
       const token = await tx.wait();
@@ -200,7 +199,7 @@ export default function Confirmation() {
         ["address"],
         tokenAddressWithZeros,
       );
-
+      setTokenAddress(String(tokenAddress));
       const tokenData = {
         address: String(tokenAddress),
         createdBy: account,

@@ -2,7 +2,7 @@ import { Trans } from "@lingui/macro";
 import { useWeb3React } from "@web3-react/core";
 import { ButtonPrimary } from "components/Button";
 import { useBalanceAndRate } from "hooks/useBalanceandRate";
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { ArrowLeft } from "react-feather";
 import { Link, useLocation } from "react-router-dom";
 import styled, { createGlobalStyle } from "styled-components";
@@ -151,7 +151,7 @@ export default function Step2() {
     queryParams.get("tokenQuantity") || "",
   );
   const [tokenSupply, setTokenSupply] = useState<string>(
-    queryParams.get("tokenSupply") || "10",
+    queryParams.get("tokenSupply") + "%" || "10%",
   );
   const [degenAmount, setDegenAmount] = useState<string>(
     queryParams.get("degenAmount") || "",
@@ -162,6 +162,27 @@ export default function Step2() {
   const tokenLogo = queryParams.get("tokenLogo") || "";
   const logo = queryParams.get("logo") || "";
   const csvData = queryParams.get("csvData") || "";
+
+  const formatTokenSupply = (value: string) => {
+    if (!value.endsWith("%")) value += "%";
+    return value;
+  };
+
+  const handleTokenSupplyInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const inputValue = e.target.value;
+    const filteredValue = inputValue.replace(/[^0-9.]/g, "");
+    if (!filteredValue.includes(".") && filteredValue.length > 2) return;
+    let formattedValue = formatTokenSupply(filteredValue);
+    setTokenSupply(formattedValue);
+  };
+
+  const handleRangeChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setTokenSupply(formatTokenSupply(e.target.value));
+  };
+
+  const handleMaxTokenSupply = () => {
+    setTokenSupply("97.5%");
+  };
 
   const tokenSupplyQuantity =
     parseFloat(tokenSupply) * 0.01 * parseFloat(tokenQuantity);
@@ -239,19 +260,12 @@ export default function Step2() {
                   placeholder="10%"
                   id="tokenSupply"
                   name="tokenSupply"
+                  pattern="[0-9]*"
                   type="text"
-                  value={
-                    tokenSupply
-                      ? tokenSupply +
-                        (document.activeElement !==
-                        document.getElementById("tokenSupply")
-                          ? "%"
-                          : "")
-                      : ""
-                  }
-                  onChange={(e) => setTokenSupply(e.target.value)}
+                  value={tokenSupply}
+                  onChange={handleTokenSupplyInputChange}
                 />
-                <Button onClick={() => setTokenSupply("97.5")}>
+                <Button onClick={handleMaxTokenSupply}>
                   <Trans>Max</Trans>
                 </Button>
               </Input>
@@ -282,7 +296,7 @@ export default function Step2() {
             max="97.5"
             step="0.5"
             value={parseFloat(tokenSupply)}
-            onChange={(e) => setTokenSupply(e.target.value)}
+            onChange={handleRangeChange}
           />
         </LPDepositContainer>
         <StyledContainer>
