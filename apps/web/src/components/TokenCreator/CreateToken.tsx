@@ -52,15 +52,13 @@ export default function CreateToken() {
         </StyledHeader>
         <StyledStepsInnerContainer>
           <ThemedText.BodySecondary fontWeight={500} fontSize={16}>
-            <Trans>1. Add basic info like name, ticker & logo</Trans>
+            <Trans>1. Add token name, ticker & logo</Trans>
           </ThemedText.BodySecondary>
           <ThemedText.BodySecondary fontWeight={500} fontSize={16}>
-            <Trans>
-              2. Add economics like Token supply, whitelist address, etc.
-            </Trans>
+            <Trans>2. Set total supply, launch price, and add liquidity</Trans>
           </ThemedText.BodySecondary>
           <ThemedText.BodySecondary fontWeight={500} fontSize={16}>
-            <Trans>3. Add liquidity, confirm data and launch</Trans>
+            <Trans>3. Airdrop tokens (optional)</Trans>
           </ThemedText.BodySecondary>
         </StyledStepsInnerContainer>
       </StyledStepsContainer>
