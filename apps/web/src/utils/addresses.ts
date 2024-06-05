@@ -1,7 +1,9 @@
 import { getAddress } from "@ethersproject/address";
 
 export const UNIVERSAL_ROUTER_ADDRESS =
-  "0x3Fa3E4B77B727b45d10C1Cd2C1a5418b356EDe5f";
+  "0x11f2A0472CDbe8C54cCEbC0EBB7543C1e8adff8a";
+
+export const PERMIT2_ADDRESS = "0x10ccFD2c6880a71f97053B50217052689294F176";
 // returns the checksummed address if the address is valid, otherwise returns false
 export function isAddress(value: any): string | false {
   try {
@@ -21,7 +23,7 @@ export function isSameAddress(a?: string, b?: string) {
 export function shortenAddress(
   address = "",
   charsStart = 4,
-  charsEnd = 4
+  charsEnd = 4,
 ): string {
   const parsed = isAddress(address);
   if (!parsed) return "";
@@ -38,7 +40,7 @@ export function shortenAddress(
 function ellipseAddressAdd0x(
   targetAddress: string,
   charsStart = 4,
-  charsEnd = 4
+  charsEnd = 4,
 ): string {
   const hasPrefix = targetAddress.startsWith("0x");
   const prefix = hasPrefix ? "" : "0x";
@@ -55,9 +57,9 @@ function ellipseAddressAdd0x(
 export function ellipseMiddle(
   target: string,
   charsStart = 4,
-  charsEnd = 4
+  charsEnd = 4,
 ): string {
   return `${target.slice(0, charsStart)}...${target.slice(
-    target.length - charsEnd
+    target.length - charsEnd,
   )}`;
 }

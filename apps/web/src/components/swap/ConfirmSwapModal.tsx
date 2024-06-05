@@ -348,6 +348,9 @@ export default function ConfirmSwapModal({
     return <SwapModalHeader inputCurrency={inputCurrency} trade={trade} allowedSlippage={allowedSlippage} />
   }, [allowedSlippage, confirmModalState, showAcceptChanges, trade, inputCurrency])
 
+  console.log("Chintu", {
+    showAcceptChanges, s: isPreviewTrade(trade), allowance, "LL": ""
+  })
   const modalBottom = useCallback(() => {
     if (confirmModalState === ConfirmModalState.REVIEWING || showAcceptChanges) {
       return (

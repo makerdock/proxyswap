@@ -1,28 +1,41 @@
-import { ChainId, TradeType as MockTradeType, Token } from '@uniswap/sdk-core'
-import { PERMIT2_ADDRESS } from '@uniswap/universal-router-sdk'
-import { DAI as MockDAI, USDC_MAINNET as MockUSDC_MAINNET, USDT as MockUSDT, nativeOnChain } from 'constants/tokens'
-import { TransactionStatus as MockTxStatus } from 'graphql/data/__generated__/types-and-hooks'
-import { ChainTokenMap } from 'hooks/Tokens'
+import { ChainId, TradeType as MockTradeType, Token } from "@uniswap/sdk-core";
+
+import {
+  DAI as MockDAI,
+  USDC_MAINNET as MockUSDC_MAINNET,
+  USDT as MockUSDT,
+  nativeOnChain,
+} from "constants/tokens";
+import { TransactionStatus as MockTxStatus } from "graphql/data/__generated__/types-and-hooks";
+import { ChainTokenMap } from "hooks/Tokens";
 import {
   ExactInputSwapTransactionInfo,
   ExactOutputSwapTransactionInfo,
   TransactionType as MockTxType,
   TransactionDetails,
   TransactionInfo,
-} from 'state/transactions/types'
-import { renderHook } from 'test-utils/render'
-import { useFormatter } from 'utils/formatNumbers'
+} from "state/transactions/types";
+import { renderHook } from "test-utils/render";
+import { useFormatter } from "utils/formatNumbers";
 
-import { UniswapXOrderStatus } from '../../../../lib/hooks/orders/types'
-import { SignatureDetails, SignatureType } from '../../../../state/signatures/types'
-import { signatureToActivity, transactionToActivity, useLocalActivities } from './parseLocal'
+import { UniswapXOrderStatus } from "../../../../lib/hooks/orders/types";
+import {
+  SignatureDetails,
+  SignatureType,
+} from "../../../../state/signatures/types";
+import {
+  signatureToActivity,
+  transactionToActivity,
+  useLocalActivities,
+} from "./parseLocal";
+import { PERMIT2_ADDRESS } from "utils/addresses";
 
 function mockSwapInfo(
   type: MockTradeType,
   inputCurrency: Token,
   inputCurrencyAmountRaw: string,
   outputCurrency: Token,
-  outputCurrencyAmountRaw: string
+  outputCurrencyAmountRaw: string,
 ): ExactInputSwapTransactionInfo | ExactOutputSwapTransactionInfo {
   if (type === MockTradeType.EXACT_INPUT) {
     return {
@@ -34,7 +47,7 @@ function mockSwapInfo(
       expectedOutputCurrencyAmountRaw: outputCurrencyAmountRaw,
       minimumOutputCurrencyAmountRaw: outputCurrencyAmountRaw,
       isUniswapXOrder: false,
-    }
+    };
   } else {
     return {
       type: MockTxType.SWAP,
@@ -45,24 +58,28 @@ function mockSwapInfo(
       outputCurrencyId: outputCurrency.address,
       outputCurrencyAmountRaw,
       isUniswapXOrder: false,
-    }
+    };
   }
 }
 
-const mockAccount1 = '0x000000000000000000000000000000000000000001'
-const mockAccount2 = '0x000000000000000000000000000000000000000002'
-const mockChainId = ChainId.MAINNET
-const mockSpenderAddress = PERMIT2_ADDRESS[mockChainId]
-const mockCurrencyAmountRaw = '1000000000000000000'
-const mockCurrencyAmountRawUSDC = '1000000'
-const mockApprovalAmountRaw = '10000000'
+const mockAccount1 = "0x000000000000000000000000000000000000000001";
+const mockAccount2 = "0x000000000000000000000000000000000000000002";
+const mockChainId = ChainId.MAINNET;
+const mockSpenderAddress = PERMIT2_ADDRESS[mockChainId];
+const mockCurrencyAmountRaw = "1000000000000000000";
+const mockCurrencyAmountRawUSDC = "1000000";
+const mockApprovalAmountRaw = "10000000";
 
 function mockHash(id: string, status: MockTxStatus = MockTxStatus.Confirmed) {
-  return id + status
+  return id + status;
 }
 
-function mockCommonFields(id: string, account = mockAccount2, status: MockTxStatus) {
-  const hash = mockHash(id, status)
+function mockCommonFields(
+  id: string,
+  account = mockAccount2,
+  status: MockTxStatus,
+) {
+  const hash = mockHash(id, status);
   return {
     hash,
     from: account,
@@ -74,25 +91,37 @@ function mockCommonFields(id: string, account = mockAccount2, status: MockTxStat
             status: status === MockTxStatus.Confirmed ? 1 : 0,
           },
     addedTime: 0,
-  }
+  };
 }
 
-function mockMultiStatus(info: TransactionInfo, id: string): [TransactionDetails, number][] {
+function mockMultiStatus(
+  info: TransactionInfo,
+  id: string,
+): [TransactionDetails, number][] {
   // Mocks a transaction with multiple statuses
   return [
     [
-      { info, ...mockCommonFields(id, mockAccount2, MockTxStatus.Pending) } as unknown as TransactionDetails,
+      {
+        info,
+        ...mockCommonFields(id, mockAccount2, MockTxStatus.Pending),
+      } as unknown as TransactionDetails,
       mockChainId,
     ],
     [
-      { info, ...mockCommonFields(id, mockAccount2, MockTxStatus.Confirmed) } as unknown as TransactionDetails,
+      {
+        info,
+        ...mockCommonFields(id, mockAccount2, MockTxStatus.Confirmed),
+      } as unknown as TransactionDetails,
       mockChainId,
     ],
     [
-      { info, ...mockCommonFields(id, mockAccount2, MockTxStatus.Failed) } as unknown as TransactionDetails,
+      {
+        info,
+        ...mockCommonFields(id, mockAccount2, MockTxStatus.Failed),
+      } as unknown as TransactionDetails,
       mockChainId,
     ],
-  ]
+  ];
 }
 
 const mockTokenAddressMap: ChainTokenMap = {
@@ -101,13 +130,13 @@ const mockTokenAddressMap: ChainTokenMap = {
     [MockUSDC_MAINNET.address]: MockUSDC_MAINNET,
     [MockUSDT.address]: MockUSDT,
   },
-}
+};
 
-jest.mock('../../../../hooks/Tokens', () => ({
+jest.mock("../../../../hooks/Tokens", () => ({
   useAllTokensMultichain: () => mockTokenAddressMap,
-}))
+}));
 
-jest.mock('../../../../state/transactions/hooks', () => {
+jest.mock("../../../../state/transactions/hooks", () => {
   return {
     useMultichainTransactions: (): [TransactionDetails, number][] => {
       return [
@@ -118,9 +147,9 @@ jest.mock('../../../../state/transactions/hooks', () => {
               MockUSDC_MAINNET,
               mockCurrencyAmountRawUSDC,
               MockDAI,
-              mockCurrencyAmountRaw
+              mockCurrencyAmountRaw,
             ),
-            ...mockCommonFields('0x123', mockAccount1, MockTxStatus.Confirmed),
+            ...mockCommonFields("0x123", mockAccount1, MockTxStatus.Confirmed),
           } as TransactionDetails,
           mockChainId,
         ],
@@ -130,9 +159,9 @@ jest.mock('../../../../state/transactions/hooks', () => {
             MockUSDC_MAINNET,
             mockCurrencyAmountRawUSDC,
             MockDAI,
-            mockCurrencyAmountRaw
+            mockCurrencyAmountRaw,
           ),
-          '0xswap_exact_input'
+          "0xswap_exact_input",
         ),
         ...mockMultiStatus(
           mockSwapInfo(
@@ -140,9 +169,9 @@ jest.mock('../../../../state/transactions/hooks', () => {
             MockUSDC_MAINNET,
             mockCurrencyAmountRawUSDC,
             MockDAI,
-            mockCurrencyAmountRaw
+            mockCurrencyAmountRaw,
           ),
-          '0xswap_exact_output'
+          "0xswap_exact_output",
         ),
         ...mockMultiStatus(
           {
@@ -151,16 +180,16 @@ jest.mock('../../../../state/transactions/hooks', () => {
             spender: mockSpenderAddress,
             amount: mockApprovalAmountRaw,
           },
-          '0xapproval'
+          "0xapproval",
         ),
         ...mockMultiStatus(
           {
             type: MockTxType.APPROVAL,
             tokenAddress: MockUSDT.address,
             spender: mockSpenderAddress,
-            amount: '0',
+            amount: "0",
           },
-          '0xrevoke_approval'
+          "0xrevoke_approval",
         ),
         ...mockMultiStatus(
           {
@@ -169,7 +198,7 @@ jest.mock('../../../../state/transactions/hooks', () => {
             currencyAmountRaw: mockCurrencyAmountRaw,
             chainId: mockChainId,
           },
-          '0xwrap'
+          "0xwrap",
         ),
         ...mockMultiStatus(
           {
@@ -178,7 +207,7 @@ jest.mock('../../../../state/transactions/hooks', () => {
             currencyAmountRaw: mockCurrencyAmountRaw,
             chainId: mockChainId,
           },
-          '0xunwrap'
+          "0xunwrap",
         ),
         ...mockMultiStatus(
           {
@@ -190,7 +219,7 @@ jest.mock('../../../../state/transactions/hooks', () => {
             expectedAmountBaseRaw: mockCurrencyAmountRawUSDC,
             expectedAmountQuoteRaw: mockCurrencyAmountRaw,
           },
-          '0xadd_liquidity_v3'
+          "0xadd_liquidity_v3",
         ),
         ...mockMultiStatus(
           {
@@ -200,7 +229,7 @@ jest.mock('../../../../state/transactions/hooks', () => {
             expectedAmountBaseRaw: mockCurrencyAmountRawUSDC,
             expectedAmountQuoteRaw: mockCurrencyAmountRaw,
           },
-          '0xremove_liquidity_v3'
+          "0xremove_liquidity_v3",
         ),
         ...mockMultiStatus(
           {
@@ -210,7 +239,7 @@ jest.mock('../../../../state/transactions/hooks', () => {
             expectedAmountBaseRaw: mockCurrencyAmountRawUSDC,
             expectedAmountQuoteRaw: mockCurrencyAmountRaw,
           },
-          '0xadd_liquidity_v2'
+          "0xadd_liquidity_v2",
         ),
         ...mockMultiStatus(
           {
@@ -220,7 +249,7 @@ jest.mock('../../../../state/transactions/hooks', () => {
             expectedCurrencyOwed0: mockCurrencyAmountRawUSDC,
             expectedCurrencyOwed1: mockCurrencyAmountRaw,
           },
-          '0xcollect_fees'
+          "0xcollect_fees",
         ),
         ...mockMultiStatus(
           {
@@ -229,16 +258,16 @@ jest.mock('../../../../state/transactions/hooks', () => {
             quoteCurrencyId: MockDAI.address,
             isFork: false,
           },
-          '0xmigrate_v3_liquidity'
+          "0xmigrate_v3_liquidity",
         ),
-      ]
+      ];
     },
-  }
-})
+  };
+});
 
-describe('parseLocalActivity', () => {
-  it('returns swap activity fields with known tokens, exact input', () => {
-    const { formatNumber } = renderHook(() => useFormatter()).result.current
+describe("parseLocalActivity", () => {
+  it("returns swap activity fields with known tokens, exact input", () => {
+    const { formatNumber } = renderHook(() => useFormatter()).result.current;
 
     const details = {
       info: mockSwapInfo(
@@ -246,28 +275,35 @@ describe('parseLocalActivity', () => {
         MockUSDC_MAINNET,
         mockCurrencyAmountRawUSDC,
         MockDAI,
-        mockCurrencyAmountRaw
+        mockCurrencyAmountRaw,
       ),
       receipt: {
-        transactionHash: '0x123',
+        transactionHash: "0x123",
         status: 1,
       },
-    } as TransactionDetails
-    const chainId = ChainId.MAINNET
-    expect(transactionToActivity(details, chainId, mockTokenAddressMap, formatNumber)).toEqual({
+    } as TransactionDetails;
+    const chainId = ChainId.MAINNET;
+    expect(
+      transactionToActivity(
+        details,
+        chainId,
+        mockTokenAddressMap,
+        formatNumber,
+      ),
+    ).toEqual({
       chainId: 1,
       currencies: [MockUSDC_MAINNET, MockDAI],
-      descriptor: '1.00 USDC for 1.00 DAI',
+      descriptor: "1.00 USDC for 1.00 DAI",
       hash: undefined,
       from: undefined,
-      status: 'CONFIRMED',
+      status: "CONFIRMED",
       timestamp: NaN,
-      title: 'Swapped',
-    })
-  })
+      title: "Swapped",
+    });
+  });
 
-  it('returns swap activity fields with known tokens, exact output', () => {
-    const { formatNumber } = renderHook(() => useFormatter()).result.current
+  it("returns swap activity fields with known tokens, exact output", () => {
+    const { formatNumber } = renderHook(() => useFormatter()).result.current;
 
     const details = {
       info: mockSwapInfo(
@@ -275,25 +311,32 @@ describe('parseLocalActivity', () => {
         MockUSDC_MAINNET,
         mockCurrencyAmountRawUSDC,
         MockDAI,
-        mockCurrencyAmountRaw
+        mockCurrencyAmountRaw,
       ),
       receipt: {
-        transactionHash: '0x123',
+        transactionHash: "0x123",
         status: 1,
       },
-    } as TransactionDetails
-    const chainId = ChainId.MAINNET
-    expect(transactionToActivity(details, chainId, mockTokenAddressMap, formatNumber)).toMatchObject({
+    } as TransactionDetails;
+    const chainId = ChainId.MAINNET;
+    expect(
+      transactionToActivity(
+        details,
+        chainId,
+        mockTokenAddressMap,
+        formatNumber,
+      ),
+    ).toMatchObject({
       chainId: 1,
       currencies: [MockUSDC_MAINNET, MockDAI],
-      descriptor: '1.00 USDC for 1.00 DAI',
-      status: 'CONFIRMED',
-      title: 'Swapped',
-    })
-  })
+      descriptor: "1.00 USDC for 1.00 DAI",
+      status: "CONFIRMED",
+      title: "Swapped",
+    });
+  });
 
-  it('returns swap activity fields with unknown tokens', () => {
-    const { formatNumber } = renderHook(() => useFormatter()).result.current
+  it("returns swap activity fields with unknown tokens", () => {
+    const { formatNumber } = renderHook(() => useFormatter()).result.current;
 
     const details = {
       info: mockSwapInfo(
@@ -301,209 +344,231 @@ describe('parseLocalActivity', () => {
         MockUSDC_MAINNET,
         mockCurrencyAmountRawUSDC,
         MockDAI,
-        mockCurrencyAmountRaw
+        mockCurrencyAmountRaw,
       ),
       receipt: {
-        transactionHash: '0x123',
+        transactionHash: "0x123",
         status: 1,
       },
-    } as TransactionDetails
-    const chainId = ChainId.MAINNET
-    const tokens = {} as ChainTokenMap
-    expect(transactionToActivity(details, chainId, tokens, formatNumber)).toMatchObject({
+    } as TransactionDetails;
+    const chainId = ChainId.MAINNET;
+    const tokens = {} as ChainTokenMap;
+    expect(
+      transactionToActivity(details, chainId, tokens, formatNumber),
+    ).toMatchObject({
       chainId: 1,
       currencies: [undefined, undefined],
-      descriptor: 'Unknown for Unknown',
-      status: 'CONFIRMED',
-      title: 'Swapped',
-    })
-  })
+      descriptor: "Unknown for Unknown",
+      status: "CONFIRMED",
+      title: "Swapped",
+    });
+  });
 
-  it('only returns activity for the current account', () => {
-    const account1Activites = renderHook(() => useLocalActivities(mockAccount1)).result.current
-    const account2Activites = renderHook(() => useLocalActivities(mockAccount2)).result.current
+  it("only returns activity for the current account", () => {
+    const account1Activites = renderHook(() => useLocalActivities(mockAccount1))
+      .result.current;
+    const account2Activites = renderHook(() => useLocalActivities(mockAccount2))
+      .result.current;
 
-    expect(Object.values(account1Activites)).toHaveLength(1)
-    expect(Object.values(account2Activites)).toHaveLength(33)
-  })
+    expect(Object.values(account1Activites)).toHaveLength(1);
+    expect(Object.values(account2Activites)).toHaveLength(33);
+  });
 
-  it('Properly uses correct tense of activity title based on tx status', () => {
-    const activities = renderHook(() => useLocalActivities(mockAccount2)).result.current
+  it("Properly uses correct tense of activity title based on tx status", () => {
+    const activities = renderHook(() => useLocalActivities(mockAccount2)).result
+      .current;
 
-    expect(activities[mockHash('0xswap_exact_input', MockTxStatus.Pending)]?.title).toEqual('Swapping')
-    expect(activities[mockHash('0xswap_exact_input', MockTxStatus.Confirmed)]?.title).toEqual('Swapped')
-    expect(activities[mockHash('0xswap_exact_input', MockTxStatus.Failed)]?.title).toEqual('Swap failed')
-  })
+    expect(
+      activities[mockHash("0xswap_exact_input", MockTxStatus.Pending)]?.title,
+    ).toEqual("Swapping");
+    expect(
+      activities[mockHash("0xswap_exact_input", MockTxStatus.Confirmed)]?.title,
+    ).toEqual("Swapped");
+    expect(
+      activities[mockHash("0xswap_exact_input", MockTxStatus.Failed)]?.title,
+    ).toEqual("Swap failed");
+  });
 
-  it('Adapts Swap exact input to Activity type', () => {
-    const hash = mockHash('0xswap_exact_input')
-    const activity = renderHook(() => useLocalActivities(mockAccount2)).result.current[hash]
-
-    expect(activity).toMatchObject({
-      chainId: mockChainId,
-      currencies: [MockUSDC_MAINNET, MockDAI],
-      title: 'Swapped',
-      descriptor: `1.00 ${MockUSDC_MAINNET.symbol} for 1.00 ${MockDAI.symbol}`,
-      hash,
-      status: MockTxStatus.Confirmed,
-      from: mockAccount2,
-    })
-  })
-
-  it('Adapts Swap exact output to Activity type', () => {
-    const hash = mockHash('0xswap_exact_output')
-    const activity = renderHook(() => useLocalActivities(mockAccount2)).result.current[hash]
+  it("Adapts Swap exact input to Activity type", () => {
+    const hash = mockHash("0xswap_exact_input");
+    const activity = renderHook(() => useLocalActivities(mockAccount2)).result
+      .current[hash];
 
     expect(activity).toMatchObject({
       chainId: mockChainId,
       currencies: [MockUSDC_MAINNET, MockDAI],
-      title: 'Swapped',
+      title: "Swapped",
       descriptor: `1.00 ${MockUSDC_MAINNET.symbol} for 1.00 ${MockDAI.symbol}`,
       hash,
       status: MockTxStatus.Confirmed,
       from: mockAccount2,
-    })
-  })
+    });
+  });
 
-  it('Adapts Approval to Activity type', () => {
-    const hash = mockHash('0xapproval')
-    const activity = renderHook(() => useLocalActivities(mockAccount2)).result.current[hash]
+  it("Adapts Swap exact output to Activity type", () => {
+    const hash = mockHash("0xswap_exact_output");
+    const activity = renderHook(() => useLocalActivities(mockAccount2)).result
+      .current[hash];
+
+    expect(activity).toMatchObject({
+      chainId: mockChainId,
+      currencies: [MockUSDC_MAINNET, MockDAI],
+      title: "Swapped",
+      descriptor: `1.00 ${MockUSDC_MAINNET.symbol} for 1.00 ${MockDAI.symbol}`,
+      hash,
+      status: MockTxStatus.Confirmed,
+      from: mockAccount2,
+    });
+  });
+
+  it("Adapts Approval to Activity type", () => {
+    const hash = mockHash("0xapproval");
+    const activity = renderHook(() => useLocalActivities(mockAccount2)).result
+      .current[hash];
 
     expect(activity).toMatchObject({
       chainId: mockChainId,
       currencies: [MockDAI],
-      title: 'Approved',
+      title: "Approved",
       descriptor: MockDAI.symbol,
       hash,
       status: MockTxStatus.Confirmed,
       from: mockAccount2,
-    })
-  })
+    });
+  });
 
-  it('Adapts Revoke Approval to Activity type', () => {
-    const hash = mockHash('0xrevoke_approval')
-    const activity = renderHook(() => useLocalActivities(mockAccount2)).result.current[hash]
+  it("Adapts Revoke Approval to Activity type", () => {
+    const hash = mockHash("0xrevoke_approval");
+    const activity = renderHook(() => useLocalActivities(mockAccount2)).result
+      .current[hash];
     expect(activity).toMatchObject({
       chainId: mockChainId,
       currencies: [MockUSDT],
-      title: 'Revoked approval',
+      title: "Revoked approval",
       descriptor: MockUSDT.symbol,
       hash,
       status: MockTxStatus.Confirmed,
-    })
-  })
+    });
+  });
 
-  it('Adapts Wrap to Activity type', () => {
-    const hash = mockHash('0xwrap')
-    const activity = renderHook(() => useLocalActivities(mockAccount2)).result.current[hash]
+  it("Adapts Wrap to Activity type", () => {
+    const hash = mockHash("0xwrap");
+    const activity = renderHook(() => useLocalActivities(mockAccount2)).result
+      .current[hash];
 
-    const native = nativeOnChain(mockChainId)
+    const native = nativeOnChain(mockChainId);
 
     expect(activity).toMatchObject({
       chainId: mockChainId,
       currencies: [native, native.wrapped],
-      title: 'Wrapped',
+      title: "Wrapped",
       descriptor: `1.00 ${native.symbol} for 1.00 ${native.wrapped.symbol}`,
       hash,
       status: MockTxStatus.Confirmed,
       from: mockAccount2,
-    })
-  })
+    });
+  });
 
-  it('Adapts Unwrap to Activity type', () => {
-    const hash = mockHash('0xunwrap')
-    const activity = renderHook(() => useLocalActivities(mockAccount2)).result.current[hash]
+  it("Adapts Unwrap to Activity type", () => {
+    const hash = mockHash("0xunwrap");
+    const activity = renderHook(() => useLocalActivities(mockAccount2)).result
+      .current[hash];
 
-    const native = nativeOnChain(mockChainId)
+    const native = nativeOnChain(mockChainId);
 
     expect(activity).toMatchObject({
       chainId: mockChainId,
       currencies: [native.wrapped, native],
-      title: 'Unwrapped',
+      title: "Unwrapped",
       descriptor: `1.00 ${native.wrapped.symbol} for 1.00 ${native.symbol}`,
       hash,
       status: MockTxStatus.Confirmed,
       from: mockAccount2,
-    })
-  })
+    });
+  });
 
-  it('Adapts AddLiquidityV3 to Activity type', () => {
-    const hash = mockHash('0xadd_liquidity_v3')
-    const activity = renderHook(() => useLocalActivities(mockAccount2)).result.current[hash]
+  it("Adapts AddLiquidityV3 to Activity type", () => {
+    const hash = mockHash("0xadd_liquidity_v3");
+    const activity = renderHook(() => useLocalActivities(mockAccount2)).result
+      .current[hash];
 
     expect(activity).toMatchObject({
       chainId: mockChainId,
       currencies: [MockUSDC_MAINNET, MockDAI],
-      title: 'Added liquidity',
+      title: "Added liquidity",
       descriptor: `1.00 ${MockUSDC_MAINNET.symbol} and 1.00 ${MockDAI.symbol}`,
       hash,
       status: MockTxStatus.Confirmed,
       from: mockAccount2,
-    })
-  })
+    });
+  });
 
-  it('Adapts RemoveLiquidityV3 to Activity type', () => {
-    const hash = mockHash('0xremove_liquidity_v3')
-    const activity = renderHook(() => useLocalActivities(mockAccount2)).result.current[hash]
+  it("Adapts RemoveLiquidityV3 to Activity type", () => {
+    const hash = mockHash("0xremove_liquidity_v3");
+    const activity = renderHook(() => useLocalActivities(mockAccount2)).result
+      .current[hash];
 
     expect(activity).toMatchObject({
       chainId: mockChainId,
       currencies: [MockUSDC_MAINNET, MockDAI],
-      title: 'Removed liquidity',
+      title: "Removed liquidity",
       descriptor: `1.00 ${MockUSDC_MAINNET.symbol} and 1.00 ${MockDAI.symbol}`,
       hash,
       status: MockTxStatus.Confirmed,
       from: mockAccount2,
-    })
-  })
+    });
+  });
 
-  it('Adapts RemoveLiquidityV2 to Activity type', () => {
-    const hash = mockHash('0xadd_liquidity_v2')
-    const activity = renderHook(() => useLocalActivities(mockAccount2)).result.current[hash]
+  it("Adapts RemoveLiquidityV2 to Activity type", () => {
+    const hash = mockHash("0xadd_liquidity_v2");
+    const activity = renderHook(() => useLocalActivities(mockAccount2)).result
+      .current[hash];
 
     expect(activity).toMatchObject({
       chainId: mockChainId,
       currencies: [MockUSDC_MAINNET, MockDAI],
-      title: 'Added V2 liquidity',
+      title: "Added V2 liquidity",
       descriptor: `1.00 ${MockUSDC_MAINNET.symbol} and 1.00 ${MockDAI.symbol}`,
       hash,
       status: MockTxStatus.Confirmed,
       from: mockAccount2,
-    })
-  })
+    });
+  });
 
-  it('Adapts CollectFees to Activity type', () => {
-    const hash = mockHash('0xcollect_fees')
-    const activity = renderHook(() => useLocalActivities(mockAccount2)).result.current[hash]
+  it("Adapts CollectFees to Activity type", () => {
+    const hash = mockHash("0xcollect_fees");
+    const activity = renderHook(() => useLocalActivities(mockAccount2)).result
+      .current[hash];
 
     expect(activity).toMatchObject({
       chainId: mockChainId,
       currencies: [MockUSDC_MAINNET, MockDAI],
-      title: 'Collected fees',
+      title: "Collected fees",
       descriptor: `1.00 ${MockUSDC_MAINNET.symbol} and 1.00 ${MockDAI.symbol}`,
       hash,
       status: MockTxStatus.Confirmed,
       from: mockAccount2,
-    })
-  })
+    });
+  });
 
-  it('Adapts MigrateLiquidityV3 to Activity type', () => {
-    const hash = mockHash('0xmigrate_v3_liquidity')
-    const activity = renderHook(() => useLocalActivities(mockAccount2)).result.current[hash]
+  it("Adapts MigrateLiquidityV3 to Activity type", () => {
+    const hash = mockHash("0xmigrate_v3_liquidity");
+    const activity = renderHook(() => useLocalActivities(mockAccount2)).result
+      .current[hash];
 
     expect(activity).toMatchObject({
       chainId: mockChainId,
       currencies: [MockUSDC_MAINNET, MockDAI],
-      title: 'Migrated liquidity',
+      title: "Migrated liquidity",
       descriptor: `${MockUSDC_MAINNET.symbol} and ${MockDAI.symbol}`,
       hash,
       status: MockTxStatus.Confirmed,
       from: mockAccount2,
-    })
-  })
+    });
+  });
 
-  it('Signature to activity - returns undefined if is filled onchain order', () => {
-    const { formatNumber } = renderHook(() => useFormatter()).result.current
+  it("Signature to activity - returns undefined if is filled onchain order", () => {
+    const { formatNumber } = renderHook(() => useFormatter()).result.current;
 
     expect(
       signatureToActivity(
@@ -512,13 +577,13 @@ describe('parseLocalActivity', () => {
           status: UniswapXOrderStatus.FILLED,
         } as SignatureDetails,
         {},
-        formatNumber
-      )
-    ).toBeUndefined()
-  })
+        formatNumber,
+      ),
+    ).toBeUndefined();
+  });
 
-  it('Signature to activity - returns activity if is cancelled onchain order', () => {
-    const { formatNumber } = renderHook(() => useFormatter()).result.current
+  it("Signature to activity - returns activity if is cancelled onchain order", () => {
+    const { formatNumber } = renderHook(() => useFormatter()).result.current;
 
     expect(
       signatureToActivity(
@@ -531,7 +596,7 @@ describe('parseLocalActivity', () => {
             MockUSDC_MAINNET,
             mockCurrencyAmountRawUSDC,
             MockDAI,
-            mockCurrencyAmountRaw
+            mockCurrencyAmountRaw,
           ),
         } as SignatureDetails,
         {
@@ -540,12 +605,12 @@ describe('parseLocalActivity', () => {
             [MockDAI.address]: MockDAI,
           },
         },
-        formatNumber
-      )
+        formatNumber,
+      ),
     ).toEqual({
       chainId: 1,
       currencies: [MockUSDC_MAINNET, MockDAI],
-      descriptor: '1.00 USDC for 1.00 DAI',
+      descriptor: "1.00 USDC for 1.00 DAI",
       from: undefined,
       hash: undefined,
       offchainOrderDetails: {
@@ -555,25 +620,25 @@ describe('parseLocalActivity', () => {
         id: undefined,
         offerer: undefined,
         orderHash: undefined,
-        status: 'cancelled',
+        status: "cancelled",
         swapInfo: {
-          expectedOutputCurrencyAmountRaw: '1000000000000000000',
-          inputCurrencyAmountRaw: '1000000',
-          inputCurrencyId: '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48',
+          expectedOutputCurrencyAmountRaw: "1000000000000000000",
+          inputCurrencyAmountRaw: "1000000",
+          inputCurrencyId: "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
           isUniswapXOrder: false,
-          minimumOutputCurrencyAmountRaw: '1000000000000000000',
-          outputCurrencyId: '0x6B175474E89094C44Da98b954EedeAC495271d0F',
+          minimumOutputCurrencyAmountRaw: "1000000000000000000",
+          outputCurrencyId: "0x6B175474E89094C44Da98b954EedeAC495271d0F",
           tradeType: 0,
           type: 1,
         },
         txHash: undefined,
-        type: 'signUniswapXOrder',
+        type: "signUniswapXOrder",
       },
       prefixIconSrc: undefined,
-      status: 'FAILED',
+      status: "FAILED",
       statusMessage: undefined,
       timestamp: NaN,
-      title: 'Swap cancelled',
-    })
-  })
-})
+      title: "Swap cancelled",
+    });
+  });
+});

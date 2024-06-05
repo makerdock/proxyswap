@@ -61,9 +61,9 @@ import { largerPercentValue } from 'utils/percent'
 import { computeRealizedPriceImpact, warningSeverity } from 'utils/prices'
 import { didUserReject } from 'utils/swapErrorToUserReadableMessage'
 
+import { UNIVERSAL_ROUTER_ADDRESS } from 'utils/addresses'
 import { getIsReviewableQuote } from '.'
 import { OutputTaxTooltipBody } from './TaxTooltipBody'
-import { UNIVERSAL_ROUTER_ADDRESS } from 'utils/addresses'
 
 const SWAP_FORM_CURRENCY_SEARCH_FILTERS = {
   showCommonBases: true,

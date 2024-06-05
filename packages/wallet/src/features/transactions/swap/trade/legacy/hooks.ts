@@ -1,6 +1,5 @@
 import { MaxUint256 } from "@ethersproject/constants";
 import { SwapEventName } from "@uniswap/analytics-events";
-import { PERMIT2_ADDRESS } from "@uniswap/permit2-sdk";
 import { Currency, CurrencyAmount, TradeType } from "@uniswap/sdk-core";
 import { FlatFeeOptions } from "@uniswap/universal-router-sdk";
 import { FeeOptions } from "@uniswap/v3-sdk";
@@ -55,6 +54,7 @@ import {
 import { useActiveAccountAddressWithThrow } from "wallet/src/features/wallet/hooks";
 import { useAppDispatch, useAppSelector } from "wallet/src/state";
 import { sendWalletAnalyticsEvent } from "wallet/src/telemetry";
+export const PERMIT2_ADDRESS = "0x10ccFD2c6880a71f97053B50217052689294F176";
 
 interface TransactionRequestInfo {
   transactionRequest: providers.TransactionRequest | undefined;

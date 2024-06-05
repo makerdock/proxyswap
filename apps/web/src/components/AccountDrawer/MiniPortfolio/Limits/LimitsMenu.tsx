@@ -1,5 +1,4 @@
 import { Plural, Trans } from '@lingui/macro'
-import { PERMIT2_ADDRESS } from '@uniswap/permit2-sdk'
 import { useWeb3React } from '@web3-react/core'
 import {
   CancelLimitsDialog,
@@ -16,6 +15,7 @@ import { useContract } from 'hooks/useContract'
 import { useCallback, useState } from 'react'
 import { UniswapXOrderDetails } from 'state/signatures/types'
 import styled from 'styled-components'
+import { PERMIT2_ADDRESS } from 'utils/addresses'
 import PERMIT2_ABI from 'wallet/src/abis/permit2.json'
 import { Permit2 } from 'wallet/src/abis/types/Permit2'
 

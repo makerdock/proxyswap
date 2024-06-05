@@ -151,6 +151,7 @@ function LimitForm({ onCurrencyChange }: LimitFormProps) {
   const allowance = usePermit2Allowance(
     parsedAmounts.INPUT?.currency?.isNative ? undefined : (parsedAmounts.INPUT as CurrencyAmount<Token>),
     isSupportedChain(chainId) ? UNIVERSAL_ROUTER_ADDRESS : undefined,
+    // undefined,
     TradeFillType.UniswapX
   )
 

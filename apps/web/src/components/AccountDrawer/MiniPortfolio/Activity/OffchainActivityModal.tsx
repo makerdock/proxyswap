@@ -26,10 +26,10 @@ import styled, { useTheme } from 'styled-components'
 import { Divider, ThemedText } from 'theme/components'
 import { ExplorerDataType, getExplorerLink } from 'utils/getExplorerLink'
 
-import { PERMIT2_ADDRESS } from '@uniswap/permit2-sdk'
 import { cancelUniswapXOrder } from 'components/AccountDrawer/MiniPortfolio/Activity/utils'
 import { ContractTransaction } from 'ethers/lib/ethers'
 import { useContract } from 'hooks/useContract'
+import { PERMIT2_ADDRESS } from 'utils/addresses'
 import PERMIT2_ABI from 'wallet/src/abis/permit2.json'
 import { Permit2 } from 'wallet/src/abis/types/Permit2'
 import { PortfolioLogo } from '../PortfolioLogo'
@@ -80,9 +80,9 @@ const OffchainModalBottomButton = styled(ThemeButton)`
 
 export function useOrderAmounts(order?: UniswapXOrderDetails):
   | {
-      inputAmount: CurrencyAmount<Currency>
-      outputAmount: CurrencyAmount<Currency>
-    }
+    inputAmount: CurrencyAmount<Currency>
+    outputAmount: CurrencyAmount<Currency>
+  }
   | undefined {
   const inputCurrency = useCurrency(order?.swapInfo?.inputCurrencyId, order?.chainId)
   const outputCurrency = useCurrency(order?.swapInfo?.outputCurrencyId, order?.chainId)

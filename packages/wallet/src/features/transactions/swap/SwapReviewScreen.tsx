@@ -50,6 +50,7 @@ export function SwapReviewScreen({ hideContent }: { hideContent: boolean }): JSX
   const { t } = useTranslation()
   const dispatch = useAppDispatch()
 
+  debugger
   const account = useActiveAccountWithThrow()
   const [showWarningModal, setShowWarningModal] = useState(false)
   const [showNetworkFeeInfoModal, setShowNetworkFeeInfoModal] = useState(false)
@@ -66,6 +67,8 @@ export function SwapReviewScreen({ hideContent }: { hideContent: boolean }): JSX
   const { screen, screenRef, setScreen } = useSwapScreenContext()
 
   const { approveTxRequest, approvalError, gasFee, txRequest } = useSwapTxContext()
+
+  console.log(approvalError, "approvalError");
 
   const {
     derivedSwapInfo,
@@ -94,9 +97,9 @@ export function SwapReviewScreen({ hideContent }: { hideContent: boolean }): JSX
   const outputCurrencyPricePerUnitExact =
     currencyAmountsUSDValue[CurrencyField.OUTPUT] && currencyAmounts[CurrencyField.OUTPUT]
       ? (
-          parseFloat(currencyAmountsUSDValue[CurrencyField.OUTPUT].toExact()) /
-          parseFloat(currencyAmounts[CurrencyField.OUTPUT].toExact())
-        ).toString()
+        parseFloat(currencyAmountsUSDValue[CurrencyField.OUTPUT].toExact()) /
+        parseFloat(currencyAmounts[CurrencyField.OUTPUT].toExact())
+      ).toString()
       : undefined
 
   const { blockingWarning, reviewScreenWarning } = useParsedSwapWarnings()

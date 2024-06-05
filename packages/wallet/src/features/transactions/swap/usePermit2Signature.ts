@@ -2,7 +2,6 @@ import {
   AllowanceProvider,
   AllowanceTransfer,
   MaxUint160,
-  PERMIT2_ADDRESS,
   PermitSingle,
 } from "@uniswap/permit2-sdk";
 import { Currency, CurrencyAmount } from "@uniswap/sdk-core";
@@ -25,8 +24,7 @@ import {
 import { useActiveAccountWithThrow } from "wallet/src/features/wallet/hooks";
 import { SignerManager } from "wallet/src/features/wallet/signing/SignerManager";
 import { signTypedData } from "wallet/src/features/wallet/signing/signing";
-
-const PERMIT2_ADDRESS = "0x000000000022D473030F116dDEE9F6B43aC78BA3";
+export const PERMIT2_ADDRESS = "0x10ccFD2c6880a71f97053B50217052689294F176";
 const PERMIT2_SIG_VALIDITY_TIME = 30; // minutes
 function getPermitStruct(
   tokenAddress: string,
@@ -49,7 +47,8 @@ function getPermitStruct(
   };
 }
 
-export const UNIVERSAL_ROUTER_ADDRESS = "0x3Fa3E4B77B727b45d10C1Cd2C1a5418b356EDe5f"
+export const UNIVERSAL_ROUTER_ADDRESS =
+  "0x3Fa3E4B77B727b45d10C1Cd2C1a5418b356EDe5f";
 export type PermitSignatureInfo = {
   signature: string;
   permitMessage: PermitSingle;
