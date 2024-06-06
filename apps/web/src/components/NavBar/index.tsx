@@ -84,7 +84,7 @@ export const PageTabs = () => {
           <Trans>Pools</Trans>
         </MenuItem>
       </Box>
-      <MenuItem
+      {/* <MenuItem
         href="/launch"
         dataTestId="launch-nav-link"
         isActive={isLaunchActive}
@@ -97,7 +97,7 @@ export const PageTabs = () => {
         isActive={isClaimActive}
       >
         <Trans>Claim</Trans>
-      </MenuItem>
+      </MenuItem> */}
     </>
   );
 };
