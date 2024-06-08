@@ -37,6 +37,7 @@ import {
   InterfaceElementName,
   InterfaceEventName,
 } from "@uniswap/analytics-events";
+import CurrencyLogo from "components/Logo/CurrencyLogo";
 
 type ContainerProps = {
   highlight: boolean;
@@ -522,6 +523,11 @@ export default function Airdrop() {
                           color: theme.neutral1,
                         }}
                       >
+                        <CurrencyLogo
+                          currency={currency}
+                          size="24px"
+                          style={{ marginRight: "8px" }}
+                        />
                         {tokenInfo?.symbol} <ChevronDown />
                       </SmallButtonPrimary>
                     ) : (
