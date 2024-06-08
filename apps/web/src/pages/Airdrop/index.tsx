@@ -3,12 +3,14 @@ import { useWeb3React } from "@web3-react/core";
 import { Trace } from "analytics";
 import {
   ButtonGray,
+  ButtonLight,
   ButtonPrimary,
   SmallButtonPrimary,
 } from "components/Button";
 import { AutoColumn } from "components/Column";
 import { RowBetween } from "components/Row";
 import CurrencySearchModal from "components/SearchModal/CurrencySearchModal";
+import { useToggleAccountDrawer } from "components/AccountDrawer/MiniPortfolio/hooks";
 import AddressInput from "components/TokenCreator/AddressInput";
 import {
   createMerkleRoot,
@@ -28,6 +30,13 @@ import { Contract } from "ethers";
 import Loader from "components/Icons/LoadingSpinner";
 import Modal from "components/Modal";
 import Success from "./Success";
+import { TraceEvent } from "@uniswap/analytics";
+import { Trans } from "@lingui/macro";
+import {
+  BrowserEvent,
+  InterfaceElementName,
+  InterfaceEventName,
+} from "@uniswap/analytics-events";
 
 type ContainerProps = {
   highlight: boolean;
@@ -219,6 +228,7 @@ export default function Airdrop() {
   const [transactionHash, setTransactionHash] = useState("");
   const [showSuccess, setShowSuccess] = useState(false);
 
+  const toggleWalletDrawer = useToggleAccountDrawer();
   const addPercentage = (entries: ManualEntry[]): ManualEntry[] => {
     const entryMap = new Map<string, ManualEntry>();
 
@@ -612,12 +622,28 @@ export default function Airdrop() {
                     <ButtonGray marginBottom="1rem" onClick={addAddressEntry}>
                       Add address
                     </ButtonGray>
-                    <ButtonPrimary
-                      disabled={isContinueDisabled}
-                      onClick={handleAirdrop}
-                    >
-                      {loading ? <Loader stroke="white" /> : "Airdrop"}
-                    </ButtonPrimary>
+                    {!account ? (
+                      <TraceEvent
+                        events={[BrowserEvent.onClick]}
+                        name={InterfaceEventName.CONNECT_WALLET_BUTTON_CLICKED}
+                        element={InterfaceElementName.CONNECT_WALLET_BUTTON}
+                      >
+                        <ButtonLight
+                          onClick={toggleWalletDrawer}
+                          fontWeight={535}
+                          $borderRadius="16px"
+                        >
+                          <Trans>Connect wallet</Trans>
+                        </ButtonLight>
+                      </TraceEvent>
+                    ) : (
+                      <ButtonPrimary
+                        disabled={isContinueDisabled}
+                        onClick={handleAirdrop}
+                      >
+                        {loading ? <Loader stroke="white" /> : "Airdrop"}
+                      </ButtonPrimary>
+                    )}
                   </ButtonContainer>
                 </Container>
               </Wrapper>
