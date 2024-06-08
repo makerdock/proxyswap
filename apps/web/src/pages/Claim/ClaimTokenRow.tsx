@@ -207,7 +207,7 @@ export default function ClaimTokenRow({
       <td>
         <StyledDataCell>
           <ThemedText.BodyPrimary fontWeight={500} fontSize={14}>
-            <Trans>{data.amount / 10 ** 6}</Trans>
+            <Trans>{data.amount / 10 ** data.decimals}</Trans>
           </ThemedText.BodyPrimary>
         </StyledDataCell>
       </td>

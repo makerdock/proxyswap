@@ -27,6 +27,7 @@ export type AirdropData = {
   tokenLogo: string;
   tickerName: string;
   airdropContract: string;
+  decimals: number;
 };
 
 export const storeData = async (

@@ -14,6 +14,7 @@ export type TokenData = {
   token_logo: string;
   ticker_name: string;
   airdrop_contract: string;
+  decimals: number;
 };
 
 const useFetchTokenData = (account: string | undefined) => {

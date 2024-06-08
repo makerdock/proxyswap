@@ -189,6 +189,7 @@ type TokenInfo = {
   logoURI: string | undefined;
   name: string | undefined;
   symbol: string | undefined;
+  decimals: number | undefined;
 };
 
 const downloadSampleCSV = () => {
@@ -311,20 +312,22 @@ export default function Airdrop() {
   useEffect(() => {
     if (currency) {
       if ("tokenInfo" in currency) {
-        const { name, symbol, address, logoURI } = currency.tokenInfo;
+        const { name, symbol, address, logoURI, decimals } = currency.tokenInfo;
         setTokenInfo({
           name,
           symbol,
           address,
           logoURI,
+          decimals,
         });
       } else {
-        const { name, symbol, address } = currency;
+        const { name, symbol, address, decimals } = currency;
         setTokenInfo({
           name,
           symbol,
           address,
           logoURI: "",
+          decimals,
         });
       }
     } else {
@@ -390,7 +393,10 @@ export default function Airdrop() {
         const percentage = entry.percentage;
         const amount = BigInt(
           Math.floor(
-            parseFloat(tokenQuantity) * parseFloat(percentage) * 0.01 * 10 ** 6,
+            parseFloat(tokenQuantity) *
+              parseFloat(percentage) *
+              0.01 *
+              10 ** tokenInfo?.decimals!,
           ),
         ).toString();
         return [address, amount];
@@ -457,6 +463,7 @@ export default function Airdrop() {
         tickerName: tokenInfo?.symbol || "",
         tokenName: tokenInfo?.name || "",
         airdropContract: String(airdropAddress),
+        decimals: tokenInfo?.decimals || 6,
       }));
 
       await storeAirdropData(airdropData);
