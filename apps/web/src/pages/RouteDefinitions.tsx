@@ -43,6 +43,7 @@ const Step2Page = lazy(() => import("pages/Launch/Step2"));
 const Step3Page = lazy(() => import("pages/Launch/Step3"));
 const ConfirmationPage = lazy(() => import("pages/Launch/Confirmation"));
 const SuccessPage = lazy(() => import("pages/Launch/Success"));
+const Airdrop = lazy(() => import("pages/Airdrop"));
 
 const Vote = lazy(() => import("pages/Vote"));
 
@@ -210,12 +211,18 @@ export const routes: RouteDefinition[] = [
   //     t`Proxyswap | Trade crypto & NFTs safely on the top DeFi exchange`,
   //   getElement: () => <SuccessPage />,
   // }),
-  // createRouteDefinition({
-  //   path: "/claim",
-  //   getTitle: () =>
-  //     t`Proxyswap | Trade crypto & NFTs safely on the top DeFi exchange`,
-  //   getElement: () => <Claim />,
-  // }),
+  createRouteDefinition({
+    path: "/airdrop",
+    getTitle: () =>
+      t`ProxySwap - Swap or provide liquidity on the Proxyswap Protocol`,
+    getElement: () => <Airdrop />,
+  }),
+  createRouteDefinition({
+    path: "/claim",
+    getTitle: () =>
+      t`ProxySwap - Swap or provide liquidity on the Proxyswap Protocol`,
+    getElement: () => <Claim />,
+  }),
   createRouteDefinition({
     path: "/explore/pools/:chainName/:poolAddress",
     getTitle: () =>

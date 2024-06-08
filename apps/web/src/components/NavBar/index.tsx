@@ -20,6 +20,7 @@ import { ChainSelector } from "./ChainSelector";
 import * as styles from "./style.css";
 import { useIsLaunchPage } from "hooks/useIsLaunchPage";
 import { useIsClaimPage } from "hooks/useIsClaimPage";
+import { useIsAirdropPage } from "hooks/useIsAirdropPage";
 
 const Nav = styled.nav`
   padding: ${({ theme }) => `${theme.navVerticalPad}px 12px`};
@@ -64,6 +65,7 @@ export const PageTabs = () => {
   const isPoolActive = useIsPoolsPage();
   const isLaunchActive = useIsLaunchPage();
   const isClaimActive = useIsClaimPage();
+  const isAirdropActive = useIsAirdropPage();
   // const isNftPage = useIsNftPage()
 
   // const shouldDisableNFTRoutes = useDisableNFTRoutes()
@@ -84,12 +86,12 @@ export const PageTabs = () => {
           <Trans>Pools</Trans>
         </MenuItem>
       </Box>
-      {/* <MenuItem
-        href="/launch"
-        dataTestId="launch-nav-link"
-        isActive={isLaunchActive}
+      <MenuItem
+        href="/airdrop"
+        dataTestId="airdrop-nav-link"
+        isActive={isAirdropActive}
       >
-        <Trans>Launch</Trans>
+        <Trans>Airdrop</Trans>
       </MenuItem>
       <MenuItem
         href="/claim"
@@ -97,7 +99,7 @@ export const PageTabs = () => {
         isActive={isClaimActive}
       >
         <Trans>Claim</Trans>
-      </MenuItem> */}
+      </MenuItem>
     </>
   );
 };

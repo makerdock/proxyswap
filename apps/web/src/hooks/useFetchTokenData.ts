@@ -3,16 +3,17 @@ import { useState, useEffect } from "react";
 export type TokenData = {
   id: number;
   created_at: string;
+  airdrop_by: string;
   address: string;
+  root_hash: string;
   token_address: string;
   claimed: boolean;
   proofs: string[];
   amount: number;
-  tokens: {
-    token_name: string;
-    token_logo: string;
-    ticker_name: string;
-  };
+  token_name: string;
+  token_logo: string;
+  ticker_name: string;
+  airdrop_contract: string;
 };
 
 const useFetchTokenData = (account: string | undefined) => {
@@ -25,7 +26,7 @@ const useFetchTokenData = (account: string | undefined) => {
         if (!account) return;
         setTokensLoading(true);
         const response = await fetch(
-          `${process.env.REACT_APP_BACKEND_URL}/get-unclaimed-tokens?address=${account}`,
+          `${process.env.REACT_APP_BACKEND_URL}/get-unclaimed-airdrop-tokens?address=${account}`,
         );
 
         if (!response.ok) {

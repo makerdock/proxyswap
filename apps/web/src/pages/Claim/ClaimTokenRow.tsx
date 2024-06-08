@@ -3,7 +3,6 @@ import { Trans } from "@lingui/macro";
 import { useWeb3React } from "@web3-react/core";
 import CLAIM_TOKEN_ABI from "wallet/src/abis/claim-token.json";
 import ProxyIcon from "assets/images/Icon.png";
-import useFetchLogo from "hooks/useFetchLogo";
 import { TokenData } from "hooks/useFetchTokenData";
 import { darken } from "polished";
 import { useState } from "react";
@@ -97,22 +96,29 @@ export default function ClaimTokenRow({
 }: ClaimTokenRowProps) {
   const { account, provider } = useWeb3React();
   const [tooltipVisible, setTooltipVisible] = useState(false);
-  const { logoUrl } = useFetchLogo(data.tokens.token_logo);
+  const logoUrl = data.token_logo;
   const [loading, setLoading] = useState(false);
 
   const handleClaim = async (
-    tokenAddress: string,
+    airdropAddress: string,
     amount: number,
     proofs: string[],
+    id: number,
   ) => {
     try {
       setLoading(true);
+
       const signer = provider?.getSigner();
-      const tokenContract = new Contract(tokenAddress, CLAIM_TOKEN_ABI, signer);
+      const tokenContract = new Contract(
+        airdropAddress,
+        CLAIM_TOKEN_ABI,
+        signer,
+      );
+
       const tx = await tokenContract.claimTokens(amount, proofs);
       await tx.wait();
       await fetch(
-        `${process.env.REACT_APP_BACKEND_URL}/mark-token-claimed?address=${account}&tokenAddress=${tokenAddress}`,
+        `${process.env.REACT_APP_BACKEND_URL}/mark-airdrop-token-claimed?id=${id}`,
         {
           method: "PUT",
         },
@@ -122,10 +128,9 @@ export default function ClaimTokenRow({
         hideProgressBar: true,
       });
       setTokenData((prevTokenData) =>
-        prevTokenData.filter((token) => token.token_address !== tokenAddress),
+        prevTokenData.filter((token) => token.id !== id),
       );
     } catch (error) {
-      console.error(error);
       toast.error("Failed to claim token. Please try again.", {
         autoClose: 2000,
         hideProgressBar: true,
@@ -140,7 +145,7 @@ export default function ClaimTokenRow({
     setTooltipVisible(true);
     setTimeout(() => setTooltipVisible(false), 2000);
   };
-  const tokenLogoUrl = data.tokens.token_logo && logoUrl ? logoUrl : ProxyIcon;
+  const tokenLogoUrl = logoUrl || ProxyIcon;
 
   return (
     <tr>
@@ -164,14 +169,14 @@ export default function ClaimTokenRow({
               }}
             >
               <ThemedText.BodyPrimary fontWeight={500} fontSize={14}>
-                <Trans>{data.tokens.token_name}</Trans>
+                <Trans>{data.token_name}</Trans>
               </ThemedText.BodyPrimary>
               <ThemedText.BodyPrimary
                 fontWeight={500}
                 fontSize={14}
                 opacity="0.32"
               >
-                <Trans>{data.tokens.ticker_name}</Trans>
+                <Trans>{data.ticker_name}</Trans>
               </ThemedText.BodyPrimary>
             </div>
             <div style={{ display: "flex", gap: "4px", alignItems: "center" }}>
@@ -210,7 +215,12 @@ export default function ClaimTokenRow({
         <StyledDataCell style={{ justifyContent: "right" }}>
           <Button
             onClick={() =>
-              handleClaim(data.token_address, data.amount, data.proofs)
+              handleClaim(
+                data.airdrop_contract,
+                data.amount,
+                data.proofs,
+                data.id,
+              )
             }
           >
             {loading ? <Loader stroke="white" /> : "Claim"}
