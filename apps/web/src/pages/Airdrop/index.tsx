@@ -175,6 +175,9 @@ const TokenQuantityInput = styled.input`
   font-weight: 500;
   color: ${({ theme }) => theme.neutral1};
   outline: none;
+  border-radius: 16px;
+  padding: 10px;
+  border: 1px solid ${({ theme }) => theme.surface3};
 `;
 
 type ManualEntry = {
@@ -516,9 +519,10 @@ export default function Airdrop() {
                           background: theme.surface1,
                           border: `1px solid ${theme.surface3}`,
                           outline: "none",
+                          color: theme.neutral1,
                         }}
                       >
-                        {tokenInfo.symbol} <ChevronDown />
+                        {tokenInfo?.symbol} <ChevronDown />
                       </SmallButtonPrimary>
                     ) : (
                       <SmallButtonPrimary
