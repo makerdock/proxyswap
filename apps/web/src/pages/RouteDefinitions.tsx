@@ -43,6 +43,7 @@ const Step2Page = lazy(() => import("pages/Launch/Step2"));
 const Step3Page = lazy(() => import("pages/Launch/Step3"));
 const ConfirmationPage = lazy(() => import("pages/Launch/Confirmation"));
 const SuccessPage = lazy(() => import("pages/Launch/Success"));
+const Airdrop = lazy(() => import("pages/Airdrop"));
 
 const Vote = lazy(() => import("pages/Vote"));
 
@@ -174,46 +175,52 @@ export const routes: RouteDefinition[] = [
       );
     },
   }),
+  // createRouteDefinition({
+  //   path: "/launch",
+  //   getTitle: () =>
+  //     t`Proxyswap | Trade crypto & NFTs safely on the top DeFi exchange`,
+  //   getElement: () => <Launch />,
+  // }),
+  // createRouteDefinition({
+  //   path: "/launch/step1",
+  //   getTitle: () =>
+  //     t`Proxyswap | Trade crypto & NFTs safely on the top DeFi exchange`,
+  //   getElement: () => <Step1Page />,
+  // }),
+  // createRouteDefinition({
+  //   path: "/launch/step2",
+  //   getTitle: () =>
+  //     t`Proxyswap | Trade crypto & NFTs safely on the top DeFi exchange`,
+  //   getElement: () => <Step2Page />,
+  // }),
+  // createRouteDefinition({
+  //   path: "/launch/step3",
+  //   getTitle: () =>
+  //     t`Proxyswap | Trade crypto & NFTs safely on the top DeFi exchange`,
+  //   getElement: () => <Step3Page />,
+  // }),
+  // createRouteDefinition({
+  //   path: "/launch/confirmation",
+  //   getTitle: () =>
+  //     t`Proxyswap | Trade crypto & NFTs safely on the top DeFi exchange`,
+  //   getElement: () => <ConfirmationPage />,
+  // }),
+  // createRouteDefinition({
+  //   path: "/launch/success",
+  //   getTitle: () =>
+  //     t`Proxyswap | Trade crypto & NFTs safely on the top DeFi exchange`,
+  //   getElement: () => <SuccessPage />,
+  // }),
   createRouteDefinition({
-    path: "/launch",
+    path: "/airdrop",
     getTitle: () =>
-      t`Proxyswap | Trade crypto & NFTs safely on the top DeFi exchange`,
-    getElement: () => <Launch />,
-  }),
-  createRouteDefinition({
-    path: "/launch/step1",
-    getTitle: () =>
-      t`Proxyswap | Trade crypto & NFTs safely on the top DeFi exchange`,
-    getElement: () => <Step1Page />,
-  }),
-  createRouteDefinition({
-    path: "/launch/step2",
-    getTitle: () =>
-      t`Proxyswap | Trade crypto & NFTs safely on the top DeFi exchange`,
-    getElement: () => <Step2Page />,
-  }),
-  createRouteDefinition({
-    path: "/launch/step3",
-    getTitle: () =>
-      t`Proxyswap | Trade crypto & NFTs safely on the top DeFi exchange`,
-    getElement: () => <Step3Page />,
-  }),
-  createRouteDefinition({
-    path: "/launch/confirmation",
-    getTitle: () =>
-      t`Proxyswap | Trade crypto & NFTs safely on the top DeFi exchange`,
-    getElement: () => <ConfirmationPage />,
-  }),
-  createRouteDefinition({
-    path: "/launch/success",
-    getTitle: () =>
-      t`Proxyswap | Trade crypto & NFTs safely on the top DeFi exchange`,
-    getElement: () => <SuccessPage />,
+      t`ProxySwap - Swap or provide liquidity on the Proxyswap Protocol`,
+    getElement: () => <Airdrop />,
   }),
   createRouteDefinition({
     path: "/claim",
     getTitle: () =>
-      t`Proxyswap | Trade crypto & NFTs safely on the top DeFi exchange`,
+      t`ProxySwap - Swap or provide liquidity on the Proxyswap Protocol`,
     getElement: () => <Claim />,
   }),
   createRouteDefinition({
