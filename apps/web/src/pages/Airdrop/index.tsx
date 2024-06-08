@@ -38,6 +38,8 @@ import {
   InterfaceEventName,
 } from "@uniswap/analytics-events";
 import CurrencyLogo from "components/Logo/CurrencyLogo";
+import useCurrencyBalance from "lib/hooks/useCurrencyBalance";
+import { NumberType, useFormatter } from "utils/formatNumbers";
 
 type ContainerProps = {
   highlight: boolean;
@@ -232,7 +234,15 @@ export default function Airdrop() {
   const [tokenInfo, setTokenInfo] = useState<TokenInfo | null>(null);
   const [transactionHash, setTransactionHash] = useState("");
   const [showSuccess, setShowSuccess] = useState(false);
-
+  const selectedCurrencyBalance = useCurrencyBalance(
+    account ?? undefined,
+    currency ?? undefined,
+  );
+  const { formatCurrencyAmount } = useFormatter();
+  const balance = formatCurrencyAmount({
+    amount: selectedCurrencyBalance,
+    type: NumberType.TokenNonTx,
+  });
   const toggleWalletDrawer = useToggleAccountDrawer();
   const addPercentage = (entries: ManualEntry[]): ManualEntry[] => {
     const entryMap = new Map<string, ManualEntry>();
@@ -381,7 +391,9 @@ export default function Airdrop() {
     ) ||
     userPercentage < 0 ||
     tokenQuantity.trim() === "" ||
-    !tokenInfo;
+    parseFloat(tokenQuantity) <= 0 ||
+    !tokenInfo ||
+    parseFloat(tokenQuantity) > parseFloat(balance.replace(",", ""));
 
   const handleDismissSearch = useCallback(() => {
     setModalOpen(false);
@@ -513,23 +525,36 @@ export default function Airdrop() {
                       onChange={(e) => setTokenQuantity(e.target.value)}
                     />
                     {tokenInfo ? (
-                      <SmallButtonPrimary
-                        onClick={() => setModalOpen(true)}
-                        style={{
-                          borderRadius: "2rem",
-                          background: theme.surface1,
-                          border: `1px solid ${theme.surface3}`,
-                          outline: "none",
-                          color: theme.neutral1,
-                        }}
-                      >
-                        <CurrencyLogo
-                          currency={currency}
-                          size="24px"
-                          style={{ marginRight: "8px" }}
-                        />
-                        {tokenInfo?.symbol} <ChevronDown />
-                      </SmallButtonPrimary>
+                      <div style={{ position: "relative", padding: "10px 0" }}>
+                        <SmallButtonPrimary
+                          onClick={() => setModalOpen(true)}
+                          style={{
+                            borderRadius: "2rem",
+                            background: theme.surface1,
+                            border: `1px solid ${theme.surface3}`,
+                            outline: "none",
+                            color: theme.neutral1,
+                          }}
+                        >
+                          <CurrencyLogo
+                            currency={currency}
+                            size="24px"
+                            style={{ marginRight: "8px" }}
+                          />
+                          {tokenInfo?.symbol} <ChevronDown />
+                        </SmallButtonPrimary>
+                        <ThemedText.BodySecondary
+                          fontSize={14}
+                          textAlign="center"
+                          style={{
+                            position: "absolute",
+                            right: "6px",
+                            bottom: "-0.7rem",
+                          }}
+                        >
+                          Balance: {balance}
+                        </ThemedText.BodySecondary>
+                      </div>
                     ) : (
                       <SmallButtonPrimary
                         onClick={() => setModalOpen(true)}
@@ -658,7 +683,14 @@ export default function Airdrop() {
                         disabled={isContinueDisabled}
                         onClick={handleAirdrop}
                       >
-                        {loading ? <Loader stroke="white" /> : "Airdrop"}
+                        {parseFloat(tokenQuantity) >
+                        parseFloat(balance.replace(",", "")) ? (
+                          `Insufficient ${tokenInfo?.symbol} Balance`
+                        ) : loading ? (
+                          <Loader stroke="white" />
+                        ) : (
+                          "Airdrop"
+                        )}
                       </ButtonPrimary>
                     )}
                   </ButtonContainer>
