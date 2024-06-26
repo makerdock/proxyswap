@@ -22,7 +22,7 @@ layout:
 
 ## Repositories
 
-* Proxyswap Labs: Front End Interfaces - [https://github.com/makerdock/proxyswap](https://github.com/makerdock/proxyswap)
+* Proxyswap Labs: Front End Interfaces - [https://github.com/demipoet/proxyswap](https://github.com/demipoet/proxyswap)
 
 ## Articles
 
