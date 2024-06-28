@@ -18,4 +18,6 @@ layout:
 Cast link - [https://warpcast.com/proxyswap/0x08d988f2](https://warpcast.com/proxyswap/0x08d988f2)
 {% endhint %}
 
-<figure><img src="../../.gitbook/assets/wearesoearly-campaign.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/wearesoearly-campaign.png" alt=""><figcaption></figcaption></figure>
+
+[bridge-eth-via-decent.md](wearesoearly-campaign/bridge-eth-via-decent.md "mention")
