@@ -16,49 +16,48 @@ layout:
 
 ## Providing LP for $PROXY
 
-1. Go to `https://proxyswap.tips/` - [🔗](https://proxyswap.tips/)
+{% tabs %}
+{% tab title="Cover" %}
+<figure><img src="../.gitbook/assets/slide 0 - LPing.png" alt=""><figcaption></figcaption></figure>
+{% endtab %}
 
-![Proxyswap website](https://proxyswap-vocs.vercel.app/docs/images/providingLP-tutorial-01.png)
+{% tab title="Step 1" %}
+<figure><img src="../.gitbook/assets/slide 1 - LPing.png" alt=""><figcaption></figcaption></figure>
+{% endtab %}
 
-2. Connect your Wallet. This assumes you are using a self-custodial crypto wallet browser extensions such as Coinbase Wallet, Metamask, Rainbow, Zapper, Zerion for popular examples. If you are using Zerion or Rabby, still try clicking the Metamask option as they can assume the MM role by default.\
+{% tab title="Step 2" %}
+<figure><img src="../.gitbook/assets/slide 2 - LPing.png" alt=""><figcaption></figcaption></figure>
+{% endtab %}
 
+{% tab title="Step 3" %}
+<figure><img src="../.gitbook/assets/slide 3 - LPing.png" alt=""><figcaption></figcaption></figure>
+{% endtab %}
 
-![Connect your Wallet](https://proxyswap-vocs.vercel.app/docs/images/providingLP-tutorial-02.gif)
+{% tab title="Step 4" %}
+<figure><img src="../.gitbook/assets/slide 4 - LPing.png" alt=""><figcaption></figcaption></figure>
+{% endtab %}
 
-3. Click the `Pool` button\
+{% tab title="Step 5" %}
+<figure><img src="../.gitbook/assets/slide 5 - LPing.png" alt=""><figcaption></figcaption></figure>
+{% endtab %}
 
+{% tab title="Step 6" %}
+<figure><img src="../.gitbook/assets/slide 6 - LPing.png" alt=""><figcaption></figcaption></figure>
+{% endtab %}
 
-![Click Pool](https://proxyswap-vocs.vercel.app/docs/images/providingLP-tutorial-03.gif)
+{% tab title="Step 7" %}
+<figure><img src="../.gitbook/assets/slide 7 - LPing.png" alt=""><figcaption></figcaption></figure>
+{% endtab %}
 
-4. Click the 'New Position\` button\
+{% tab title="Step 8" %}
+<figure><img src="../.gitbook/assets/slide 8 - LPing.png" alt=""><figcaption></figcaption></figure>
+{% endtab %}
 
+{% tab title="Step 9" %}
+<figure><img src="../.gitbook/assets/slide 9 - LPing.png" alt=""><figcaption></figcaption></figure>
+{% endtab %}
 
-![Click New Position](https://proxyswap-vocs.vercel.app/docs/images/providingLP-tutorial-04.png)
-
-5. You will see the panel below wherein `DEGEN` is by default as the token on the left. You may click the dropdown field `Select a Token`, and then select PROXY among the choices.\
-
-
-![Click Select a Token, Select PROXY](https://proxyswap-vocs.vercel.app/docs/images/providingLP-tutorial-05.png)
-
-6. Select a Fee Tier based on which your LP position will be charging a % on trade fees for your position. There are currently a 0.3% fee tier LP and a 1.0% fee tier LP initialized at the moment. We recommend choosing between these two options.\
-
-
-![Click Select Fee Tier](https://proxyswap-vocs.vercel.app/docs/images/providingLP-tutorial-06.png)
-
-7. Enter the amounts of tokens you like to add into your LP position. The ratio between $DEGEN and $PROXY will be automatically calculated.\
-
-
-![Enter amount of tokens](https://proxyswap-vocs.vercel.app/docs/images/providingLP-tutorial-07.png)
-
-8. Enter the price range you want to enter your LP Position to, by setting the minimum price and maximum price. You can switch the price range view between $DEGEN and $PROXY tokens by clicking the toggle on the upper right corner of the dialog.
-
-![Enter price range](https://proxyswap-vocs.vercel.app/docs/images/providingLP-tutorial-08.png)
-
-9. Click the Preview button.\
-
-
-![Click Preview](https://proxyswap-vocs.vercel.app/docs/images/providingLP-tutorial-09.png)
-
-10. Click Add. You may be asked to confirm an Approve transaction to allow Proxyswap to spend your $PROXY tokens if you are doing this for the first time. Otherwise, the Confirm the Multicall transaction which will perform the Add LP transactions.
-
-![Click Add, Confirms Transaction](https://proxyswap-vocs.vercel.app/docs/images/providingLP-tutorial-09.png)
+{% tab title="Step 10" %}
+<figure><img src="../.gitbook/assets/slide 10 - LPing.png" alt=""><figcaption></figcaption></figure>
+{% endtab %}
+{% endtabs %}
