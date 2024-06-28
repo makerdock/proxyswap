@@ -17,7 +17,7 @@ layout:
 ## Locking your LP
 
 {% tabs %}
-{% tab title="Cover" %}
+{% tab title="S. 0" %}
 <figure><img src="../../.gitbook/assets/slide 0 - LP Locker.png" alt=""><figcaption></figcaption></figure>
 {% endtab %}
 
