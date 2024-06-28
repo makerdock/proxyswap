@@ -19,6 +19,7 @@ layout:
 * Proxyswap Interface - [https://proxyswap.tips/](https://proxyswap.tips/)
 * Warpcast Channel - [https://warpcast.com](https://warpcast.com/\~/channel/proxyswap)
 * Proxyswap DAO Voting Community - [https://farcaster.vote/](https://farcaster.vote/app/#/communities/12)
+* Telegram Support Channel - [https://t.me/+vcmWcU2GXophZjZh](https://t.me/+vcmWcU2GXophZjZh)
 
 ## Repositories
 
