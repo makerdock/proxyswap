@@ -21,7 +21,7 @@ layout:
 <figure><img src="../.gitbook/assets/slide 0 - LPing.png" alt=""><figcaption></figcaption></figure>
 {% endtab %}
 
-{% tab title="S. 1" %}
+{% tab title="Step 1" %}
 <figure><img src="../.gitbook/assets/slide 1 - LPing.png" alt=""><figcaption></figcaption></figure>
 {% endtab %}
 
