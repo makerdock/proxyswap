@@ -16,11 +16,9 @@ layout:
 
 ## Providing LP for $PROXY
 
-{% tabs %}
-{% tab title="Cover" %}
 <figure><img src="../.gitbook/assets/slide 0 - LPing.png" alt=""><figcaption></figcaption></figure>
-{% endtab %}
 
+{% tabs %}
 {% tab title="Step 1" %}
 <figure><img src="../.gitbook/assets/slide 1 - LPing.png" alt=""><figcaption></figcaption></figure>
 {% endtab %}
