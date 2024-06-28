@@ -14,6 +14,8 @@ layout:
 
 # Swaps
 
+### Performing a swap on Proxyswap (Degen L3 Chain)
+
 {% tabs %}
 {% tab title="Cover" %}
 <figure><img src="../.gitbook/assets/slide 0 - Swapping.png" alt=""><figcaption></figcaption></figure>
