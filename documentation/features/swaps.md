@@ -14,13 +14,11 @@ layout:
 
 # Swaps
 
-<div data-full-width="true">
-
-<figure><img src="../.gitbook/assets/slide 0 - Swapping.png" alt=""><figcaption><p>See steps below</p></figcaption></figure>
-
-</div>
-
 {% tabs %}
+{% tab title="Cover" %}
+<figure><img src="../.gitbook/assets/slide 0 - Swapping.png" alt=""><figcaption></figcaption></figure>
+{% endtab %}
+
 {% tab title="Step 1" %}
 <figure><img src="../.gitbook/assets/slide 1 - Swapping.png" alt=""><figcaption></figcaption></figure>
 {% endtab %}
