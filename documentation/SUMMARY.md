@@ -15,7 +15,8 @@
 
 * [Farcaster's First Social DEX](proxy-campaigns/farcasters-first-social-dex.md)
 * [Liquidity Incentives on Rivera](proxy-campaigns/liquidity-incentives-on-rivera.md)
-* [/wearesoearly Campaign](proxy-campaigns/wearesoearly-campaign.md)
+* [/wearesoearly Campaign](proxy-campaigns/wearesoearly-campaign/README.md)
+  * [Bridge ETH via Decent](proxy-campaigns/wearesoearly-campaign/bridge-eth-via-decent.md)
 
 ## Tokenomics
 

@@ -14,24 +14,54 @@ layout:
 
 # Lock
 
-The user flow below describes how Proxyswap LPLocker contract is implemented.
+## Locking your LP
 
-1. User creates a new LP position through the Pools tab in the website. Refer [here](https://proxyswap-vocs.vercel.app/lock-contract) to learn how to create a new LP position.\
+{% tabs %}
+{% tab title="Cover" %}
+<figure><img src="../../.gitbook/assets/slide 0 - LP Locker.png" alt=""><figcaption></figcaption></figure>
+{% endtab %}
 
-2. Once user has the LP Position created, he will go to the "Lock LP" page of the website\
+{% tab title="S. 1" %}
+<figure><img src="../../.gitbook/assets/slide 1 - LP Locker.png" alt=""><figcaption></figcaption></figure>
+{% endtab %}
 
-3. He will click "New LP Lock"\
+{% tab title="S. 2" %}
+<figure><img src="../../.gitbook/assets/slide 2 - LP Locker.png" alt=""><figcaption></figcaption></figure>
+{% endtab %}
 
-4. He will then be brought to a new section wherein he will:\
+{% tab title="S. 3" %}
+<figure><img src="../../.gitbook/assets/slide 3 - LP Locker.png" alt=""><figcaption></figcaption></figure>
+{% endtab %}
 
-   * Choose which LP position he wants to lock (as he may have multiple)\
+{% tab title="S. 4" %}
+<figure><img src="../../.gitbook/assets/slide 4 - LP Locker.png" alt=""><figcaption></figcaption></figure>
+{% endtab %}
 
-   * Enter duration - in terms of years, months, days, hours, minutes, seconds\
+{% tab title="S. 5" %}
+<figure><img src="../../.gitbook/assets/slide 5 - LP Locker.png" alt=""><figcaption></figcaption></figure>
+{% endtab %}
 
-   * Clicks "Create Lock" button\
+{% tab title="S. 6" %}
+<figure><img src="../../.gitbook/assets/slide 6 - LP Locker.png" alt=""><figcaption></figcaption></figure>
+{% endtab %}
 
-   * He then will confirm a transaction to create the LP lock contract instance via wallet extension\
+{% tab title="S. 7" %}
+<figure><img src="../../.gitbook/assets/slide 7 - LP Locker.png" alt=""><figcaption></figcaption></figure>
+{% endtab %}
 
-   * Once transaction is approved and LP lock created, he then will need to confirm an "Approve" transaction that allows Proxyswap to "spend" his LP position NFT\
+{% tab title="S. 8" %}
+<figure><img src="../../.gitbook/assets/slide 8 - LP Locker.png" alt=""><figcaption></figcaption></figure>
+{% endtab %}
 
-   * After approval transaction is successful, he then will need to confirm another "safeTransfer()" transaction to transfer the LP Position NFT into the lock contract.
+{% tab title="S. 9" %}
+<figure><img src="../../.gitbook/assets/slide 9 - LP Locker.png" alt=""><figcaption></figcaption></figure>
+{% endtab %}
+
+{% tab title="S. 10" %}
+<figure><img src="../../.gitbook/assets/slide 10 - LP Locker.png" alt=""><figcaption></figcaption></figure>
+{% endtab %}
+
+{% tab title="S. 11" %}
+<figure><img src="../../.gitbook/assets/slide 11 - LP Locker.png" alt=""><figcaption></figcaption></figure>
+{% endtab %}
+{% endtabs %}
