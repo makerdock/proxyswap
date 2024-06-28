@@ -23,3 +23,5 @@ Lock any LP NFT on Proxyswap, claim fees on locked positions&#x20;
 🔹 Generating Fees: As trades occur in the pool where your liquidity is provided, fees are generated.
 
 🔹 Claiming Fees: Even though the actual liquidity is locked and cannot be withdrawn, you can still claim the trading fees accrued during the lock period
+
+* [lock.md](lock.md "mention")
