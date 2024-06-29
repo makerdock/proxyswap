@@ -14,7 +14,7 @@ layout:
 
 # Farcaster's First Social DEX
 
-[![Proxyswap. Farcaster's First Social DEX. Coming Soon.](https://i.ibb.co/fvTZctk/socialdex.jpg)](https://warpcast.com/proxyswap/0xe5d67063)
+[![Proxyswap. Farcaster's First Social DEX. Coming Soon.](https://i.ibb.co/fvTZctk/socialdex.jpg =1284x)](https://warpcast.com/proxyswap/0xe5d67063)
 
 [@farcaster](https://warpcast.com/farcaster)'s 1st Social DEX is coming 🔜&#x20;
 
