@@ -14,7 +14,7 @@ layout:
 
 # Farcaster's First Social DEX
 
-![../.gitbook/assets/socialdex.png](https://warpcast.com/proxyswap/0xe5d67063)
+![https://2071974519-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FsWBLQWgnhlgLFxKzJ0Uk%2Fuploads%2FfjL4czhu5LiBSU0lrZ4s%2Fsocialdex.png?alt=media&token=95ab0110-2c1a-4092-8866-589166148584](https://warpcast.com/proxyswap/0xe5d67063)
 
 <figure><img src="../.gitbook/assets/socialdex.png" alt=""><figcaption></figcaption></figure>
 
