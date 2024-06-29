@@ -14,11 +14,7 @@ layout:
 
 # Farcaster's First Social DEX
 
-!\[[https://imagedelivery.net/BXluQx4ige9GuW0Ia56BHw/47d213fb-0259-49be-273e-1e2a15e4e600/rectcontain3](https://imagedelivery.net/BXluQx4ige9GuW0Ia56BHw/47d213fb-0259-49be-273e-1e2a15e4e600/rectcontain3)]\([https://warpcast.com/proxyswap/0xe5d67063](https://warpcast.com/proxyswap/0xe5d67063))
-
-!\[]\()
-
-\{% content-ref url="[https://warpcast.com/proxyswap/0xe5d67063](https://warpcast.com/proxyswap/0xe5d67063)" %\} sample link \{% endcontent-ref %\}
+![[Proxy swap. Farcaster's First Social DEX. Coming Soon.](https://imagedelivery.net/BXluQx4ige9GuW0Ia56BHw/47d213fb-0259-49be-273e-1e2a15e4e600/rectcontain3)](https://warpcast.com/proxyswap/0xe5d67063)
 
 [@farcaster](https://warpcast.com/farcaster)'s 1st Social DEX is coming 🔜&#x20;
 
