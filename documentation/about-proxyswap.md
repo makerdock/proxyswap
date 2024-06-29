@@ -14,6 +14,8 @@ layout:
 
 # About Proxyswap
 
+> **Proxywap was deployed for, and by Degens.**
+
 ## Protocol, Interface, Studio
 
 To begin, we should make clear the distinctions between the different areas of "Proxyswap", some of which may confuse new users.
@@ -28,5 +30,3 @@ Please note that as the Proxyswap protocol v 0.1 is currently an identical fork 
 ## Future Vision
 
 Our mission is to onboard users, teams and liquidity onto “degenchain” with a feature-rich trading platform fully integrated and informed by sufficiently decentralized social networks.
-
-Proxywap was deployed for, and by Degens.

@@ -22,15 +22,21 @@ Swaps are the most common way of interacting with the Proxyswap protocol. For en
 
 [https://docs.uniswap.org/concepts/protocol/swaps#introduction](https://docs.uniswap.org/concepts/protocol/swaps#introduction)
 
-### Price Impact[​](https://docs.uniswap.org/concepts/protocol/swaps#price-impact) <a href="#price-impact" id="price-impact"></a>
+### Price Impact <a href="#price-impact" id="price-impact"></a>
+
+To understand price impact of swaps in more detail, consult the Uniswap documentation:[​](https://docs.uniswap.org/concepts/protocol/swaps#price-impact)
 
 [https://docs.uniswap.org/concepts/protocol/swaps#price-impact](https://docs.uniswap.org/concepts/protocol/swaps#price-impact)
 
-### Slippage[​](https://docs.uniswap.org/concepts/protocol/swaps#slippage) <a href="#slippage" id="slippage"></a>
+### Slippage <a href="#slippage" id="slippage"></a>
+
+To understand slippage in more detail, consult the Uniswap documentation:[​](https://docs.uniswap.org/concepts/protocol/swaps#slippage)
 
 [https://docs.uniswap.org/concepts/protocol/swaps#slippage](https://docs.uniswap.org/concepts/protocol/swaps#slippage)
 
-### Safety Checks[​](https://docs.uniswap.org/concepts/protocol/swaps#safety-checks) <a href="#safety-checks" id="safety-checks"></a>
+### Safety Checks <a href="#safety-checks" id="safety-checks"></a>
+
+To understand safety checks in more detail, consult the Uniswap documentation:[​](https://docs.uniswap.org/concepts/protocol/swaps#safety-checks)
 
 [https://docs.uniswap.org/concepts/protocol/swaps#safety-checks](https://docs.uniswap.org/concepts/protocol/swaps#safety-checks)
 

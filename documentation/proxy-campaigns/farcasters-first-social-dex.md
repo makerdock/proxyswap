@@ -14,7 +14,7 @@ layout:
 
 # Farcaster's First Social DEX
 
-<figure><img src="https://proxy.wrpcd.net/?url=https%3A%2F%2Fi.imgur.com%2FsLPIuAD.png&#x26;s=68c8ca564b3fe8522965789ac358451104cf64910051e4f2be38ec51449c16ef" alt=""><figcaption></figcaption></figure>
+\[!\["Proxy swap, Farcaster's first social DEX. Coming soon.]\([https://imagedelivery.net/BXluQx4ige9GuW0Ia56BHw/47d213fb-0259-49be-273e-1e2a15e4e600/rectcontain3](https://imagedelivery.net/BXluQx4ige9GuW0Ia56BHw/47d213fb-0259-49be-273e-1e2a15e4e600/rectcontain3))]\([https://warpcast.com/proxyswap/0xe5d67063](https://warpcast.com/proxyswap/0xe5d67063))
 
 [@farcaster](https://warpcast.com/farcaster)'s 1st Social DEX is coming 🔜&#x20;
 
@@ -22,7 +22,7 @@ Shoutout to the community - its your support & excitement that’s making this h
 
 Onchain trading is getting an upgrade 📈&#x20;
 
-🔹 More [/social](https://warpcast.com/\~/channel/social)&#x20;
+🔹 More social
 
 🔹 More fun&#x20;
 

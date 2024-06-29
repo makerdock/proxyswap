@@ -34,11 +34,15 @@ The nature of AMM design makes some styles of limit orders possible, while other
 
 ### Take-Profit Order <a href="#take-profit-orders" id="take-profit-orders"></a>
 
+To perform a take-profit order, consult the Uniswap documentation:&#x20;
+
 [https://docs.uniswap.org/concepts/protocol/range-orders#take-profit-orders](https://docs.uniswap.org/concepts/protocol/range-orders#take-profit-orders)[​](https://docs.uniswap.org/concepts/protocol/range-orders#take-profit-orders)
 
 ***
 
-### Buy Limit Orders[​](https://docs.uniswap.org/concepts/protocol/range-orders#buy-limit-orders) <a href="#buy-limit-orders" id="buy-limit-orders"></a>
+### Buy Limit Orders <a href="#buy-limit-orders" id="buy-limit-orders"></a>
+
+To perform a buy limit order, consult the Uniswap documentation: [​](https://docs.uniswap.org/concepts/protocol/range-orders#buy-limit-orders)
 
 [https://docs.uniswap.org/concepts/protocol/range-orders#buy-limit-orders](https://docs.uniswap.org/concepts/protocol/range-orders#buy-limit-orders)
 
@@ -46,16 +50,22 @@ The nature of AMM design makes some styles of limit orders possible, while other
 
 ### Buy Stop Orders[​](https://docs.uniswap.org/concepts/protocol/range-orders#buy-stop-orders) <a href="#buy-stop-orders" id="buy-stop-orders"></a>
 
+To perform a buy stop order, consult the Uniswap documentation:&#x20;
+
 [https://docs.uniswap.org/concepts/protocol/range-orders#buy-stop-orders](https://docs.uniswap.org/concepts/protocol/range-orders#buy-stop-orders)
 
 ***
 
-### Stop-Loss Orders[​](https://docs.uniswap.org/concepts/protocol/range-orders#stop-loss-orders) <a href="#stop-loss-orders" id="stop-loss-orders"></a>
+### Stop-Loss Orders <a href="#stop-loss-orders" id="stop-loss-orders"></a>
+
+To perform a stop-loss order, consult the Uniswap documentation: [​](https://docs.uniswap.org/concepts/protocol/range-orders#stop-loss-orders)
 
 [https://docs.uniswap.org/concepts/protocol/range-orders#stop-loss-orders](https://docs.uniswap.org/concepts/protocol/range-orders#stop-loss-orders)
 
 ***
 
-## Fees[​](https://docs.uniswap.org/concepts/protocol/range-orders#fees) <a href="#fees" id="fees"></a>
+## Fees <a href="#fees" id="fees"></a>
+
+To understand fees with regards to range orders in more detail, consult the Uniswap documentation:[​](https://docs.uniswap.org/concepts/protocol/range-orders#fees)
 
 [https://docs.uniswap.org/concepts/protocol/range-orders#fees](https://docs.uniswap.org/concepts/protocol/range-orders#fees)
