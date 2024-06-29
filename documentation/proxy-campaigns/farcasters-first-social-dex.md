@@ -14,18 +14,20 @@ layout:
 
 # Farcaster's First Social DEX
 
-![[Proxy swap. Farcaster's First Social DEX. Coming Soon.](https://imagedelivery.net/BXluQx4ige9GuW0Ia56BHw/47d213fb-0259-49be-273e-1e2a15e4e600/rectcontain3)](https://warpcast.com/proxyswap/0xe5d67063)
+![Proxy swap. Farcaster's First Social DEX. Coming Soon.](https://warpcast.com/proxyswap/0xe5d67063)
 
-[@farcaster](https://warpcast.com/farcaster)'s 1st Social DEX is coming 🔜&#x20;
+<figure><img src="../.gitbook/assets/socialdex.png" alt=""><figcaption></figcaption></figure>
 
-Shoutout to the community - its your support & excitement that’s making this happen 💙&#x20;
+[@farcaster](https://warpcast.com/farcaster)'s 1st Social DEX is coming 🔜
 
-Onchain trading is getting an upgrade 📈&#x20;
+Shoutout to the community - its your support & excitement that’s making this happen 💙
+
+Onchain trading is getting an upgrade 📈
 
 🔹 More social
 
-🔹 More fun&#x20;
+🔹 More fun
 
-🔹 Customised to each user&#x20;
+🔹 Customised to each user
 
 🔹 And much more 🍳
