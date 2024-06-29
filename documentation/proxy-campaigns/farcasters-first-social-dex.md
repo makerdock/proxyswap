@@ -16,7 +16,9 @@ layout:
 
 [![Proxyswap. Farcaster's First Social DEX. Coming Soon.](../.gitbook/assets/socialdex.png)](https://warpcast.com/proxyswap/0xe5d67063)
 
-<a href="https://warpcast.com/proxyswap/0xe5d67063" target="_blank"><img alt="Proxyswap. Farcaster's First Social DEX. Coming Soon." fetchpriority="high" class="block" src="../.gitbook/assets/socialdex.png" style="max-width: 100%; height: auto;"></a>
+[![Proxyswap. Farcaster's First Social DEX. Coming Soon.](../.gitbook/assets/socialdex.png)](https://warpcast.com/proxyswap/0xe5d67063)
+
+<figure><img src="../.gitbook/assets/socialdex.png" alt=""><figcaption></figcaption></figure>
 
 [@farcaster](https://warpcast.com/farcaster)'s 1st Social DEX is coming 🔜
 
